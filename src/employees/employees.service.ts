@@ -1,26 +1,44 @@
 import { Injectable } from '@nestjs/common';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
+import {v4 as uuid} from "uuid";
+import { InjectRepository } from '@nestjs/typeorm';
+import { Employee } from './entities/employee.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class EmployeesService {
-  create(createEmployeeDto: CreateEmployeeDto) {
-    return 'This action adds a new employee';
+  
+  private employees: CreateEmployeeDto[] = [
+    {
+      employeeId: uuid(),
+      employeeName: "Luis",
+      employeeLastname: "Hernandez",
+      employeePhoneNumber: "4424859526",
+      employeeEmail: "luis.hernandez@oerlikon.com",
+      
+
+    }
+  ]
+
+  async create(createEmployeeDto: CreateEmployeeDto) {
+    createEmployeeDto.employeeId = uuid()
+    return createEmployeeDto
   }
 
   findAll() {
-    return `This action returns all employees`;
+    return this.employees
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} employee`;
+  findOne(id: string) {
+    
   }
 
-  update(id: number, updateEmployeeDto: UpdateEmployeeDto) {
+  update(id: string, updateEmployeeDto: UpdateEmployeeDto) {
     return `This action updates a #${id} employee`;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} employee`;
   }
 }
