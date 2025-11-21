@@ -15,6 +15,7 @@ export class Employee {
     employeePhoneNumber: string
     @Column("text",{unique:true})
     employeeEmail: string
-
+    @Column({nullable: true})
+    locationID:number
 
 }
