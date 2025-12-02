@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { EmployeesModule } from './employees/employees.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from "@nestjs/config";
+import { LocationsModule } from './locations/locations.module';
 
 @Module({
   imports: [ 
@@ -18,7 +19,7 @@ import { ConfigModule } from "@nestjs/config";
       entities:[],
       autoLoadEntities: true,
       synchronize: true,
-  }), EmployeesModule],
+  }), EmployeesModule, LocationsModule],
   controllers: [AppController],
   providers: [AppService],
 })
