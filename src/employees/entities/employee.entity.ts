@@ -11,11 +11,11 @@ export class Employee {
     employeeName: string
     @Column({type:"text"})
     employeeLastname: string 
-    @Column("text",{unique:true})
+    @Column("text",{unique:true, nullable:true},)
     employeePhoneNumber: string
     @Column("text",{unique:true})
     employeeEmail: string
-    @Column({nullable: true})
+    @Column("text")
     locationID:number
 
 }

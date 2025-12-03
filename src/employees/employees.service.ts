@@ -8,15 +8,18 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class EmployeesService {
-  
+  constructor(
+    @InjectRepository(Employee)
+    private readonly employeeRepository : Repository<Employee>
+  )
+{}  
   private employees: CreateEmployeeDto[] = [
     {
       employeeId: uuid(),
       employeeName: "Luis",
       employeeLastname: "Hernandez",
       employeePhoneNumber: "4424859526",
-      employeeEmail: "luis.hernandez@oerlikon.com",
-      
+      employeeEmail: "luis.hernandez@oerlikon.com",  
 
     }
   ]
@@ -27,7 +30,9 @@ export class EmployeesService {
   }
 
   findAll() {
-    return this.employees
+  
+    return this.employeeRepository.find();
+    
   }
 
   findOne(id: string) {
