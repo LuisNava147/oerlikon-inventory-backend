@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
 import {v4 as uuid} from "uuid";
@@ -13,20 +13,10 @@ export class EmployeesService {
     private readonly employeeRepository : Repository<Employee>
   )
 {}  
-  private employees: CreateEmployeeDto[] = [
-    {
-      employeeId: uuid(),
-      employeeName: "Luis",
-      employeeLastname: "Hernandez",
-      employeePhoneNumber: "4424859526",
-      employeeEmail: "luis.hernandez@oerlikon.com",  
-
-    }
-  ]
-
+  
   async create(createEmployeeDto: CreateEmployeeDto) {
-    createEmployeeDto.employeeId = uuid()
-    return createEmployeeDto
+    const employees = this.employeeRepository.create(createEmployeeDto)
+    return this.employeeRepository.save(employees);
   }
 
   findAll() {
@@ -36,14 +26,25 @@ export class EmployeesService {
   }
 
   findOne(id: string) {
+    const employee = this.employeeRepository.findOne({
+      where:{
+        employeeId: id
+      }
+    })
+    return employee;
+  }
+
+  async update(id: string, updateEmployeeDto: UpdateEmployeeDto) {
+    const employee = await this.employeeRepository.preload({
+      employeeId: id,
+      ...updateEmployeeDto
+    })
+    if(!employee)throw new NotFoundException("No se puede actualizar")
+    return await this.employeeRepository.save(employee);
     
   }
 
-  update(id: string, updateEmployeeDto: UpdateEmployeeDto) {
-    return `This action updates a #${id} employee`;
-  }
-
-  remove(id: string) {
-    return `This action removes a #${id} employee`;
+  async remove(id: string) {
+    return await this.employeeRepository.delete(id);
   }
 }
