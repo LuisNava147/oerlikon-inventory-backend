@@ -24,6 +24,7 @@ export class LocationsController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateLocationDto: UpdateLocationDto) {
+    //console.log(updateLocationDto) verificar que si se actualice 
     return this.locationsService.update(+id, updateLocationDto);
   }
 
