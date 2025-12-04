@@ -1,3 +1,4 @@
+import { Location } from "src/locations/entities/location.entity";
 import {Entity, Column, PrimaryGeneratedColumn }from "typeorm";
 import { ManyToOne } from "typeorm";
 import { JoinColumn } from "typeorm";
@@ -16,5 +17,10 @@ export class Employee {
     @Column("text",{unique:true})
     employeeEmail: string
     
+    @ManyToOne(()=> Location, (location)=> location.employee)
+    @JoinColumn({
+        name:"LocationId",
+    })
+    location: Location | string
 
 }

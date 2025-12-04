@@ -25,15 +25,28 @@ export class EmployeesService {
   }
 
   findAll() {
-  
-    return this.employeeRepository.find();
-    
+    return this.employeeRepository.find({
+      relations:{
+        location:true
+      }
+    });
+  }
+
+  findByLocation(id: number){
+    return this.employeeRepository.findBy({
+      location:{
+        locationId: id
+      }
+    })
   }
 
   async findOne(id: string) {
     const employee = await this.employeeRepository.findOne({
       where:{
         employeeId: id
+      },
+      relations:{
+        location:true
       }
     })
     if(!employee)throw new NotFoundException("empleado no encontrado")
@@ -47,7 +60,8 @@ export class EmployeesService {
         ...updateEmployeeDto
       })
       if(!employee)throw new NotFoundException("No se puede actualizar")
-      return await this.employeeRepository.save(employee);
+      await this.employeeRepository.save(employee);
+    return employee;
     }catch(error){
       throw this.handleDBError(error)
     }

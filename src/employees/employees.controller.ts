@@ -9,7 +9,7 @@ export class EmployeesController {
 
   @Post()
   create(@Body() createEmployeeDto: CreateEmployeeDto) {
-    //console.log(createEmployeeDto) verificar que si se crea el employee en console
+    console.log(createEmployeeDto) 
     return this.employeesService.create(createEmployeeDto);
   }
 
@@ -23,9 +23,14 @@ export class EmployeesController {
     return this.employeesService.findOne(id);
   }
 
+  @Get('/location/:id')
+  findByLocation(@Param('id')id:string){
+    return this.employeesService.findByLocation(+id);
+  }
+
   @Patch(':id')
   update(@Param('id', ParseUUIDPipe) id: string, @Body() updateEmployeeDto: UpdateEmployeeDto) {
-    //console.log(updateEmployeeDto) verificar que se haya actualizado el employee
+    console.log(updateEmployeeDto) 
     return this.employeesService.update(id, updateEmployeeDto);
   }
 

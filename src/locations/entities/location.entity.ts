@@ -1,5 +1,6 @@
+import { Employee } from "src/employees/entities/employee.entity";
 import {Entity, Column, PrimaryGeneratedColumn }from "typeorm";
-import { ManyToOne } from "typeorm";
+import { ManyToOne, OneToMany } from "typeorm";
 import { JoinColumn } from "typeorm";
 import { OneToOne } from "typeorm";
 
@@ -11,4 +12,7 @@ export class Location {
     locationName: string
     @Column("text",{nullable:true})
     locationAddress: string
+
+    @OneToMany(()=> Employee, (employee)=> employee.location)
+    employee: Employee[]
 }
