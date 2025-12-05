@@ -5,6 +5,14 @@ import { EmployeesModule } from './employees/employees.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from "@nestjs/config";
 import { LocationsModule } from './locations/locations.module';
+import { DevicesModule } from './devices/devices.module';
+import { ProvidersModule } from './providers/providers.module';
+import { AccessRequestsModule } from './access-requests/access-requests.module';
+import { IncidentsModule } from './incidents/incidents.module';
+import { TicketIncidentsModule } from './ticket-incidents/ticket-incidents.module';
+import { DeparmentsModule } from './deparments/deparments.module';
+import { AssignmentsModule } from './assignments/assignments.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [ 
@@ -19,7 +27,7 @@ import { LocationsModule } from './locations/locations.module';
       entities:[],
       autoLoadEntities: true,
       synchronize: true,
-  }), EmployeesModule, LocationsModule],
+  }), EmployeesModule, LocationsModule, DevicesModule, ProvidersModule, AccessRequestsModule, IncidentsModule, TicketIncidentsModule, DeparmentsModule, AssignmentsModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })
