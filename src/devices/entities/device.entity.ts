@@ -35,4 +35,8 @@ deviceMAC: string
 @JoinColumn({name: "locationId"})
 location: Location
 
+@ManyToOne(()=> Deparment, {nullable:true})
+@JoinColumn({name: "departmentId"})
+department: Deparment
+
 }
