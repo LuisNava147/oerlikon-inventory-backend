@@ -1,3 +1,4 @@
+import { Device } from "src/devices/entities/device.entity";
 import { Employee } from "src/employees/entities/employee.entity";
 import {Entity, Column, PrimaryGeneratedColumn }from "typeorm";
 import { ManyToOne, OneToMany } from "typeorm";
@@ -15,4 +16,7 @@ export class Location {
 
     @OneToMany(()=> Employee, (employee)=> employee.location)
     employee: Employee[]
+
+    @OneToMany(()=> Device, (device)=> device.location)
+    device: Device[]
 }
