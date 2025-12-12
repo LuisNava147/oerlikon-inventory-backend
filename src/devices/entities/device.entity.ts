@@ -1,4 +1,8 @@
+import { Deparment } from "src/deparments/entities/deparment.entity";
+import { Location } from "src/locations/entities/location.entity";
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { ManyToOne } from "typeorm";
+import { JoinColumn } from "typeorm";
 
 @Entity()
 export class Device {
@@ -26,5 +30,9 @@ ipAddress: string
 sapName: string
 @Column("text",{nullable:true})
 deviceMAC: string
+
+@ManyToOne(()=> Location, {nullable:false})
+@JoinColumn({name: "locationId"})
+location: Location
 
 }
