@@ -61,6 +61,6 @@ export class DeparmentsService {
     if(error.code == '23505'){
       throw new BadRequestException("Bad Request")
     }
-    throw new InternalServerErrorException("Error interno al actualizar el empleado")
+    throw new InternalServerErrorException("Error interno al actualizar el departamento")
   }
 }

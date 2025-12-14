@@ -12,6 +12,8 @@ deviceId: string
 deviceHostName: string
 @Column("text",{unique:true, nullable:true})
 deviceAssetNumber: string
+@Column("text",{unique:true})
+deviceSerialTag: string
 @Column("text",{default:"Stock"})
 deviceStatus: string
 @Column("text")
@@ -33,7 +35,7 @@ deviceMAC: string
 
 @ManyToOne(()=> Location, {nullable:false})
 @JoinColumn({name: "locationId"})
-location: Location
+location: Location | string
 
 @ManyToOne(()=> Deparment, {nullable:true})
 @JoinColumn({name: "departmentId"})
