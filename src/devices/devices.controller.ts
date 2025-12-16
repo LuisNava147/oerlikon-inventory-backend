@@ -27,6 +27,16 @@ export class DevicesController {
     return this.devicesService.findByLocation(+id);
   }
 
+  @Get('/employee/:id')
+  findByEmployee(@Param('id', ParseUUIDPipe)id:string){
+    return this.devicesService.findByEmployee(id);
+  }
+
+  @Get('/asset-number/:assetNumber')
+  findByAssetNumber(@Param('assetNumber') name: string){
+    return this.devicesService.findByAssetNumber(name);
+  }
+
   @Patch(':id')
   update(@Param('id', ParseUUIDPipe) id: string, @Body() updateDeviceDto: UpdateDeviceDto) {
     return this.devicesService.update(id, updateDeviceDto);

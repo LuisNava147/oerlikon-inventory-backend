@@ -4,6 +4,7 @@ import { UpdateDeviceDto } from './dto/update-device.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Device } from './entities/device.entity';
 import { Repository } from 'typeorm';
+import { Like } from 'typeorm';
 
 @Injectable()
 export class DevicesService {
@@ -25,18 +26,20 @@ export class DevicesService {
       relations:{
         location:true,
         department:true,
+        employee: true,
       }
     });
   }
 
   findByLocation(id: number){
-    return this.deviceReposirory.findBy({
+    const location= this.deviceReposirory.findBy({
       location:{
         locationId: id
       }
     })
+    if(!location)throw new NotFoundException("No se encontró la ubicación")
+    return location;
   }
-  
 
   async findOne(id: string) {
     const device = await this.deviceReposirory.findOne({
@@ -45,10 +48,29 @@ export class DevicesService {
       },
       relations:{
         location: true,
-        department: true
+        department: true,
+        employee: true,
       }
     })
     if(!device)throw new NotFoundException("Dispositivo no encontrado")
+    return device;
+  }
+
+  findByEmployee(id: string){
+    const employee= this.deviceReposirory.findBy({
+      employee:{
+        employeeId:id
+      }
+    })
+    if(!employee)throw new NotFoundException("No se encontró el empleado");
+    return employee;
+  }
+
+  findByAssetNumber(assetNumber: string){
+    const device = this.deviceReposirory.findBy({
+      deviceAssetNumber: Like(`%${assetNumber}%`)
+    })
+    if(!device)throw new NotFoundException("No. de activo no encontrado")
     return device;
   }
 
