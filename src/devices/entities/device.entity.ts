@@ -1,4 +1,5 @@
 import { Deparment } from "src/deparments/entities/deparment.entity";
+import { Employee } from "src/employees/entities/employee.entity";
 import { Location } from "src/locations/entities/location.entity";
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 import { ManyToOne } from "typeorm";
@@ -40,5 +41,9 @@ location: Location | string
 @ManyToOne(()=> Deparment, {nullable:true})
 @JoinColumn({name: "departmentId"})
 department: Deparment
+
+@ManyToOne(()=> Employee, (employee) => employee.device, {nullable:true})
+@JoinColumn({name: "employeeId"})
+employee: Employee
 
 }

@@ -1,8 +1,10 @@
+import { Device } from "src/devices/entities/device.entity";
 import { Location } from "src/locations/entities/location.entity";
 import {Entity, Column, PrimaryGeneratedColumn }from "typeorm";
 import { ManyToOne } from "typeorm";
 import { JoinColumn } from "typeorm";
 import { OneToOne } from "typeorm";
+import { OneToMany } from "typeorm";
 
 @Entity()
 export class Employee {
@@ -23,4 +25,6 @@ export class Employee {
     })
     location: Location | string
 
+    @OneToMany(()=> Device, (device)=> device.employee)
+    device: Device[]
 }

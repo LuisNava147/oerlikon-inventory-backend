@@ -2,6 +2,7 @@ import { Location } from 'src/locations/entities/location.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsNotEmpty, IsOptional, IsNumber,MaxLength, MinLength, IsInt, IsUUID } from 'class-validator';
 import { Deparment } from 'src/deparments/entities/deparment.entity';
+import { Employee } from 'src/employees/entities/employee.entity';
 
 export class CreateDeviceDto {
     @IsString()
@@ -65,5 +66,8 @@ export class CreateDeviceDto {
     @IsOptional()
     department?: Deparment
 
+    @IsUUID()
+    @IsOptional()
+    employee?: Employee
 
 }

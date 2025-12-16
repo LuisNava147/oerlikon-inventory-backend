@@ -36,6 +36,7 @@ export class DevicesService {
       }
     })
   }
+  
 
   async findOne(id: string) {
     const device = await this.deviceReposirory.findOne({
