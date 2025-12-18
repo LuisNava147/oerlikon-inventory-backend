@@ -23,8 +23,8 @@ export class DevicesController {
   }
 
   @Get('/location/:id')
-  findByLocation(@Param('id')id:string){
-    return this.devicesService.findByLocation(+id);
+  findByLocation(@Param('id')id:number){
+    return this.devicesService.findByLocation(id);
   }
 
   @Get('/employee/:id')
@@ -33,8 +33,38 @@ export class DevicesController {
   }
 
   @Get('/asset-number/:assetNumber')
-  findByAssetNumber(@Param('assetNumber') name: string){
-    return this.devicesService.findByAssetNumber(name);
+  findByAssetNumber(@Param('assetNumber') assetNumber: string){
+    return this.devicesService.findByAssetNumber(assetNumber);
+  }
+
+  @Get('/hostname/:hostName')
+  findByHostName(@Param('hostName') hostName: string){
+    return this.devicesService.findByHostName(hostName);
+  }
+
+  @Get('/ip-address/:ip')
+  findByIP(@Param('ip') ip: string){
+    return this.devicesService.findByIP(ip);
+  }
+
+  @Get('/type/:type')
+  findByType(@Param('type') type: string){
+    return this.devicesService.findByType(type);
+  }
+
+  @Get('/brand/:brand')
+  findByBrand(@Param('brand') brand: string){
+    return this.devicesService.findByBrand(brand);
+  }
+
+  @Get('/employee-name/:name')
+  findByEmployeeName(@Param('name')name:string){
+    return this.devicesService.findByEmployeeName(name);
+  }
+
+  @Get('/department/:depart')
+  findByDepartment(@Param('depart')depart:string){
+    return this.devicesService.findByDepartment(depart);
   }
 
   @Patch(':id')

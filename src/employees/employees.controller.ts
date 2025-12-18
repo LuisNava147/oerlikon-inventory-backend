@@ -30,7 +30,6 @@ export class EmployeesController {
 
   @Patch(':id')
   update(@Param('id', ParseUUIDPipe) id: string, @Body() updateEmployeeDto: UpdateEmployeeDto) {
-    console.log(updateEmployeeDto) 
     return this.employeesService.update(id, updateEmployeeDto);
   }
 

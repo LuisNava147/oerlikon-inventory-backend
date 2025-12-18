@@ -37,7 +37,6 @@ export class DevicesService {
         locationId: id
       }
     })
-    if(!location)throw new NotFoundException("No se encontró la ubicación")
     return location;
   }
 
@@ -56,21 +55,76 @@ export class DevicesService {
     return device;
   }
 
-  findByEmployee(id: string){
-    const employee= this.deviceReposirory.findBy({
-      employee:{
-        employeeId:id
+  async findByEmployee(id: string){
+    const employee= await this.deviceReposirory.findBy({
+        employee:{
+          employeeId:id
       }
     })
-    if(!employee)throw new NotFoundException("No se encontró el empleado");
     return employee;
   }
 
-  findByAssetNumber(assetNumber: string){
+  findByHostName(hostName: string){
     const device = this.deviceReposirory.findBy({
+      deviceHostName: Like(`%${hostName}%`)
+    })
+    return device;
+  }
+
+  async findByAssetNumber(assetNumber: string){
+    const device = await this.deviceReposirory.findBy({
       deviceAssetNumber: Like(`%${assetNumber}%`)
     })
-    if(!device)throw new NotFoundException("No. de activo no encontrado")
+    if(device.length === 0)throw new NotFoundException("no. activo no encontrado");
+    return device;
+  }
+
+  findByIP(ip: string){
+    const device = this.deviceReposirory.findBy({
+      ipAddress: Like(`%${ip}%`)
+    })
+    return device;
+  }
+
+  findByType(type: string){
+    const device = this.deviceReposirory.findBy({
+      deviceType: Like(`%${type}%`)
+    })
+    return device;
+  }
+
+  findByBrand(brand: string){
+    const device = this.deviceReposirory.findBy({
+      deviceBrand: Like(`%${brand}%`)
+    })
+    return device;
+  }
+
+  async findByEmployeeName(name: string){
+    const employee = await this.deviceReposirory.find({
+      where:[{
+        employee: {employeeName: Like(`%${name}`)}
+      },{
+        employee: {employeeLastName: Like(`%${name}`)}
+      }
+    ],
+    relations: {
+      employee: true,
+      location: true,
+    }
+    })
+    return employee;
+  }
+
+  findByDepartment(depart: string){
+    const device = this.deviceReposirory.find({
+      where:{
+        department: Like(`%${depart}$`)
+      },
+      relations:{
+        location: true,
+      }
+    })
     return device;
   }
 
@@ -88,8 +142,8 @@ export class DevicesService {
   }
 
   async remove(id: string) {
-    const device = await this.findOne(id)
-    await this.deviceReposirory.delete(device)
+    await this.findOne(id)
+    await this.deviceReposirory.delete(id)
     return {
       message: "Dispositivo eliminado"
     }
