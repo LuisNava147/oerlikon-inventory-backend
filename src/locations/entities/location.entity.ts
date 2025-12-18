@@ -1,5 +1,6 @@
 import { Device } from "src/devices/entities/device.entity";
 import { Employee } from "src/employees/entities/employee.entity";
+import { Provider } from "src/providers/entities/provider.entity";
 import {Entity, Column, PrimaryGeneratedColumn }from "typeorm";
 import { ManyToOne, OneToMany } from "typeorm";
 import { JoinColumn } from "typeorm";
@@ -19,4 +20,7 @@ export class Location {
 
     @OneToMany(()=> Device, (device)=> device.location)
     device: Device[]
+
+    @OneToMany(()=> Provider, (provider)=> provider.location)
+    provider: Provider[]
 }
