@@ -1,9 +1,11 @@
+import { Assignment } from "src/assignments/entities/assignment.entity";
 import { Deparment } from "src/deparments/entities/deparment.entity";
 import { Employee } from "src/employees/entities/employee.entity";
 import { Location } from "src/locations/entities/location.entity";
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 import { ManyToOne } from "typeorm";
 import { JoinColumn } from "typeorm";
+import { OneToMany } from "typeorm";
 
 @Entity()
 export class Device {
@@ -46,4 +48,6 @@ department: Deparment
 @JoinColumn({name: "employeeId"})
 employee: Employee
 
+@OneToMany(()=> Assignment,(assignment)=> assignment.device)
+assignment: Assignment[]
 }
