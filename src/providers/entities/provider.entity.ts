@@ -24,6 +24,6 @@ export class Provider {
     })
     location: Location
 
-    /*@OneToMany(()=>AccessRequest,(accessRequest)=>accessRequest.provider)
-    accessRequest: AccessRequest[]*/
+    @OneToMany(()=>AccessRequest,(accessRequest)=>accessRequest.provider)
+    accessRequest: AccessRequest[]
 }
