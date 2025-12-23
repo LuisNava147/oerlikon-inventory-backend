@@ -14,7 +14,7 @@ export class Incident {
         'CURRENT_DATE'
     })
     incidentDateOpening:  Date
-    @Column("text",{default: 'PENDIENTE'})
+    @Column("text",{nullable:true, default: 'PENDIENTE'})
     status: string
     @Column("text")
     incidentDescription: string
@@ -22,8 +22,7 @@ export class Incident {
     incidentNote: string
     @Column({
         type: 'date',
-        default: () => 
-        'CURRENT_DATE'
+        nullable:true
     })
     incidentDateClose:  Date
 
