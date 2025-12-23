@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Device } from "src/devices/entities/device.entity";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 
 @Entity()
 export class Incident {
@@ -24,5 +25,12 @@ export class Incident {
         'CURRENT_DATE'
     })
     incidentDateClose:  Date
+
+    //relaciones
+    @ManyToOne(()=> Device, {nullable: true})
+    @JoinColumn({
+        name: "deviceId"
+    })
+    device: Device
 
 }

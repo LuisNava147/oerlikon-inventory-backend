@@ -1,6 +1,7 @@
 import { Assignment } from "src/assignments/entities/assignment.entity";
 import { Deparment } from "src/deparments/entities/deparment.entity";
 import { Employee } from "src/employees/entities/employee.entity";
+import { Incident } from "src/incidents/entities/incident.entity";
 import { Location } from "src/locations/entities/location.entity";
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 import { ManyToOne } from "typeorm";
@@ -50,4 +51,7 @@ employee: Employee
 
 @OneToMany(()=> Assignment,(assignment)=> assignment.device)
 assignment: Assignment[]
+
+@OneToMany(()=> Incident, (incident)=> incident.device)
+incident: Incident[]
 }
