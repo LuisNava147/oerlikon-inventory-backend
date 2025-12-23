@@ -1,3 +1,4 @@
+import { Deparment } from "src/deparments/entities/deparment.entity";
 import { Device } from "src/devices/entities/device.entity";
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 
@@ -33,4 +34,9 @@ export class Incident {
     })
     device: Device
 
+    @ManyToOne(()=> Deparment, {nullable: true})
+    @JoinColumn({
+        name: "departmentId"
+    })
+    department: Deparment
 }
