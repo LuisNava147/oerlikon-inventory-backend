@@ -16,11 +16,10 @@ export class TicketIncident {
     ticketDateOpening:  Date
     @Column({
         type: 'date',
-        default: () => 
-        'CURRENT_DATE'
+        nullable:true
     })
     ticketDateClose: Date
-    @Column("text",{default: 'PENDIENTE'})
+    @Column("text",{default: 'PENDIENTE', nullable:true})
     status: string
 
 }

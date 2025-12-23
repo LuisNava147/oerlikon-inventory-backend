@@ -1,26 +1,60 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException, InternalServerErrorException } from '@nestjs/common';
 import { CreateTicketIncidentDto } from './dto/create-ticket-incident.dto';
 import { UpdateTicketIncidentDto } from './dto/update-ticket-incident.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { TicketIncident } from './entities/ticket-incident.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class TicketIncidentsService {
-  create(createTicketIncidentDto: CreateTicketIncidentDto) {
-    return 'This action adds a new ticketIncident';
+  constructor(
+    @InjectRepository(TicketIncident)
+    private readonly ticketIncidentRepository : Repository<TicketIncident>
+  ){}
+
+  async create(createTicketIncidentDto: CreateTicketIncidentDto) {
+   try{
+    const ticketIncident = this.ticketIncidentRepository.create(createTicketIncidentDto)
+    return await this.ticketIncidentRepository.save(ticketIncident);
+   }catch(error){
+    this.handleDBError(error);
+   }
   }
 
   findAll() {
-    return `This action returns all ticketIncidents`;
+    return this.ticketIncidentRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} ticketIncident`;
+  async findOne(id: string) {
+    const ticketIncident = await this.ticketIncidentRepository.findOne({
+      where:{
+        ticketIncidentId: id
+      }
+    })
+    if(!ticketIncident)throw new NotFoundException("ticket no encontrado")
+    return ticketIncident;
   }
 
-  update(id: number, updateTicketIncidentDto: UpdateTicketIncidentDto) {
-    return `This action updates a #${id} ticketIncident`;
+  async update(id: string, updateTicketIncidentDto: UpdateTicketIncidentDto) {
+    const ticketIncident = await this.ticketIncidentRepository.preload({
+      ticketIncidentId: id,
+      ...updateTicketIncidentDto
+    })
+    if(!ticketIncident)throw new NotFoundException("No se pudo actualizar el ticket")
+    return await this.ticketIncidentRepository.save(ticketIncident);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} ticketIncident`;
+  async remove(id: string) {
+    await this.ticketIncidentRepository.delete(id)
+    return{
+      message: "Ticket eliminado"
+    }
+  }
+
+  private handleDBError(error:any):never{
+    if(error.code == '23505'){
+      throw new BadRequestException("Bad Request")
+    }
+    throw new InternalServerErrorException("Error interno al actualizar")
   }
 }
