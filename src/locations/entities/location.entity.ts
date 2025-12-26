@@ -1,3 +1,5 @@
+import { access } from "fs";
+import { AccessRequest } from "src/access-requests/entities/access-request.entity";
 import { Device } from "src/devices/entities/device.entity";
 import { Employee } from "src/employees/entities/employee.entity";
 import { Provider } from "src/providers/entities/provider.entity";
@@ -23,4 +25,7 @@ export class Location {
 
     @OneToMany(()=> Provider, (provider)=> provider.location)
     provider: Provider[]
+
+    @OneToMany(()=> AccessRequest, (access_request)=> access_request.location)
+    access_request: AccessRequest[]
 }

@@ -1,3 +1,4 @@
+import { Location } from "src/locations/entities/location.entity";
 import { Provider } from "src/providers/entities/provider.entity";
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 import { ManyToOne } from "typeorm";
@@ -10,17 +11,17 @@ export class AccessRequest {
     accessId: string
     @Column("text")
     applicantFullName: string
-    @Column("text")
+   /* @Column("text")
     centerApplicant: string
     @Column("text")
-    centerToAccess: string
+    centerToAccess: string */
     @Column("text")
     visitorName: string
     @Column("text")
     accessReason: string
     @Column({type: "date"})
     accessDate: Date
-    @Column({type: "time"})
+    @Column("text")
     accessHour: string
     @Column("text")
     accessDuration: string
@@ -33,4 +34,10 @@ export class AccessRequest {
         name: "providerId"
     })
     provider: Provider
+
+    @ManyToOne(()=> Location,(location)=>location.access_request, {nullable:false})
+    @JoinColumn({
+        name: "locationId"
+    })
+    location: Location
 }
