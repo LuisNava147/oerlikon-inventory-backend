@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe, Res } from '@nestjs/common';
 import { AccessRequestsService } from './access-requests.service';
 import { CreateAccessRequestDto } from './dto/create-access-request.dto';
 import { UpdateAccessRequestDto } from './dto/update-access-request.dto';
+import type { Response } from 'express';
 
 @Controller('access-requests')
 export class AccessRequestsController {
@@ -18,17 +19,17 @@ export class AccessRequestsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.accessRequestsService.findOne(+id);
+  findOne(@Param('id',ParseUUIDPipe) id: string) {
+    return this.accessRequestsService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAccessRequestDto: UpdateAccessRequestDto) {
-    return this.accessRequestsService.update(+id, updateAccessRequestDto);
+  update(@Param('id',ParseUUIDPipe) id: string, @Body() updateAccessRequestDto: UpdateAccessRequestDto) {
+    return this.accessRequestsService.update(id, updateAccessRequestDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.accessRequestsService.remove(+id);
+  remove(@Param('id',ParseUUIDPipe) id: string) {
+    return this.accessRequestsService.remove(id);
   }
 }
