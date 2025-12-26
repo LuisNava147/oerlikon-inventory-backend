@@ -9,7 +9,7 @@ export class CreateAccessRequestDto {
     applicantFullName: string
 
     @IsString()
-    @MaxLength(160)
+    @MaxLength(260)
     visitorName: string
 
     @IsString()
@@ -33,7 +33,7 @@ export class CreateAccessRequestDto {
     @IsUUID()
     provider: Provider
 
-    @IsUUID()
+    @IsString()
     location: Location
 
 }
