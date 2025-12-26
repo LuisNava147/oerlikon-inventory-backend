@@ -17,7 +17,7 @@ export const generateResponsivaHTML = (assignments: Assignment[]): string  => {
     assignments.forEach(assign => {
         const d = assign.device;
         const type = d.deviceType.toLowerCase();
-        const info = `${d.deviceBrand}/${d.deviceSerialTag}`;
+        const info = `${d.deviceType}/${d.deviceBrand}/${d.deviceModel}/${d.deviceSerialTag}`;
 
         if(type.includes('laptop') || type.includes('desktop')){
             computerText = `${d.deviceAssetNumber}/${info} cargador`;
