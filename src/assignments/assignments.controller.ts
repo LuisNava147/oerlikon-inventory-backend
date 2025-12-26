@@ -3,6 +3,7 @@ import { AssignmentsService } from './assignments.service';
 import { CreateAssignmentDto } from './dto/create-assignment.dto';
 import { UpdateAssignmentDto } from './dto/update-assignment.dto';
 import type { Response } from 'express';
+import { Employee } from 'src/employees/entities/employee.entity';
 
 @Controller('assignments')
 export class AssignmentsController {
@@ -30,14 +31,14 @@ export class AssignmentsController {
     const pdfBuffer = await this.assignmentsService.generatePdf(id)
     res.set({
       'Content-Type': 'application/pdf',
-      'Content-Disposition': 'attachment; filename=Carta_Responsiva_Legal.pdf',
-      'Content-Length': pdfBuffer.length.toString(),
+      'Content-Length': pdfBuffer.buffer.length.toString(),
 
       'Cache-Control':'no-cache, no-store, must-revalidate',
       'Pragma':'no-cache',
       'Expires':0,
     });
-    res.send(pdfBuffer);
+    res.attachment(pdfBuffer.fileName);
+    res.send(pdfBuffer.buffer);
   }
 
   @Patch(':id')

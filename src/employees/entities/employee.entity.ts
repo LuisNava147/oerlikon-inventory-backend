@@ -27,4 +27,6 @@ export class Employee {
 
     @OneToMany(()=> Device, (device)=> device.employee)
     device: Device[]
+
+    
 }

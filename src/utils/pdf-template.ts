@@ -1,4 +1,4 @@
-import { Assignment } from "./assignments/entities/assignment.entity";
+import { Assignment } from "../assignments/entities/assignment.entity";
 
 export const generateResponsivaHTML = (assignments: Assignment[]): string  => {
     if(!assignments || assignments.length === 0)return '<h1>No hay dispositivos asignados</h1>';
@@ -39,7 +39,7 @@ export const generateResponsivaHTML = (assignments: Assignment[]): string  => {
         <html>
         <head>
           <style>
-            body { font-family: 'Arial', sans-serif; font-size: 11pt; line-height: 1.4; margin: 40px 50px; color: #000; }
+            body { font-family: 'Arial', sans-serif; font-size: 10pt; line-height: 1.4; margin: 40px 50px; color: #000; }
             .header { text-align: right; margin-bottom: 20px; font-weight: bold; }
             .title { font-weight: bold; margin-bottom: 20px; text-transform: uppercase; }
             .content { text-align: justify; margin-bottom: 12px; }
@@ -68,10 +68,10 @@ export const generateResponsivaHTML = (assignments: Assignment[]): string  => {
     
           <div class="list-section">
             <div class="list-item"><span class="label">Teléfono móvil:</span> ${phoneText}</div>
-            <div class="list-item"><span class="label">Computadora portátil:</span> ${computerText}</div>
+            <div class="list-item"><span class="label">Computadora:</span> ${computerText}</div>
             <div class="list-item"><span class="label">Tableta electrónica:</span> ${tabletText}</div>
-            <div class="list-item"><span class="label">Pantalla / Monitor:</span> ${monitorText}</div>
-            <div class="list-item"><span class="label">Accesorios / Otros:</span> <br>&nbsp;&nbsp;${finalAccessories}</div>
+            <div class="list-item"><span class="label">Pantalla/Monitor:</span> ${monitorText}</div>
+            <div class="list-item"><span class="label">Accesorios/Otros:</span> <br>&nbsp;&nbsp;${finalAccessories}</div>
           </div>
     
           <div class="content">

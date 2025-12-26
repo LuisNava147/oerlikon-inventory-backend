@@ -2,7 +2,7 @@ import { Injectable, BadRequestException, NotFoundException, InternalServerError
 import { CreateAssignmentDto } from './dto/create-assignment.dto';
 import { UpdateAssignmentDto } from './dto/update-assignment.dto';
 import * as puppeteer from 'puppeteer';
-import { generateResponsivaHTML } from 'src/pdf-template';
+import { generateResponsivaHTML } from 'src/utils/pdf-template';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Assignment } from './entities/assignment.entity';
 import { Repository } from 'typeorm';
@@ -56,13 +56,14 @@ export class AssignmentsService {
     }
   }
 
-  async generatePdf(assignmentId: string): Promise<Buffer>{
+  async generatePdf(assignmentId: string): Promise<{buffer:Buffer; fileName: string}>{
     const currentAssignment = await this.findOne(assignmentId)
-    const employeeId = currentAssignment.employee.employeeId;
+    const {employeeName, employeeLastName} = currentAssignment.employee;
+    const {deviceType, deviceBrand} = currentAssignment.device;
     const allActiveAssignments = await this.assignmentRepository.find({
       where:{
         employee:{
-          employeeId: employeeId
+          employeeId: currentAssignment.employee.employeeId
         },
         assigmentStatus: 'Activo'
       },
@@ -88,7 +89,13 @@ export class AssignmentsService {
     margin: {top: '30px', bottom: '30px', left: '20px', right: '20px'}
   });
   await browser.close();
-  return Buffer.from(pdfBuffer);
+
+  const safeName = `${employeeName.trim()}_${employeeLastName.trim()}_${deviceType.trim()}_${deviceBrand.trim()}`.replace(/\s+/g,'_');
+  const fileName = `Carta_Responsiva_Legal_${safeName}.pdf`;
+  return{
+    buffer: Buffer.from(pdfBuffer),
+    fileName
+  };
   }
 
   private handleDBError(error:any):never{
