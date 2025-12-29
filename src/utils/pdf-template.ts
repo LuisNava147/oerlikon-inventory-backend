@@ -22,7 +22,7 @@ export const generateResponsivaHTML = (assignments: Assignment[]): string  => {
         if(type.includes('laptop') || type.includes('desktop')){
             computerText = `${d.deviceAssetNumber}/${info} cargador`;
         }else if(type.includes('telefono movil') || type.includes('celular')){
-            phoneText = `${info} cable/cargador`;
+            phoneText = `${d.employee.employeePhoneNumber}/${info} cable/cargador`;
         }else if(type.includes('tablet')){
             tabletText = `${info} cable/cargador`
         }else if(type.includes('monitor') || type.includes('pantalla')){

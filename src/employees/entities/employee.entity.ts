@@ -1,3 +1,4 @@
+import { User } from "src/auth/entities/user.entity";
 import { Device } from "src/devices/entities/device.entity";
 import { Location } from "src/locations/entities/location.entity";
 import {Entity, Column, PrimaryGeneratedColumn }from "typeorm";
@@ -27,6 +28,9 @@ export class Employee {
 
     @OneToMany(()=> Device, (device)=> device.employee)
     device: Device[]
+    @OneToOne(()=> User)
+    @JoinColumn({name: "userId"})
+    user: User
 
     
 }
