@@ -1,6 +1,6 @@
 import { Location } from 'src/locations/entities/location.entity';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsNotEmpty, IsOptional, IsNumber,MaxLength, MinLength, IsInt, IsUUID } from 'class-validator';
+import { IsString, IsNotEmpty, IsOptional, IsNumber,MaxLength, MinLength, IsInt, IsUUID, IsEmail } from 'class-validator';
 
 export class CreateProviderDto {
 @IsString()
@@ -10,6 +10,7 @@ providerName: string
 
 @IsString()
 @IsOptional()
+@IsEmail()
 providerEmail: string
 
 @IsString()
