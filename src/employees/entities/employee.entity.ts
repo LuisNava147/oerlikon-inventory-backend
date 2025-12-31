@@ -29,7 +29,6 @@ export class Employee {
     @OneToMany(()=> Device, (device)=> device.employee)
     device: Device[]
     @OneToOne(()=> User)
-    @JoinColumn({name: "userId"})
     user: User
 
     

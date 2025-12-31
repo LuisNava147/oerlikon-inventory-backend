@@ -12,7 +12,7 @@ import { IncidentsModule } from './incidents/incidents.module';
 import { TicketIncidentsModule } from './ticket-incidents/ticket-incidents.module';
 import { DeparmentsModule } from './deparments/deparments.module';
 import { AssignmentsModule } from './assignments/assignments.module';
-import { AuthModule } from './auth/guards/auth.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [ 
