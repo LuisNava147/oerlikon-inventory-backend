@@ -1,5 +1,8 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import { Providers } from '@/providers';
+import { HeroUIProvider } from "@heroui/react";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,7 +18,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <HeroUIProvider>
+        <Providers>
+        {children}
+        </Providers>
+        </HeroUIProvider>
+       </body>
     </html>
   )
 }
