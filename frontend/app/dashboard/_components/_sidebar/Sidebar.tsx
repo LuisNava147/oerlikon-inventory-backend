@@ -10,10 +10,10 @@ export default function Sidebar() {
         <NavItem icon={<Laptop size={28} />} path="/dashboard/devices" />
         <NavItem icon={<Printer size={28} />} path="/dashboard/printers" />
         <NavItem icon={<Smartphone size={28} />} path="/dashboard/smartphones" />
-        <NavItem icon={<FileText size={28} />} path="/dashboard/responsives" />
+        <NavItem icon={<FileText size={28} />} path="/dashboard/assignments" />
         <NavItem icon={<Users size={28} />} path="/dashboard/employees" />
-        <NavItem icon={<FileStack size={28} />} path="/dashboard/access-request" />
-        <NavItem icon={<TriangleAlert size={28} />} path="/dashboard/device-incidents" />
+        <NavItem icon={<FileStack size={28} />} path="/dashboard/access-requests" />
+        <NavItem icon={<TriangleAlert size={28} />} path="/dashboard/devices-incidents" />
         <NavItem icon={<Ticket size={28} />} path="/dashboard/ticket-incidents" />
         <NavItem icon={<Headset size={28} />} path="/dashboard/providers" />
       </div>
