@@ -1,4 +1,6 @@
 
-export default function EmployeesPage(){
+const EmployeesPage = () =>{
     return "employees"
 }
+
+export default EmployeesPage

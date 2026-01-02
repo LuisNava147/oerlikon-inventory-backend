@@ -1,4 +1,6 @@
 
-export default function PrintersPage(){
+const PrintersPage = () =>{
     return "printers"
 }
+
+export default PrintersPage

@@ -1,4 +1,6 @@
 
-export default function AssignmentsPage(){
+const AssignmentsPage = () => {
     return "responsivas"
 }
+
+export default AssignmentsPage;

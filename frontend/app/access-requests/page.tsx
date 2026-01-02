@@ -1,4 +1,6 @@
 
-export default function AccessRequest(){
-    return "accesos a proveedor"
+const AccessRequests = () =>{
+    return null
 }
+
+export default AccessRequests

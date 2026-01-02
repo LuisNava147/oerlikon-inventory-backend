@@ -1,4 +1,6 @@
 
-export default function SmartphonesPage(){
+const SmartphonesPage = () => {
     return "smartphones"
 }
+
+export default SmartphonesPage

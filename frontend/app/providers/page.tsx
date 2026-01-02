@@ -1,4 +1,6 @@
 
-export default function ProvidersPage(){
+const ProvidersPage = () =>{
     return "providers"
 }
+
+export default ProvidersPage
