@@ -5,7 +5,7 @@ export default function Sidebar() {
   return (
     <nav className="w-24 h-screen bg-red-600 flex flex-col items-center py-10 overflow-y-auto">
       
-      <div className="flex flex-col gap-4 w-full">
+      <div className="flex flex-col gap-3 w-full">
         <NavItem icon={<LayoutDashboard size={28} />} path="/dashboard" />
         <NavItem icon={<Laptop size={28} />} path="/dashboard/devices" />
         <NavItem icon={<Printer size={28} />} path="/dashboard/printers" />
