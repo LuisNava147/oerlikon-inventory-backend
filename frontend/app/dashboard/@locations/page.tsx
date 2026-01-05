@@ -1,28 +1,34 @@
-'use client';
 
+import { API_URL } from "@/constants";
 import { Card, CardHeader, CardBody, Button, Input, Divider } from "@heroui/react";
 import { MapPin, Plus, Trash2, Edit, Search } from "lucide-react";
 import { useState } from "react";
+import { authHeaders } from "@/app/helpers/authHeaders";
+import { Location } from "@/entities";
+import LocationCard from "./_components/LocationCard";
 
-const initialLocations = [
-    { id: 1, name: "Planta Principal", manager: "Carlos Ruiz", code: "P-01" },
-    { id: 2, name: "Almacén B", manager: "Ana Lopez", code: "W-02" },
-    { id: 3, name: "Oficinas Administrativas", manager: "Luis Navas", code: "O-05" },
-  ];
-const LocationPage = () => {
-    const [locations, setLocations] = useState(initialLocations);
-    <div className="h-full flex flex-col gap-6">
-        <div className="flex justify-between items-center">
-            <h2 className="text-xl font-bond text-slate-800 flex items-center gap-2">
-                <MapPin className="text-red-600">
-                    Gestion de ubicaciones
-                </MapPin>
-                <Button type="submit" color="primary" size="md" startContent={<Plus size = {16}/>}>
-                    Nueva Ubicacion
-                </Button>
-            </h2>
+
+const LocationPage = async({searchParams}:{searchParams: {[key:string]: string | string[] | undefined}}) => {
+    const response = await fetch(`${API_URL}/locations`,{
+        headers:{
+            ...authHeaders()
+        },
+        next: {
+            tags:["dashboard:locations"]
+        }
+    });
+    
+    return(
+        <div className="7/12">
+            <div className="w-full flex flex-col items-center h-[90vh] bg-red-50">
+                <div className="w.1/2 my-10">
+                    <div className="w-full">
+                        <LocationCard devices={searchParams.devices}/>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>  
+    )
 } 
 
 export default LocationPage

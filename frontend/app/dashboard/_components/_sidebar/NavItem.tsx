@@ -18,8 +18,8 @@ export const NavItem = ({ icon, path }: NavItemProps) => {
     <Link href={path} className="w-full flex justify-center">
       <span 
         className={isActive 
-          ? "bg-white w-10/12 flex justify-center rounded-md transition-all py-3 shadow-lg shadow-red-800/50 text-red-600" 
-          : "w-10/12 py-3 flex justify-center text-gray-300 hover:text-white hover:bg-red-800 rounded-md transition-colors"
+          ? "bg-white w-full flex justify-center rounded-md transition-all py-3 shadow-lg shadow-red-800/50 text-red-600" 
+          : "w-full py-3 flex justify-center text-gray-300 hover:text-white hover:bg-red-800 rounded-md transition-colors"
         }
       >
         {icon}
