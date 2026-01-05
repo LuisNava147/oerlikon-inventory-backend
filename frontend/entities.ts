@@ -82,7 +82,7 @@ export interface Incident {
 }
 
 export interface Location {
-    locationId: number
+    locationId: number | string
     locationName: string
     locationAddress?: string
     employee: Employee[]
