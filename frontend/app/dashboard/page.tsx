@@ -1,38 +1,58 @@
 'use client';
 
-import { Card, CardBody } from "@heroui/react";
+import { Card, CardHeader, CardBody, Divider } from "@heroui/react";
+import { Users, Monitor, ShieldAlert } from "lucide-react";
 
 export default function DashboardPage() {
   return (
-    <div className="flex flex-col gap-6">
-      <div className="w-full bg-blue-900 rounded-2xl p-8 shadow-xl text-white">
-        <h1 className="text-3xl font-bold mb-2">Panel de Control</h1>
-        <p className="opacity-80">Bienvenido al sistema de gestión.</p>
+    <div className="space-y-6">
+      <h2 className="text-xl font-bold text-slate-800">Resumen Operativo</h2>
+      
+      {/* Cards de Información */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <InfoCard 
+          title="Empleados" 
+          count="342" 
+          icon={<Users className="text-blue-600" />} 
+          desc="Activos en planta"
+        />
+        <InfoCard 
+          title="Dispositivos" 
+          count="1,204" 
+          icon={<Monitor className="text-purple-600" />} 
+          desc="Asignados y en stock"
+        />
+        <InfoCard 
+          title="Incidentes" 
+          count="5" 
+          icon={<ShieldAlert className="text-red-500" />} 
+          desc="Requieren atención"
+        />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Tarjetas de ejemplo estilo OXXO Dashboard */}
-        <Card className="h-40 bg-white shadow-md border-l-4 border-blue-600">
-            <CardBody className="flex items-center justify-center">
-                <p className="text-gray-500">Inventario Total</p>
-                <p className="text-4xl font-bold text-slate-800">1,240</p>
-            </CardBody>
-        </Card>
-        
-        <Card className="h-40 bg-white shadow-md border-l-4 border-green-600">
-            <CardBody className="flex items-center justify-center">
-                <p className="text-gray-500">Asignaciones Activas</p>
-                <p className="text-4xl font-bold text-slate-800">85</p>
-            </CardBody>
-        </Card>
-
-        <Card className="h-40 bg-white shadow-md border-l-4 border-red-500">
-            <CardBody className="flex items-center justify-center">
-                <p className="text-gray-500">Incidentes Pendientes</p>
-                <p className="text-4xl font-bold text-slate-800">3</p>
-            </CardBody>
-        </Card>
-      </div>
+      {/* Tabla Resumen (Ejemplo) */}
+      <Card className="flex-1 shadow-sm border border-gray-200">
+        <CardHeader className="font-bold text-slate-700">Últimos Movimientos</CardHeader>
+        <Divider/>
+        <CardBody>
+          <p className="text-gray-400 text-sm">No hay movimientos recientes hoy.</p>
+        </CardBody>
+      </Card>
     </div>
   );
+}
+
+function InfoCard({ title, count, icon, desc }: any) {
+  return (
+    <Card className="shadow-sm border border-gray-100">
+      <CardBody className="flex gap-4 items-center">
+        <div className="p-3 bg-gray-50 rounded-lg">{icon}</div>
+        <div>
+          <p className="text-sm text-gray-500">{title}</p>
+          <p className="text-2xl font-bold text-slate-800">{count}</p>
+          <p className="text-xs text-green-600">{desc}</p>
+        </div>
+      </CardBody>
+    </Card>
+  )
 }
