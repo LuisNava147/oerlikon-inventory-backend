@@ -23,13 +23,13 @@ export class AuthController {
   async login(@Body()loginUserDto: LoginUserDto, @Res({passthrough: true}) response: Response, @Cookies() cookies: any){
     const token = await this.authService.loginUser(loginUserDto)
     let expireDate = new Date()
-    expireDate.setDate(expireDate.getHours()+8)
+    expireDate.setHours(expireDate.getHours()+8)
     response.cookie(TOKEN_NAME, token, {
       httpOnly: true,
-      secure: true,
-      sameSite: 'none',
+      secure: false,
+      sameSite: 'lax',
       expires: expireDate,
-      maxAge: 1000 * 60 * 60 *24 *7
+      maxAge: 1000 * 60 * 60 *8
     })
     return token;
   }
