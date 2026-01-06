@@ -89,6 +89,8 @@ export interface Location {
     device: Device[]
     provider: Provider[]
     access_request: AccessRequest[]
+    employeesCount?: number
+    devicesCount?: number
 }
 
 export interface Provider {

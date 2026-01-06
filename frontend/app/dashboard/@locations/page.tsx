@@ -7,6 +7,7 @@ import FormNewLocation from "./_components/FormNewLocation";
 import DeleteLocationButtom from "./_components/DeleteLocationButton";
 import UpdateLocation from "./_components/UpdateLocation";
 import FormUpdateLocation from "./_components/FormUpdateLocation";
+import LocationStats from "./_components/LocationStats";
 
 
 const LocationPage = async({searchParams}:{searchParams: {[key:string]: string | string[] | undefined}}) => {
@@ -40,6 +41,7 @@ const LocationPage = async({searchParams}:{searchParams: {[key:string]: string |
             </div>
             <div className="w-full pr-2">
         <LocationCard devices={searchParams?.devices} />
+        <LocationStats devices={searchParams?.devices} />
       </div>
 
       <div className="w-full pr-2">
@@ -52,6 +54,7 @@ const LocationPage = async({searchParams}:{searchParams: {[key:string]: string |
             <FormUpdateLocation devices={searchParams?.devices} />
           </UpdateLocation>
         </div>
+       
       </div>
         </div>
     )

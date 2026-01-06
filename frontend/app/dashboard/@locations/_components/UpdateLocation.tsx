@@ -18,7 +18,7 @@ export default function UpdateLocation({children, devices}:{children: ReactNode,
             <ModalContent>
                 
                     <ModalBody className="p-6">
-                    <h3 className="text-lg font-bold mb-4">Editar Ubicación</h3>
+                    <h3 className="text-lg font-bold mb-4 items-center justify-center">Editar Ubicación</h3>
                     {children}
                     </ModalBody>
                 

@@ -25,10 +25,19 @@ export class LocationsService {
     return this.locationRepository.find();
   }
 
-  async findOne(id: number) {
+  async findOne(id: number){
     const location = await this.locationRepository.findOneBy({
-      locationId: id,
+      locationId: id
     })
+    if(!location)throw new NotFoundException("Locación no encontrada")
+    return location
+  }
+  async findStats(id: number) {
+    const location = await this.locationRepository.createQueryBuilder('location')
+    .where('location.locationId = :id',{id})
+    .loadRelationCountAndMap('location.employeesCount','location.employee')
+    .loadRelationCountAndMap('location.devicesCount','location.device')
+    .getOne()
     if(!location)throw new NotFoundException("Locación no encontrada")
     return location
   }

@@ -30,6 +30,12 @@ export class LocationsController {
   }
 
   @Auth(ROLES.ADMIN)
+  @Get('/stats/:id')
+  findStats(@Param('id') id:string){
+    return this.locationsService.findStats(+id)
+  }
+
+  @Auth(ROLES.ADMIN)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateLocationDto: UpdateLocationDto) {
     //console.log(updateLocationDto) verificar que si se actualice 
