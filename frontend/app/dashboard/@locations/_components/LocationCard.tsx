@@ -9,7 +9,7 @@ import { MapPin, UserCircle } from "lucide-react";
 export default async function LocationCard({devices}:{devices: string | string[] | undefined}) {
     if(!devices || devices === "0"){
         return(
-            <Card className="bg-gray-200 border-dashed border-2 shadow-none">
+            <Card className="w-full bg-gray-200 rounded-lg shadow-none">
                 <CardBody className="py-10 text-center text-gray-800">
                     <p>Selecciona una ubicación para ver detalles</p>
                 </CardBody>
@@ -31,17 +31,14 @@ export default async function LocationCard({devices}:{devices: string | string[]
     return(
         <Card className = "w-full shadow-md text-2xl">
             <CardHeader className="flex gap-3 pb-2">
-                <div className="bg-blue-600 p-2 rounded-lg text-blue-50">
+                <div className="bg-red-600 p-2 rounded-lg text-blue-50">
                     <MapPin size={24}/>
                 </div>
                 <b className="text-xl font-bold text-slate-800">{data.locationName}</b>
             </CardHeader>
             <Divider />
             <CardBody className="gap-4">
-                <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg">
-                    <UserCircle size={20} className="text-slate-400"/>
-                </div>
-                <p className="w-full">Dirección:{data.locationAddress}</p>
+                <p className="w-full font-bold text-slate-600 text-xl">Dirección: <b className="">{data.locationAddress}</b></p>
             </CardBody>
         </Card>
     )

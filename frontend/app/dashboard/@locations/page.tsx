@@ -1,8 +1,4 @@
-
 import { API_URL } from "@/constants";
-import { Card, CardHeader, CardBody, Button, Input, Divider } from "@heroui/react";
-import { MapPin, Plus, Trash2, Edit, Search } from "lucide-react";
-import { useState } from "react";
 import { authHeaders } from "@/app/helpers/authHeaders";
 import { Location } from "@/entities";
 import LocationCard from "./_components/LocationCard";
@@ -38,16 +34,15 @@ const LocationPage = async({searchParams}:{searchParams: {[key:string]: string |
     ]
     
     return(
-        <div className="w-full h-[90vh] bg-red-50 p-10 flex flex-col items-center">
-            <div className="w-1/2 my-4">
+        <div className="w-full h-auto flex flex-col gap-6">
+            <div className="w-full sticky top-0 z-10 bg-slate-50 pt-2 pb-4 pr-2">
         <SelectLocation locations={data} devices={searchParams?.devices} />
             </div>
-            <div className="w-1/2 mb-10">
+            <div className="w-full pr-2">
         <LocationCard devices={searchParams?.devices} />
       </div>
 
-      {/* Formularios y Botones */}
-      <div className="w-1/2 flex flex-col gap-4">
+      <div className="w-full pr-2">
         <FormNewLocation devices={searchParams?.devices} />
         
         <div className="flex flex-row gap-4 justify-center">
