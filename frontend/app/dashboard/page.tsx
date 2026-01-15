@@ -1,20 +1,43 @@
-'use client';
 
-import { Card, CardHeader, CardBody, Divider } from "@heroui/react";
-import { Users, Monitor, ShieldAlert } from "lucide-react";
-import LocationCard from "./@locations/_components/LocationCard";
+import { useEffect, useState } from "react";
+import { Skeleton } from "@heroui/react";
+import { API_URL } from "@/constants";
+import EmployeeStats from "./_components/EmployeesStats";
+import DashboardActions from "./_components/DashboardActions";
+import StockAlert from "./_components/StockAlert";
+import { authHeaders } from "../helpers/authHeaders";
 
-export default function DashboardPage({searchParams}:{searchParams : { [key: string]: string | string[] | undefined}}) {
- return(
- <div>
-    <div className="h-[80vh] w-6/7 bg-red-400">
-    <div className=" overflow-hidden overflow-y-auto first:mt-0 last:mb-0">
-    {
-       
-    }
-    <p className="w-full text-2xl px2 text-center mt-10">holaaa</p>
-    </div>
-    </div>
-</div>)
+export default async function DashboardPage() {
   
+  let allDevices: any[] = [];
+  try{
+    const response = await fetch(`${API_URL}/devices`,{
+      headers:{
+        ...authHeaders()
+      },
+      next:{
+        tags:["dashboard:devices"]
+      },
+      cache: 'no-store'
+    })
+    const devices = await response.json()
+    if(Array.isArray(devices)){
+      allDevices = devices
+    }
+  }catch(error){
+    console.error("Error calculando stock: error")
+  }
+
+  return (
+    <div className="flex flex-col gap-8 pb-10 p-2 md:p-4 max-w-7xl mx-auto w-full">
+      <div>
+        <h1 className="text-3xl font-bold text-slate-800">Panel de Control</h1>
+        <p className="text-slate-500">Resumen general del inventario de IT Oerlikon</p>
+      </div>
+
+      <EmployeeStats devices="global" />
+      <DashboardActions />
+      <StockAlert available={allDevices} />
+    </div>
+  );
 }

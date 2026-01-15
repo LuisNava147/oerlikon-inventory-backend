@@ -36,6 +36,10 @@ const LocationPage = async({searchParams}:{searchParams: {[key:string]: string |
     
     return(
         <div className="w-full h-auto flex flex-col gap-6">
+             <div className="mt-4">
+        <h1 className="text-3xl font-bold text-slate-800">Ubicaciones</h1>
+        <p className="text-slate-500">Resumen, creación, actualización y eliminación de ubicaciones plantas Oerlikon México</p>
+      </div>
             <div className="w-full sticky top-0 z-10 bg-slate-50 pt-2 pb-4 pr-2">
         <SelectLocation locations={data} devices={searchParams?.devices} />
             </div>
