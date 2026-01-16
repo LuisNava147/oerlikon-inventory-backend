@@ -3,8 +3,6 @@ import {ApiProperty, ApiPropertyOptional} from '@nestjs/swagger';
 import { Employee } from "src/employees/entities/employee.entity";
 
 export class CreateUserDto {
-@IsUUID()
-employee:Employee
 
 @ApiProperty({default: "firstname.lastname@oerlikon.com"})
 @IsEmail()

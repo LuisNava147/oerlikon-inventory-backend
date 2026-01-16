@@ -78,6 +78,12 @@ export class DevicesController {
   }
 
   @Auth(ROLES.ADMIN)
+  @Get('/location-name/:name')
+  findByLocationName(@Param('name')name:string){
+    return this.devicesService.findByLocationName(name);
+  }
+
+  @Auth(ROLES.ADMIN)
   @Get('/department/:depart')
   findByDepartment(@Param('depart')depart:string){
     return this.devicesService.findByDepartment(depart);

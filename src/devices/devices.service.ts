@@ -4,7 +4,7 @@ import { UpdateDeviceDto } from './dto/update-device.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Device } from './entities/device.entity';
 import { Repository } from 'typeorm';
-import { Like } from 'typeorm';
+import { ILike } from 'typeorm';
 
 @Injectable()
 export class DevicesService {
@@ -66,14 +66,14 @@ export class DevicesService {
 
   findByHostName(hostName: string){
     const device = this.deviceReposirory.findBy({
-      deviceHostName: Like(`%${hostName}%`)
+      deviceHostName: ILike(`%${hostName}%`)
     })
     return device;
   }
 
   async findByAssetNumber(assetNumber: string){
     const device = await this.deviceReposirory.findBy({
-      deviceAssetNumber: Like(`%${assetNumber}%`)
+      deviceAssetNumber: ILike(`%${assetNumber}%`)
     })
     if(device.length === 0)throw new NotFoundException("no. activo no encontrado");
     return device;
@@ -81,21 +81,21 @@ export class DevicesService {
 
   findByIP(ip: string){
     const device = this.deviceReposirory.findBy({
-      ipAddress: Like(`%${ip}%`)
+      ipAddress: ILike(`%${ip}%`)
     })
     return device;
   }
 
   findByType(type: string){
     const device = this.deviceReposirory.findBy({
-      deviceType: Like(`%${type}%`)
+      deviceType: ILike(`%${type}%`)
     })
     return device;
   }
 
   findByBrand(brand: string){
     const device = this.deviceReposirory.findBy({
-      deviceBrand: Like(`%${brand}%`)
+      deviceBrand: ILike(`%${brand}%`)
     })
     return device;
   }
@@ -103,9 +103,9 @@ export class DevicesService {
   async findByEmployeeName(name: string){
     const employee = await this.deviceReposirory.find({
       where:[{
-        employee: {employeeName: Like(`%${name}`)}
+        employee: {employeeName: ILike(`%${name}`)}
       },{
-        employee: {employeeLastName: Like(`%${name}`)}
+        employee: {employeeLastName: ILike(`%${name}`)}
       }
     ],
     relations: {
@@ -116,10 +116,24 @@ export class DevicesService {
     return employee;
   }
 
+  async findByLocationName(name: string){
+    const locationName =  await this.deviceReposirory.find({
+      where:{
+        location: {
+          locationName: ILike(`%${name}`)
+        }
+      },
+      relations:{
+        location:true,
+      }
+    })
+    return locationName
+  }
+
   findByDepartment(depart: string){
     const device = this.deviceReposirory.find({
       where:{
-        department: Like(`%${depart}$`)
+        department: ILike(`%${depart}$`)
       },
       relations:{
         location: true,
