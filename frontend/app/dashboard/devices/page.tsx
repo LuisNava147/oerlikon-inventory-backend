@@ -62,12 +62,15 @@ export default async function DevicePage({searchParams}:{searchParams: {[key:str
         const rawDevices = Array.isArray(data) ? data : [data]
 
         devices = rawDevices.filter((d: Device)=>{
-            const type = d.deviceType?.toLowerCase()||""
+            const type = d.deviceType?.toLowerCase().trim()||""
+            
             const isAllowed = ALLOWED_TYPES.some(allowed => type.includes(allowed))
             const isExcluded = type.includes("printer") || type.includes("impresora") || 
             type.includes("phone") || type.includes("celular");
 
             return isAllowed && !isExcluded
+
+           
         })
     }
 

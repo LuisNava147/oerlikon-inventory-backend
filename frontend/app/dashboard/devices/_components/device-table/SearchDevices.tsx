@@ -49,10 +49,10 @@ export default function SearchDevices() {
                     disallowEmptySelection
                     size="sm"
                     variant="faded"
-                    color="primary"
+                    color="danger"
                 >
                     <SelectItem key="hostname">Hostname</SelectItem>
-                    <SelectItem key="asset">Activo Fijo</SelectItem>
+                    <SelectItem key="asset">No. Activo</SelectItem>
                     <SelectItem key="employee">Nombre Empleado</SelectItem>
                     <SelectItem key="brand">Marca</SelectItem>
                     <SelectItem key="type">Tipo de Dispositivo</SelectItem>

@@ -10,11 +10,11 @@ import DeviceIcon from "./DeviceIcon";
 import DeviceActions from "./DeviceActions"; 
 
 const columns = [
-  { name: "DISPOSITIVO", uid: "device" },
-  { name: "IDENTIFICADORES", uid: "ids" },
-  { name: "ASIGNACIÓN", uid: "assignment" },
-  { name: "UBICACIÓN", uid: "location" },
-  { name: "ACCIONES", uid: "actions" },
+  { name: "DISPOSITIVO", uid: "device", align: "center" },
+  { name: "IDENTIFICADORES", uid: "ids", align: "center" },
+  { name: "ASIGNACIÓN", uid: "assignment", align: "center" },
+  { name: "UBICACIÓN", uid: "location", align: "center" },
+  { name: "ACCIONES", uid: "actions", align: "center" },
 ];
 
 export default function DeviceList({ devices }: { devices: Device[] }) {
@@ -31,8 +31,8 @@ export default function DeviceList({ devices }: { devices: Device[] }) {
         switch (columnKey) {
             case "device":
                 return (
-                    <div className="flex items-center gap-3">
-                        <div className="p-2 bg-slate-50 rounded-lg border border-slate-200 shrink-0">
+                    <div className="flex items-center min-w-[160px] justify-center gap-3">
+                        <div className="p-2 bg-slate-100 rounded-lg border border-slate-200 shrink-0">
                             <DeviceIcon type={device.deviceType} />
                         </div>
                         <div className="flex flex-col">
@@ -45,41 +45,48 @@ export default function DeviceList({ devices }: { devices: Device[] }) {
                 );
             case "ids":
                 return (
-                    <div className="flex flex-col gap-1 min-w-[140px]">
+                    <div className="flex flex-col  gap-1 min-w-[160px]">
                         {device.deviceSerialTag && (
-                            <div className="text-xs text-slate-500">
-                                <span className="font-semibold text-slate-700">S/N: </span>{device.deviceSerialTag}
+                            <div className="text-xs text-slate-500 flex justify-between items-center w-full border-b border-slate-200 pb-1 ">
+                                <span className="font-semibold text-slate-700 block">S/N: </span>
+                                <span className="font-semibold text-slate-500 text-right ml-2 truncate font-medum">{device.deviceSerialTag}</span>
                             </div>
                         )}
                         {device.deviceAssetNumber && (
-                            <div className="text-xs text-slate-500">
-                                <span className="font-semibold text-slate-700">AF: </span>{device.deviceAssetNumber}
+                            <div className="text-xs text-slate-500 flex justify-between items-center w-full border-b border-slate-200 pb-1">
+                                <span className="font-semibold text-slate-700 block">NO. ACTIVO: </span>
+                                <span className="font-semibold text-red-500 text-right ml-2 truncate font-medum">{device.deviceAssetNumber}</span>
                             </div>
                         )}
                          {device.deviceHostName && (
-                            <Chip size="sm" variant="flat" className="h-5 text-[10px] bg-slate-100 text-slate-600 max-w-fit">
-                                {device.deviceHostName}
-                            </Chip>
+                            <div className="text-xs text-slate-500 flex justify-between items-center w-full ">
+                            <span className="font-semibold text-slate-700 block">HOSTNAME: </span>
+                            <span className="font-semibold text-slate-500 text-right ml-2 truncate font-medum">{device.deviceHostName}</span>
+                        </div>
                         )}
                     </div>
                 );
             case "assignment":
                 if (device.employee) {
                     return (
-                        <div className="min-w-[150px]">
+                        <div className="min-w-[160px] items-center text-center">
                             <User
                                 name={`${device.employee.employeeName} ${device.employee.employeeLastName}`}
                                 description={device.employee.employeeEmail}
                                 avatarProps={{ size: "sm", className: "bg-blue-100 text-blue-600 shrink-0" }}
                                 classNames={{
-                                    name: "text-xs font-semibold text-slate-700 whitespace-nowrap",
+                                    name: "text-md font-semibold text-slate-700 whitespace-nowrap",
                                     description: "text-[10px] text-slate-400"
                                 }}
                             />
                         </div>
                     );
                 }
-                return <Chip size="sm" color="success" variant="flat" className="text-xs">Disponible</Chip>;
+                return <div className="min-w-[160px] items-center text-center">
+                        <Chip size="md" color="success" variant="flat" className="text-md">En stock</Chip>
+                </div>
+                
+                
 
             case "location":
                 return (
@@ -114,7 +121,8 @@ export default function DeviceList({ devices }: { devices: Device[] }) {
             >
                 <TableHeader columns={columns}>
                     {(column) => (
-                        <TableColumn key={column.uid} align={column.uid === "actions" ? "center" : "start"}>
+                        <TableColumn key={column.uid} align={column.align || "start"}
+                        >
                             {column.name}
                         </TableColumn>
                     )}
@@ -122,7 +130,7 @@ export default function DeviceList({ devices }: { devices: Device[] }) {
                 <TableBody items={items}>
                     {(item) => (
                         // 1. CORRECCIÓN CLAVE: Aseguramos que la key sea string y nunca undefined
-                        <TableRow key={item.deviceId || Math.random().toString()}> 
+                        <TableRow key={item.deviceId || Math.random().toString()} className="border-b border-slate-200 last:border-none hover:bg-slate-50 transition-colors"> 
                             {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
                         </TableRow>
                     )}
