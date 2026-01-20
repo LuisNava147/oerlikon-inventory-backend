@@ -5,6 +5,9 @@ import { Button } from "@heroui/react";
 import { Plus } from "lucide-react";
 import SearchDevices from "./_components/device-table/SearchDevices";
 import DeviceList from "./_components/device-table/DeviceList";
+import FormCreateDevice from "./_components/device-table/FormDeviceCreate";
+import CreateDevice from "./_components/device-table/DeviceCreate";
+import { json } from "stream/consumers";
 
 export default async function DevicePage({searchParams}:{searchParams: {[key:string]: string | string[] | undefined}}) {
     const ALLOWED_TYPES = [
@@ -74,7 +77,28 @@ export default async function DevicePage({searchParams}:{searchParams: {[key:str
         })
     }
 
-    
+    async function getLocations() {
+        const response = await fetch(`${API_URL}/locations`,{
+            headers:{
+                ...authHeaders(),
+            },
+            cache: 'no-store'
+        })
+        return await response.json()
+    }
+
+    async function getEmployees() {
+        const response = await fetch(`${API_URL}/employees`,{
+            headers:{
+                ...authHeaders(),
+            },
+            cache: 'no-store'
+        })
+        return await response.json()
+    }
+
+    const locations = await getLocations()
+    const employees = await getEmployees()    
     
     return(
         <div className="w-full h-auto flex flex-col gap-6 mt-4">
@@ -85,9 +109,12 @@ export default async function DevicePage({searchParams}:{searchParams: {[key:str
                         Laptops, Desktops y Periféricos ({devices.length} encontrados)
                     </p>
                 </div>
-                <Button color="primary" startContent={<Plus size={20}/>} className="font-semibold shadow-md mt-6">
-                    Nuevo Equipo
-                </Button>
+               
+                <div className="rounded-md mt-6">
+                    <CreateDevice>
+                        <FormCreateDevice locations={locations} employees={employees} />
+                    </CreateDevice>
+                </div>
             </div>
             <SearchDevices />
             <DeviceList devices={devices} />

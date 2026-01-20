@@ -1,19 +1,26 @@
+'use server'
 import { API_URL } from "@/constants"
 import { authHeaders } from "@/app/helpers/authHeaders"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation";
 
-export async function CreateDevice(formData:FormData) {
+export async function createDevice(formData:FormData) {
+    const locationId= formData.get("location")?.toString()
+    const employeeId = formData.get("employee")?.toString()
+
     const deviceData = {
         deviceHostName: formData.get("deviceHostName"),
         deviceAssetNumber: formData.get("deviceAssetNumber"),
         deviceType: formData.get("deviceType"),
         deviceModel: formData.get("deviceModel"),
         deviceBrand: formData.get("deviceBrand"),
-        location: formData.get("location") || null,
-        employee: formData.get("employee") || null
+        deviceSerialTag: formData.get("deviceSerialTag"),
+        location: locationId ? locationId.toString() : null,
+        employee: employeeId ? employeeId : null
+
+
     }
-    console.log(deviceData)
+    //console.log(deviceData)
 
     const response = await fetch(`${API_URL}/devices`,{
         method: "POST",
@@ -23,12 +30,7 @@ export async function CreateDevice(formData:FormData) {
         },
         body: JSON.stringify(deviceData)
     })
-    if(!response.ok){
-        const errorData = await response.json()
-        console.error("Error creando dispositivo: ", errorData)
-        return { error: "No se pudo crear el dispositivo. Revisa los datos." }
-    }
+    //console.log(await response.json())
 
     revalidatePath('/dashboard/devices');
-    redirect('/dashboard/devices');
 }
