@@ -3,18 +3,24 @@ import { createDevice } from "@/actions/devices/devices-create";
 import { Employee, Location } from "@/entities";
 import { Autocomplete, AutocompleteItem, Button, ButtonGroup, Divider, Input, Select, SelectItem } from "@heroui/react";
 import { MapPin, Monitor, Save } from "lucide-react";
-import { useState } from "react";
-import { useFormStatus } from "react-dom";
+import { useEffect, useState } from "react";
+import { useFormState, useFormStatus } from "react-dom";
 
 const DEVICE_TYPE = [
     {key: "Laptop", label:"Laptop"},
     {key: "Desktop", label:"Desktop/PC"},
     {key: "Monitor", label:"Monitor"},
     {key: "Mouse", label:"Mouse"},
-    {key: "Keyboard", label:"Teclado"},
+    {key: "Teclado", label:"Teclado"},
     {key: "Docking", label:"Docking Station"},
+    {key: "Diadema", label: "Diadema"},
 ]
 
+const initialState = {
+    success: false,
+    error: null,
+  }
+  
 function SubmitButton(){
     const {pending} = useFormStatus()
     return(
@@ -25,11 +31,17 @@ function SubmitButton(){
     
 }
 
-
-export default function FormCreateDevice({locations, employees}:{locations: Location[], employees: Employee[]}){
+export default function FormCreateDevice({locations, employees, onClose}:{locations: Location[], employees: Employee[], onClose: ()=>void}){
+    const [state, formAction] = useFormState(createDevice, initialState)
     const [employeeId, setEmployeeId] = useState<string>("");
+
+    useEffect(()=>{
+        if(state.success){
+            onClose()
+        }
+    }, [state.success, onClose])
     return(
-        <form action={createDevice} className="bg-slate-50 p-8 rounded-3xl flex flex-col gap-4">
+        <form action={formAction} className="bg-slate-50 p-8 rounded-none flex flex-col gap-4">
             
             <div className="flex items-start gap-2 text-slate-700">
                 <Monitor size={30} className="text-red-600"/>
@@ -72,6 +84,9 @@ export default function FormCreateDevice({locations, employees}:{locations: Loca
                             )
                         }
                     </Autocomplete>
+                    {state.error && (
+                        <p className="text-red-600 text-sm">{state.error}</p>
+                    )}
             </div>
             <div className="flex justify-end pt-4">
                 <SubmitButton />

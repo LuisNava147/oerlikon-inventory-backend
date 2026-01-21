@@ -19,6 +19,7 @@ export default async function DevicePage({searchParams}:{searchParams: {[key:str
         "keyboard", "teclado", 
         "docking", 
         "monitor", "pantalla", 
+        "diadema",
     ];
     
     let devices: Device[] = []
@@ -111,9 +112,10 @@ export default async function DevicePage({searchParams}:{searchParams: {[key:str
                 </div>
                
                 <div className="rounded-md mt-6">
-                    <CreateDevice>
-                        <FormCreateDevice locations={locations} employees={employees} />
-                    </CreateDevice>
+                    <CreateDevice
+                      locations={locations} employees={employees}
+                    />
+                    
                 </div>
             </div>
             <SearchDevices />

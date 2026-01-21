@@ -31,11 +31,12 @@ export default function DeviceList({ devices }: { devices: Device[] }) {
         switch (columnKey) {
             case "device":
                 return (
-                    <div className="flex items-center min-w-[160px] justify-center gap-3">
-                        <div className="p-2 bg-slate-100 rounded-lg border border-slate-200 shrink-0">
+                    <div className="flex items-center gap-3 min-w-[160px] ">
+                        <div className=" flex items-start justify-start p-2 bg-slate-100 rounded-md border border-slate-200 shrink-0">
                             <DeviceIcon type={device.deviceType} />
+                            
                         </div>
-                        <div className="flex flex-col">
+                        <div className="flex flex-col text-start">
                             <p className="font-bold text-sm capitalize text-slate-800 whitespace-nowrap">
                                 {device.deviceBrand} {device.deviceModel}
                             </p>
@@ -105,7 +106,7 @@ export default function DeviceList({ devices }: { devices: Device[] }) {
 
     if (devices.length === 0) {
         return (
-            <div className="text-center py-10 bg-slate-50 rounded-xl border border-dashed border-slate-300">
+            <div className="text-center py-10 bg-slate-200 rounded-xl border border-collapse border-slate-300">
                 <p className="text-slate-500">No se encontraron dispositivos.</p>
             </div>
         );
