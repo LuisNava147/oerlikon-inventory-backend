@@ -19,6 +19,8 @@ export default function DeviceIcon({type}:{type:string}){
     return <HardDrive size={30} className="text-green-600"/>
     if(t.includes("diadema"))
     return <Headset size={30} className="text-yellow-600" />
+    if(t.includes("token"))
+    
 
     return <Monitor size={30} className="text-red-600"/>
 }

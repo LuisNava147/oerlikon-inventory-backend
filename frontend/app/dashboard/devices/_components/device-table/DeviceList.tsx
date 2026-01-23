@@ -4,20 +4,21 @@ import {
   Table, TableHeader, TableColumn, TableBody, TableRow, TableCell,
   User, Chip, Pagination
 } from "@heroui/react";
-import { Device } from "@/entities";
+import { Device, Employee, Location } from "@/entities";
 import { useState, useMemo } from "react";
 import DeviceIcon from "./DeviceIcon";       
 import DeviceActions from "./DeviceActions"; 
 
 const columns = [
-  { name: "DISPOSITIVO", uid: "device", align: "center" },
+  { name: "DISPOSITIVO", uid: "device", align: "start" },
   { name: "IDENTIFICADORES", uid: "ids", align: "center" },
   { name: "ASIGNACIÓN", uid: "assignment", align: "center" },
   { name: "UBICACIÓN", uid: "location", align: "center" },
   { name: "ACCIONES", uid: "actions", align: "center" },
 ];
 
-export default function DeviceList({ devices }: { devices: Device[] }) {
+export default function DeviceList({ devices, employees, locations, onClose}: { devices: Device[], employees: Employee[], locations:Location[], onClose:()=>void }) {
+    console.log("👀 CLIENTE RECIBIÓ:", devices.length, "DISPOSITIVOS");
     const [page, setPage] = useState(1);
     const rowsPerPage = 10;
     const pages = Math.ceil(devices.length / rowsPerPage);
@@ -99,8 +100,8 @@ export default function DeviceList({ devices }: { devices: Device[] }) {
                 );
 
             case "actions":
-                return <DeviceActions deviceId={device.deviceId} />;
-            default: return null;
+                return (<DeviceActions devices={device} employees={employees} locations={locations} onClose={onClose} />)
+            
         }
     };
 

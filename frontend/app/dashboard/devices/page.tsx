@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 import { Device } from "@/entities";
 import { API_URL } from "@/constants";
 import { authHeaders } from "@/app/helpers/authHeaders";
@@ -9,7 +11,7 @@ import FormCreateDevice from "./_components/device-table/FormDeviceCreate";
 import CreateDevice from "./_components/device-table/DeviceCreate";
 import { json } from "stream/consumers";
 
-export default async function DevicePage({searchParams}:{searchParams: {[key:string]: string | string[] | undefined}}) {
+export default async function DevicePage({searchParams, onClose}:{searchParams: {[key:string]: string | string[] | undefined}, onClose: ()=>void}) {
     const ALLOWED_TYPES = [
         // Computadoras
         "laptop", "laptops",
@@ -20,6 +22,13 @@ export default async function DevicePage({searchParams}:{searchParams: {[key:str
         "docking", 
         "monitor", "pantalla", 
         "diadema",
+        "token"
+    ];
+
+    const EXCLUDED_TYPES = [
+        "printer", "impresora", "multifuncional", "copiadora", "scanner",
+        "phone", "celular", "smartphone", "iphone",
+        "tablet", "ipad", "android"
     ];
     
     let devices: Device[] = []
@@ -61,16 +70,16 @@ export default async function DevicePage({searchParams}:{searchParams: {[key:str
         },
         cache: 'no-cache'
     })
+
     if(response.ok){
         const data = await response.json()
         const rawDevices = Array.isArray(data) ? data : [data]
-
+        
         devices = rawDevices.filter((d: Device)=>{
             const type = d.deviceType?.toLowerCase().trim()||""
             
             const isAllowed = ALLOWED_TYPES.some(allowed => type.includes(allowed))
-            const isExcluded = type.includes("printer") || type.includes("impresora") || 
-            type.includes("phone") || type.includes("celular");
+            const isExcluded = EXCLUDED_TYPES.some(excluded => type.includes(excluded) )
 
             return isAllowed && !isExcluded
 
@@ -98,9 +107,10 @@ export default async function DevicePage({searchParams}:{searchParams: {[key:str
         return await response.json()
     }
 
+    
     const locations = await getLocations()
     const employees = await getEmployees()    
-    
+
     return(
         <div className="w-full h-auto flex flex-col gap-6 mt-4">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -119,7 +129,7 @@ export default async function DevicePage({searchParams}:{searchParams: {[key:str
                 </div>
             </div>
             <SearchDevices />
-            <DeviceList devices={devices} />
+            <DeviceList devices={devices} employees={employees} locations={locations} onClose={onClose} />
         </div>
         
     )

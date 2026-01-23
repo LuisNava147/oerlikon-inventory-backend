@@ -1,7 +1,7 @@
 "use client"
 
-import { Button, Modal, ModalBody, ModalContent, useDisclosure } from "@heroui/react";
-import { Plus } from "lucide-react";
+import { Button, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@heroui/react";
+import { Monitor, MonitorUp, Plus } from "lucide-react";
 import { Children, ReactNode } from "react";
 import FormCreateDevice from "./FormDeviceCreate";
 import { Employee, Location } from "@/entities";
@@ -14,15 +14,17 @@ export default function CreateDevice({locations, employees}:{locations: Location
         <Button onPress={onOpen} color="primary" className="font-bold">
             <Plus size={20}/> Nuevo Equipo
         </Button>
-        <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="4xl" scrollBehavior="inside" backdrop="blur" className="bg-slate-200 rounded-none">
+        <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="4xl" scrollBehavior="inside" backdrop="blur">
             <ModalContent className="w-full h-[90vh] md:h-auto max-h-[90vh]">
                 {
                     ()=>(
                         <>
-                        <ModalBody className="py-7 overflow-y-auto">
-                            
-                        <FormCreateDevice locations={locations} employees={employees} onClose={onOpenChange}/>
-                            
+                        <ModalHeader className="flex flex-row gap-3 items-center text-slate-700">
+                        <MonitorUp size={30} className="text-red-600"/>
+                        <p className="text-xl font-bold">Registrar nuevo Equipo</p>
+                        </ModalHeader>
+                        <ModalBody className="py-7 overflow-y-auto">  
+                        <FormCreateDevice locations={locations} employees={employees} onClose={onOpenChange}/>  
                         </ModalBody>
                         </>
                     )

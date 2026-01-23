@@ -3,6 +3,7 @@
 import { Location } from "@/entities";
 import { Select, SelectItem } from "@heroui/react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function SelectLocation({locations, devices}:{locations: Location[], devices: string | string[] | undefined}){
     const router = useRouter();
