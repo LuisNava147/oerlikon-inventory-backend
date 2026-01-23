@@ -29,8 +29,7 @@ export async function updateDevice(deviceId: string,prevState:any,formData:FormD
         location: locationId ? locationId.toString() : null,
         employee: employeeId ? employeeId : null
     }
-    console.log("Actualizando: ",deviceData)
-
+   
     const response = await fetch(`${API_URL}/devices/${deviceId}`,{
         method: "PATCH",
         headers:{

@@ -18,6 +18,7 @@ const DEVICE_TYPE = [
     {key: "Teclado", label:"Teclado"},
     {key: "Docking", label:"Docking Station"},
     {key: "Diadema", label: "Diadema"},
+    {key: "Token", label: "Token"},
 ]
 
 const initialState = {
@@ -39,6 +40,8 @@ export default function FormUpdateDevice({locations=[], employees=[], devices, o
     const [employeeId, setEmployeeId] = useState<string>("");
     const [employeeInput, setEmployeeInput] = useState("")
     const [locationId, setLocationId] = useState<string>("")
+    const [deviceType, setDeviceType] = useState<string>("");
+
     const deviceId = devices?.deviceId ? String(devices.deviceId) : ""
     const updateWithDeviceId = updateDevice.bind(null, deviceId)
 
@@ -50,6 +53,9 @@ export default function FormUpdateDevice({locations=[], employees=[], devices, o
             }
             if(devices.location?.locationId){
                 setLocationId(String(devices.location.locationId))
+            }
+            if(devices.deviceType){
+                setDeviceType(devices.deviceType)
             }
         }
         
@@ -82,14 +88,14 @@ export default function FormUpdateDevice({locations=[], employees=[], devices, o
         <>    
                 <form action={formAction} className="bg-slate-50 p-8 rounded-none flex flex-col gap-2">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <input type="hidden" name="deviceType" value={devices.deviceType} />
-                    <Select name="deviceType" label="Tipo de Dispositivo" placeholder="Selecciona uno" variant="bordered" isRequired items={DEVICE_TYPE} className="bg-white rounded-3xl"
-                    defaultSelectedKeys={devices.deviceType ? [devices.deviceType] : []}>
-                    {(item)=>(
+                    <input type="hidden" name="deviceType" value={deviceType} />
+                    <Select label="Tipo de Dispositivo" placeholder="Selecciona uno" variant="bordered" isRequired items={DEVICE_TYPE} className="bg-white rounded-3xl"
+                    selectedKeys={deviceType ? [deviceType] : []} onSelectionChange={(keys)=> setDeviceType(Array.from(keys)[0] as string)}>
+                    {DEVICE_TYPE.map((item)=>(
                         <SelectItem key={item.key}>
                             {item.label}
                         </SelectItem>
-                    )}
+                    ))}
                 </Select>
             <Input isRequired label="Marca del Dispositivo" placeholder="Ej. DELL" variant="bordered" name="deviceBrand"  defaultValue={devices?.deviceBrand} className="mb-3 bg-white rounded-2xl"/>
             <Input isRequired label="Modelo" placeholder="Ej. Latitude 5420" variant="bordered" name="deviceModel" defaultValue={devices?.deviceModel} className="mb-3 bg-white rounded-2xl" />

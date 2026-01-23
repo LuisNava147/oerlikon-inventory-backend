@@ -5,6 +5,7 @@ import Link from "next/link";
 import FormUpdateDevice from "./FormDeviceUpdate";
 import { Device, Employee, Location } from "@/entities";
 import UpdateDevice from "./DeviceUpdate";
+import DeleteDeviceButton from "./DeleteDeviceButton";
 
 
 export default function DeviceActions({devices, locations, employees, onClose}:{devices:Device, locations:Location[], employees: Employee[], onClose: ()=>void}){
@@ -15,9 +16,7 @@ export default function DeviceActions({devices, locations, employees, onClose}:{
             </Tooltip>
 
             <Tooltip content="Eliminar">
-            <Button className="cursor-pointer text-default-400 active:opacity-50 hover:text-red-700 bg-transparent border-none outline-none">
-                <Trash2 size={18} />
-            </Button>
+            <DeleteDeviceButton device={devices} />
             </Tooltip>
         </div>
     )

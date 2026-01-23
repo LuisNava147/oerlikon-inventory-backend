@@ -1,4 +1,4 @@
-import { Laptop, Monitor, Mouse, Keyboard, HardDrive, Smartphone, HelpCircle, Printer, LaptopMinimal, Headset } from "lucide-react";
+import { Laptop, Monitor, Mouse, Keyboard, HardDrive, Smartphone, HelpCircle, Printer, LaptopMinimal, Headset, SquarePower, CircleQuestionMark } from "lucide-react";
 
 export default function DeviceIcon({type}:{type:string}){
     if(!type)return <HelpCircle size={20} className="text-slate-400" />
@@ -20,7 +20,8 @@ export default function DeviceIcon({type}:{type:string}){
     if(t.includes("diadema"))
     return <Headset size={30} className="text-yellow-600" />
     if(t.includes("token"))
+    return <SquarePower size={30} className="text-blue-950" />
     
 
-    return <Monitor size={30} className="text-red-600"/>
+    return <CircleQuestionMark size={30} className="text-red-600"/>
 }

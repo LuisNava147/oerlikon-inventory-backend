@@ -18,7 +18,6 @@ const columns = [
 ];
 
 export default function DeviceList({ devices, employees, locations, onClose}: { devices: Device[], employees: Employee[], locations:Location[], onClose:()=>void }) {
-    console.log("👀 CLIENTE RECIBIÓ:", devices.length, "DISPOSITIVOS");
     const [page, setPage] = useState(1);
     const rowsPerPage = 10;
     const pages = Math.ceil(devices.length / rowsPerPage);
