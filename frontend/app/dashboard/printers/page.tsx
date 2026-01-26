@@ -4,6 +4,9 @@ import { authHeaders } from "@/app/helpers/authHeaders";
 import SearchPrinters from "./_components/printer-table/SearchPrinters";
 import PrinterList from "./_components/printer-table/PrinterList";
 import CreatePrinter from "./_components/printer-table/PrinterCreate";
+import Link from "next/link";
+import { Button } from "@heroui/react";
+import { Building } from "lucide-react";
 
 export default async function DevicePage({searchParams, onClose}:{searchParams: {[key:string]: string | string[] | undefined}, onClose: ()=>void}){
     const ALLOWED_TYPES = [
@@ -122,7 +125,12 @@ export default async function DevicePage({searchParams, onClose}:{searchParams: 
                     </p>
                 </div>
                
-                <div className="rounded-md mt-6">
+                <div className="rounded-md mt-6 flex flex-col md:flex-row gap-3">
+                    <Link href={"/dashboard/departments"}>
+                        <Button color="secondary" variant="flat" className="font-bold w-full md:w-auto" startContent={<Building size={20}/>}>
+                            Departamentos
+                        </Button>
+                    </Link>
                     <CreatePrinter locations={locations} departments={departments} />
                 </div>
             </div>
