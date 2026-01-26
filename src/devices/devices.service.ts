@@ -65,37 +65,76 @@ export class DevicesService {
   }
 
   findByHostName(hostName: string){
-    const device = this.deviceReposirory.findBy({
-      deviceHostName: ILike(`%${hostName}%`)
+    const device = this.deviceReposirory.find({
+      where:{
+        deviceHostName: ILike(`%${hostName}%`)
+      },
+      relations:{
+        employee:true,
+        location: true,
+        department: true
+      }
+      
     })
     return device;
   }
 
   async findByAssetNumber(assetNumber: string){
-    const device = await this.deviceReposirory.findBy({
-      deviceAssetNumber: ILike(`%${assetNumber}%`)
+    const device = await this.deviceReposirory.find({
+      where:{
+        deviceAssetNumber: ILike(`%${assetNumber}%`)
+      },
+      relations:{
+        employee:true,
+        location:true,
+        department: true,
+      }
+      
     })
     if(device.length === 0)throw new NotFoundException("no. activo no encontrado");
     return device;
   }
 
   findByIP(ip: string){
-    const device = this.deviceReposirory.findBy({
-      ipAddress: ILike(`%${ip}%`)
+    const device = this.deviceReposirory.find({
+      where:{
+        ipAddress: ILike(`%${ip}%`)
+      },
+      relations:{
+        department:true,
+        location:true
+      }
+      
     })
     return device;
   }
 
   findByType(type: string){
-    const device = this.deviceReposirory.findBy({
-      deviceType: ILike(`%${type}%`)
+    const device = this.deviceReposirory.find({
+      where:{
+        deviceType: ILike(`%${type}%`)
+      },
+      relations:{
+        employee: true,
+        location:true,
+        department: true,
+      }
+      
     })
     return device;
   }
 
   findByBrand(brand: string){
-    const device = this.deviceReposirory.findBy({
-      deviceBrand: ILike(`%${brand}%`)
+    const device = this.deviceReposirory.find({
+      where:{
+        deviceBrand: ILike(`%${brand}%`)
+      },
+      relations:{
+        employee:true,
+        location:true,
+        department:true
+      }
+      
     })
     return device;
   }
@@ -103,9 +142,9 @@ export class DevicesService {
   async findByEmployeeName(name: string){
     const employee = await this.deviceReposirory.find({
       where:[{
-        employee: {employeeName: ILike(`%${name}`)}
+        employee: {employeeName: ILike(`%${name}%`)}
       },{
-        employee: {employeeLastName: ILike(`%${name}`)}
+        employee: {employeeLastName: ILike(`%${name}%`)}
       }
     ],
     relations: {
@@ -118,25 +157,57 @@ export class DevicesService {
 
   async findByLocationName(name: string){
     const locationName =  await this.deviceReposirory.find({
-      where:{
-        location: {
-          locationName: ILike(`%${name}`)
-        }
-      },
+     where:{
+      location: {
+        locationName: ILike(`%${name}%`)
+      }
+     },
       relations:{
+        employee:true,
         location:true,
+        department:true,
       }
     })
     return locationName
   }
 
-  findByDepartment(depart: string){
+  findByDepartmentName(depart: string){
     const device = this.deviceReposirory.find({
       where:{
-        department: ILike(`%${depart}$`)
+        department: {
+          departmentName: ILike(`%${depart}%`)
+        }
       },
       relations:{
         location: true,
+        department: true,
+      }
+    })
+    return device;
+  }
+
+  async findBySapName(name: string){
+    const device = await this.deviceReposirory.find({
+      where:{
+        sapName: ILike(`%${name}%`)
+      },
+      relations:{
+        location: true,
+        department: true
+      }
+    })
+    return device;
+  }
+
+  async findByDeviceModel(model: string){
+    const device = await this.deviceReposirory.find({
+      where:{
+        deviceModel: ILike(`%${model}%`)
+      },
+      relations:{
+        location: true,
+        employee: true,
+        department: true
       }
     })
     return device;

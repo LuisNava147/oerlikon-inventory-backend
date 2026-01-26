@@ -86,7 +86,19 @@ export class DevicesController {
   @Auth(ROLES.ADMIN)
   @Get('/department/:depart')
   findByDepartment(@Param('depart')depart:string){
-    return this.devicesService.findByDepartment(depart);
+    return this.devicesService.findByDepartmentName(depart);
+  }
+
+  @Auth(ROLES.ADMIN)
+  @Get('/sap-name/:name')
+  findBySapName(@Param('name')name:string){
+    return this.devicesService.findBySapName(name);
+  }
+
+  @Auth(ROLES.ADMIN)
+  @Get('/model/:model')
+  findByDeviceModel(@Param('model')model:string){
+    return this.devicesService.findByDeviceModel(model);
   }
 
   @Auth(ROLES.ADMIN)
