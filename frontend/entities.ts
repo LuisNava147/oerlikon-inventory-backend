@@ -52,6 +52,7 @@ export interface Device {
     ipAddress?: string
     sapName?: string
     deviceMAC?: string
+    deviceAccount?: string
     location: Location 
     department?: Deparment
     employee?: Employee
