@@ -57,6 +57,10 @@ export class CreateDeviceDto {
     @IsOptional()
     deviceMAC?: string
 
+    @IsString()
+    @IsOptional()
+    deviceAccount?:string
+
     //relaciones BD
     @IsString()
     @IsNotEmpty()

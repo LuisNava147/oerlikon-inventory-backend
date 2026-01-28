@@ -78,6 +78,18 @@ export class DevicesController {
   }
 
   @Auth(ROLES.ADMIN)
+  @Get('/employee-phone-number/:phone')
+  findByEmployeePhoneNumber(@Param('phone')phone:string){
+    return this.devicesService.findByEmployeePhoneNumber(phone);
+  }
+
+  @Auth(ROLES.ADMIN)
+  @Get('/mobile-account/:account')
+  findByEmployeePhoneAccount(@Param('account')account:string){
+    return this.devicesService.findByPhoneAccount(account);
+  }
+
+  @Auth(ROLES.ADMIN)
   @Get('/location-name/:name')
   findByLocationName(@Param('name')name:string){
     return this.devicesService.findByLocationName(name);

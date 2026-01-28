@@ -36,6 +36,8 @@ ipAddress: string
 sapName: string
 @Column("text",{nullable:true})
 deviceMAC: string
+@Column("text",{nullable:true})
+deviceAccount: string
 
 @ManyToOne(()=> Location, {nullable:false, onDelete:'SET NULL'})
 @JoinColumn({name: "locationId"})

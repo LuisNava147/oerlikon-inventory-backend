@@ -155,6 +155,19 @@ export class DevicesService {
     return employee;
   }
 
+  async findByEmployeePhoneNumber(phone: string){
+    const employee = await this.deviceReposirory.find({
+      where:{
+        employee: {employeePhoneNumber: ILike(`%${phone}%`)}
+      },
+    relations: {
+      employee: true,
+      location: true,
+    }
+    })
+    return employee;
+  }
+
   async findByLocationName(name: string){
     const locationName =  await this.deviceReposirory.find({
      where:{
@@ -194,6 +207,19 @@ export class DevicesService {
       relations:{
         location: true,
         department: true
+      }
+    })
+    return device;
+  }
+
+  async findByPhoneAccount(account: string){
+    const device = await this.deviceReposirory.find({
+      where:{
+        deviceAccount: ILike(`%${account}%`)
+      },
+      relations:{
+        location: true,
+        employee: true
       }
     })
     return device;
