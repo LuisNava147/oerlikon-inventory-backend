@@ -7,8 +7,6 @@ import UpdateDepartment from "./UpdateDepartment";
 import DeleteDepartmentButton from "./DeleteDepartmentButton";
 
 export default function DepartmentActions({departments}:{departments:Deparment}){
-    const{isOpen, onOpen, onOpenChange} = useDisclosure()
-
     return(
         <div className="flex items-center justify-center gap-2">
             <Tooltip content="Editar">

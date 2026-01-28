@@ -25,7 +25,7 @@ export default function SearchDepartment(){
     }
 
     return(
-        <div className="flex w-full md:max-w-md bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+        <div className="flex flex-col md:flex-row gap-3 items-end md:items-center bg-slate-100 rounded-lg">
             <Input className="w-full" placeholder="Buscar Departamento..." value={query} onValueChange={handleSearch}
             startContent={<Search size={18} className="text-slate-400" />} endContent={query && (
                 <div className="cursor-pointer active:opacity-50" onClick={handleClear}>
@@ -33,7 +33,7 @@ export default function SearchDepartment(){
                 </div>
             )}
             size="md"
-            variant="bordered"
+            
             />
         </div>
     )

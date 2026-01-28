@@ -35,6 +35,7 @@ export interface Deparment {
     departmentName: string
     device: Device[]
     incident: Incident[]
+    printerCount?: number
 }
 
 export interface Device { 

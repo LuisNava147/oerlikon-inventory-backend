@@ -2,7 +2,7 @@
 
 import { Deparment } from "@/entities";
 import { Modal, ModalBody, ModalContent, ModalHeader, Tooltip, useDisclosure } from "@heroui/react";
-import { Pencil } from "lucide-react";
+import { Pencil, SquarePen } from "lucide-react";
 import FormUpdateDepartment from "./FormUpdateDepartment";
 
 export default function UpdateDepartment({departments}:{departments:Deparment}){
@@ -14,12 +14,14 @@ export default function UpdateDepartment({departments}:{departments:Deparment}){
                     <Pencil size={18} />
                 </span>
             </Tooltip>
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange} backdrop="blur" isDismissable={false}>
                 <ModalContent>
                     {()=>(
                        <>
-                       <ModalHeader>Editar Departamento</ModalHeader>
-                       <ModalBody>
+                       <ModalHeader className="flex flex-row gap-3 items-center text-slate-700">
+                       <SquarePen size={30} className="border border-red-50 bg-red-50 rounded-lg text-red-600" />
+                        Editar Departamento</ModalHeader>
+                       <ModalBody className="py-7 overflow-y-auto">
                        <FormUpdateDepartment departments={departments} onClose={onOpenChange} />
                        </ModalBody>
                        </> 

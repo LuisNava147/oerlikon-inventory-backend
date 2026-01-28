@@ -1,7 +1,7 @@
 "use client"
 import { createDepartment } from "@/actions/departments/department-create"
 import { Button, Card, CardBody, CardHeader, Input } from "@heroui/react"
-import { Building, PlusCircle } from "lucide-react"
+import { BriefcaseBusiness, Building, PlusCircle, Save } from "lucide-react"
 import { useEffect, useRef } from "react"
 import { useFormState, useFormStatus } from "react-dom"
 
@@ -11,7 +11,7 @@ function SubmitButton(){
     const {pending} = useFormStatus()
     return(
         <Button type= "submit" color="primary" className="w-full font-bold shadow-lg shadow-blue-500/30" isLoading={pending}
-        startContent={!pending && <PlusCircle size={20}/>}>
+        startContent={!pending && <Save size={20}/>}>
         {pending ? "Guardando..." : "Guardar Departamento"}
         </Button>
     )
@@ -31,8 +31,9 @@ export default function CreateDepartment(){
     <Card className="w-full bg-white border border-slate-200 shadow-md sticky top-6">
         <CardHeader className="flex gap-3 pb-0 pt-6 px-6">
             <div className="p-2 bg-red-50 rounded-lg text-red-600">
-                <Building size={24} />
+                <BriefcaseBusiness size={24} />
             </div>
+            <p className="text-xl font-bold">Crear Nuevo Departamento</p>
         </CardHeader>
         <CardBody className="px-6 py-6 overflow-hidden">
             <form ref={formRef} action={formAction} className="flex flex-col gap-6">

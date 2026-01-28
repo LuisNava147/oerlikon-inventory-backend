@@ -54,7 +54,8 @@ export default function DeleteDepartmentButton({departments}:{departments:Deparm
                         </p>
                     </div>
                     <p className="text-xs text-slate-400 mt-4">
-                        Esta acción es irreversible y se perderá el historial de asignaciones.
+                        Esta acción es irreversible y se perderá el historial de asignaciones. 
+                        Si <b>{departments.departmentName}</b> tiene equipos asignados, estos quedarán sin departamento.
                     </p>
                     {error && (
                         <div className="bg-red-100 text-red-700 p-2 rounded text-sm mt-2">{error}</div>

@@ -10,8 +10,9 @@ import DepartmentActions from "./DepartmentActions";
 // import DepartmentActions from "./DepartmentActions"; // Lo crearemos después
 
 const columns = [
-  { name: "NOMBRE DEL DEPARTAMENTO", uid: "name", align: "start" },
-  { name: "ACCIONES", uid: "actions", align: "center" },
+  { name: "DEPARTAMENTO", uid: "name", align: "start" as const},
+  {name: "ASIGNACIONES", uid:"count", align:"center" as const},
+  { name: "ACCIONES", uid: "actions", align: "center" as const},
 ];
 
 export default function DepartmentList({ departments }: { departments: Deparment[] }) {
@@ -32,16 +33,21 @@ export default function DepartmentList({ departments }: { departments: Deparment
                         {dept.departmentName}
                     </div>
                 );
-            case "id":
-                return (
-                    <span className="text-xs text-slate-400 font-mono">
-                        {dept.departmentId}
-                    </span>
-                );
+            case "count":
+                return(
+                    <div className="flex justify-center items-center">
+                        <Chip size="md" variant="flat" color={dept.printerCount && dept.printerCount > 0 ? "primary" : "default"} 
+                        classNames={{content:""}}>
+                            {dept.printerCount || 0} impresoras asignadas.
+                        </Chip>
+                    </div>
+                    
+                )
             case "actions":
                 return (
-
-                    <DepartmentActions departments={dept}/>
+                    <div className="flex flex-col justify-center items-center">
+                        <DepartmentActions departments={dept}/>
+                    </div>
                 );
             default:
                 return null;
@@ -50,7 +56,7 @@ export default function DepartmentList({ departments }: { departments: Deparment
 
     if (departments.length === 0) {
         return (
-            <div className="text-center py-10 bg-slate-50 rounded-xl border border-dashed border-slate-300 mt-4">
+            <div className="text-center py-10 bg-slate-200 rounded-xl border border-collapse border-slate-300">
                 <p className="text-slate-500">No se encontraron departamentos.</p>
             </div>
         );
@@ -66,7 +72,7 @@ export default function DepartmentList({ departments }: { departments: Deparment
             >
                 <TableHeader columns={columns}>
                     {(column) => (
-                        <TableColumn key={column.uid} align={column.align || "start"}>
+                        <TableColumn key={column.uid} align={column.align}>
                             {column.name}
                         </TableColumn>
                     )}

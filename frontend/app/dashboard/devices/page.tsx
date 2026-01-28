@@ -129,7 +129,9 @@ export default async function DevicePage({searchParams, onClose}:{searchParams: 
                 </div>
             </div>
             <SearchDevices />
+            <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-2">
             <DeviceList devices={devices} employees={employees} locations={locations} onClose={onClose} />
+            </div>
         </div>
         
     )

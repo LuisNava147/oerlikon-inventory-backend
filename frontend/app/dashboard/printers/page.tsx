@@ -6,7 +6,7 @@ import PrinterList from "./_components/printer-table/PrinterList";
 import CreatePrinter from "./_components/printer-table/PrinterCreate";
 import Link from "next/link";
 import { Button } from "@heroui/react";
-import { Building } from "lucide-react";
+import { BriefcaseBusiness, Building } from "lucide-react";
 
 export default async function DevicePage({searchParams, onClose}:{searchParams: {[key:string]: string | string[] | undefined}, onClose: ()=>void}){
     const ALLOWED_TYPES = [
@@ -127,7 +127,7 @@ export default async function DevicePage({searchParams, onClose}:{searchParams: 
                
                 <div className="rounded-md mt-6 flex flex-col md:flex-row gap-3">
                     <Link href={"/dashboard/departments"}>
-                        <Button color="secondary" variant="flat" className="font-bold w-full md:w-auto" startContent={<Building size={20}/>}>
+                        <Button color="secondary" variant="flat" className="font-bold w-full md:w-auto" startContent={<BriefcaseBusiness size={20}/>}>
                             Departamentos
                         </Button>
                     </Link>
@@ -135,7 +135,9 @@ export default async function DevicePage({searchParams, onClose}:{searchParams: 
                 </div>
             </div>
             <SearchPrinters />
+            <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-2">
             <PrinterList devices={devices} departments={departments} locations={locations} onClose={onClose} />
+            </div>
         </div>
         
     )

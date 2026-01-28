@@ -13,10 +13,19 @@ export async function deleteDepartment(departmentId:string):Promise<{success: bo
             }
         })
         //console.log(await response.json())
-
+        if(!response.ok){
+            const errorText = await response.text()
+            if(errorText.includes("foreign key constraint") || errorText.includes("violates foreign key")){
+                return{
+                    success: false,
+                    error: "No se puede eliminar: Este departamento tiene equipos o impresoras asignados."
+                }
+            }
+            return{success: false, error: "Error desconocido al eliminar."}
+        }
         revalidatePath('dashboard/departments')
        return {success: true, error: null}
     }catch(error){
-        return{success:false, error: "Error de conexión"}
+        return{success:false, error: "Error de conexión con el servidor"}
     }
 }
