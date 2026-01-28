@@ -24,8 +24,13 @@ export class DeparmentsService {
     
   }
 
-  findAll() {
-    return this.departmentRepository.find();
+  async findAll() {
+    const department = await this.departmentRepository.createQueryBuilder('department')
+    .loadRelationCountAndMap('department.printerCount','department.device','device',
+    (qb)=> qb.where('device.deviceType ILIKE :type',{type:'%Printer%'}))
+    .orderBy('department.departmentName','ASC')
+    .getMany()
+    return department
   }
 
   async findOne(id: string) {
@@ -35,6 +40,7 @@ export class DeparmentsService {
     if(!department)throw new NotFoundException("el departamento no existe")
     return department;
   }
+
 
   async update(id: string, updateDeparmentDto: UpdateDeparmentDto) {
     try{

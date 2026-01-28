@@ -37,15 +37,15 @@ sapName: string
 @Column("text",{nullable:true})
 deviceMAC: string
 
-@ManyToOne(()=> Location, {nullable:false})
+@ManyToOne(()=> Location, {nullable:false, onDelete:'SET NULL'})
 @JoinColumn({name: "locationId"})
 location: Location | string
 
-@ManyToOne(()=> Deparment, {nullable:true})
+@ManyToOne(()=> Deparment, {nullable:true, onDelete:'SET NULL'})
 @JoinColumn({name: "departmentId"})
 department: Deparment
 
-@ManyToOne(()=> Employee, (employee) => employee.device, {nullable:true})
+@ManyToOne(()=> Employee, (employee) => employee.device, {nullable:true, onDelete:'SET NULL'})
 @JoinColumn({name: "employeeId"})
 employee: Employee
 
