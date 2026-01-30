@@ -66,6 +66,7 @@ export interface Employee {
     employeeLastName: string 
     employeePhoneNumber?: string
     employeeEmail: string
+    devicesCount?:number
     location: Location 
     device: Device[]
     user: User  
