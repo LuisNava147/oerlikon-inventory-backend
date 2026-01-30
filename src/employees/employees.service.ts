@@ -4,7 +4,7 @@ import { UpdateEmployeeDto } from './dto/update-employee.dto';
 import {v4 as uuid} from "uuid";
 import { InjectRepository } from '@nestjs/typeorm';
 import { Employee } from './entities/employee.entity';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 
 
 @Injectable()
@@ -25,12 +25,20 @@ export class EmployeesService {
   }
 
   findAll() {
-    return this.employeeRepository.find({
-      relations:{
-        location:true,
-        device: true
-      }
-    });
+    return this.employeeRepository.createQueryBuilder('employee')
+    .leftJoinAndSelect('employee.location','location')
+    .leftJoinAndSelect('employee.device','device')
+    .leftJoinAndSelect('employee.user','user')
+
+    .loadRelationCountAndMap(
+      'employee.devicesCount',
+      'employee.device',
+      'device'
+    )
+
+    .orderBy('employee.employeeName','ASC')
+    .getMany()
+
   }
 
   findByLocation(id: number){
@@ -49,10 +57,71 @@ export class EmployeesService {
       relations:{
         location:true,
         device:true,
+        user:true
       }
     })
     if(!employee)throw new NotFoundException("empleado no encontrado")
     return employee;
+  }
+
+  async findByEmployeeName(name:string){
+    const employee = await this.employeeRepository.find({
+      where:[{
+        employeeName: ILike(`%${name}%`)
+      },{
+        employeeLastName: ILike(`%${name}%`)
+      }],
+      relations:{
+        location:true,
+        device:true,
+        user:true
+      }
+    })
+    return employee;
+  }
+
+  async findByLocationName(name:string){
+    const location= await this.employeeRepository.find({
+      where:{
+        location:{
+          locationName: ILike(`%${name}%`)
+        }
+      }, 
+      relations:{
+        location:true,
+        device:true,
+        user:true
+      }
+    })
+    return location;
+  }
+
+  async findByEmployeeEmail(email:string){
+    const employee = await this.employeeRepository.find({
+      where:{
+        employeeEmail: ILike(`%${email}%`)
+      },
+      relations:{
+        location:true,
+        device:true,
+        user:true
+      }
+    })
+    return employee;
+  }
+
+  async findByEmployeePhoneNumber(phone:string){
+    const employee = await this.employeeRepository.find({
+      where:{
+        employeePhoneNumber: ILike(`%${phone}%`)
+      },
+      relations:{
+        location:true,
+        device:true,
+        user:true
+      }
+    })
+    return employee
   }
 
   async update(id: string, updateEmployeeDto: UpdateEmployeeDto) {

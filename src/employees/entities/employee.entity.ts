@@ -20,15 +20,15 @@ export class Employee {
     @Column("text",{unique:true})
     employeeEmail: string
     
-    @ManyToOne(()=> Location, (location)=> location.employee)
+    @ManyToOne(()=> Location, (location)=> location.employee,{onDelete:'SET NULL'})
     @JoinColumn({
         name:"LocationId",
     })
     location: Location | string
 
-    @OneToMany(()=> Device, (device)=> device.employee)
+    @OneToMany(()=> Device, (device)=> device.employee, {onDelete:'SET NULL'})
     device: Device[]
-    @OneToOne(()=> User)
+    @OneToOne(()=> User, (user)=> user.employee, {onDelete:'SET NULL'})
     user: User
 
     

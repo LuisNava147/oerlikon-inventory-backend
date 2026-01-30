@@ -14,7 +14,7 @@ export class EmployeesController {
   @Auth(ROLES.ADMIN)
   @Post()
   create(@Body() createEmployeeDto: CreateEmployeeDto) {
-    console.log(createEmployeeDto) 
+    //console.log(createEmployeeDto) 
     return this.employeesService.create(createEmployeeDto);
   }
 
@@ -34,6 +34,30 @@ export class EmployeesController {
   @Get('/location/:id')
   findByLocation(@Param('id')id:string){
     return this.employeesService.findByLocation(+id);
+  }
+
+  @Auth(ROLES.ADMIN)
+  @Get('/location-name/:name')
+  findByLocationName(@Param('name')name:string){
+    return this.employeesService.findByLocationName(name);
+  }
+
+  @Auth(ROLES.ADMIN)
+  @Get('/employee-name/:name')
+  findByEmployeeName(@Param('name')name:string){
+    return this.employeesService.findByEmployeeName(name);
+  }
+
+  @Auth(ROLES.ADMIN)
+  @Get('/employee-email/:email')
+  findByEmployeeEmail(@Param('email')email:string){
+    return this.employeesService.findByEmployeeEmail(email);
+  }
+
+  @Auth(ROLES.ADMIN)
+  @Get('/employee-phone/:phone')
+  findByEmployeePhoneNumber(@Param('phone')phone:string){
+    return this.employeesService.findByEmployeePhoneNumber(phone);
   }
 
   @Auth(ROLES.ADMIN)

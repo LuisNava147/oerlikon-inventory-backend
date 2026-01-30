@@ -14,6 +14,7 @@ export class CreateEmployeeDto {
     employeeLastName: string 
     
     @IsString()
+    @IsOptional()
     @MaxLength(16)
     employeePhoneNumber: string
 
@@ -25,6 +26,7 @@ export class CreateEmployeeDto {
     employeeEmail: string
 
     @IsString()
+    @IsOptional()
     location: Location
 
     
