@@ -5,13 +5,16 @@ import {v4 as uuid} from "uuid";
 import { InjectRepository } from '@nestjs/typeorm';
 import { Employee } from './entities/employee.entity';
 import { ILike, Repository } from 'typeorm';
+import { User } from 'src/auth/entities/user.entity';
 
 
 @Injectable()
 export class EmployeesService {
   constructor(
     @InjectRepository(Employee)
-    private readonly employeeRepository : Repository<Employee>
+    private readonly employeeRepository : Repository<Employee>,
+    @InjectRepository(User)
+    private readonly userRepository : Repository<User>,
   )
 {}  
   
@@ -140,10 +143,17 @@ export class EmployeesService {
   }
 
   async remove(id: string) {
-    await this.employeeRepository.delete(id);
-    return{
-      message: "Empleado Eliminado"
+    const employee = await this.employeeRepository.findOne({
+      where:{employeeId: id},
+      relations:['user']
+    })
+    if(!employee)throw new NotFoundException()
+
+    if(employee.user){
+      await this.userRepository.delete(employee.user.userId)
     }
+
+    return await this.employeeRepository.delete(id)
   }
 
   private handleDBError(error:any):never{

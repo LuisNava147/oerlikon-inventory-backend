@@ -13,6 +13,9 @@ userEmail: string
 @MinLength(8)
 userPassword: string
 
+@IsUUID()
+employee: Employee 
+
 @IsOptional()
 @IsIn(["Admin"])
 userRoles: string[]

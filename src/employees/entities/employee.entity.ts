@@ -28,7 +28,7 @@ export class Employee {
 
     @OneToMany(()=> Device, (device)=> device.employee, {onDelete:'SET NULL'})
     device: Device[]
-    @OneToOne(()=> User, (user)=> user.employee, {onDelete:'SET NULL'})
+    @OneToOne(()=> User, (user)=> user.employee)
     user: User
 
     
