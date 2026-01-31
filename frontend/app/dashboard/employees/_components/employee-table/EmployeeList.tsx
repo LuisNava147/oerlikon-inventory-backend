@@ -6,7 +6,7 @@ import {
   } from "@heroui/react";
   import { Device, Employee, Location } from "@/entities";
   import { useState, useMemo } from "react";
-import EmployeeActions from "../../EmployeeActions";
+import EmployeeActions from "./EmployeeActions";
 import ViewAssetsModal from "./ViewAssetsModal";
 
   const columns = [
