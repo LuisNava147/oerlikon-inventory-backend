@@ -49,13 +49,7 @@ export default async function DepartmentPage({searchParams, onClose}:{searchPara
            
           </div>
          
-    
-          {/* --- AQUÍ ESTÁ LA CLAVE DEL DISEÑO --- */}
-          {/* grid-cols-1: En móvil es 1 columna (uno abajo de otro) */}
-          {/* lg:grid-cols-3: En PC son 3 columnas (se divide la pantalla) */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-            
-            {/* IZQUIERDA: Tabla (ocupa 2 espacios de 3) */}
             
             <div className="lg:col-span-2 flex flex-col gap-6">
                 <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-100 ">
