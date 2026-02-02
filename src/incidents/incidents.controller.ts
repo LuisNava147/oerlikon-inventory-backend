@@ -30,6 +30,30 @@ export class IncidentsController {
   }
 
   @Auth(ROLES.ADMIN)
+  @Get('/report-number/:name')
+  findByReportNumber(@Param('name') name: string) {
+    return this.incidentsService.findByReportNumber(name);
+  }
+
+  @Auth(ROLES.ADMIN)
+  @Get('/department-name/:name')
+  findByDepartmentName(@Param('name') name: string) {
+    return this.incidentsService.findByDepartmentName(name);
+  }
+
+  @Auth(ROLES.ADMIN)
+  @Get('/device-name/:name')
+  findByDeviceName(@Param('name') name: string) {
+    return this.incidentsService.findByDeviceName(name);
+  }
+
+  @Auth(ROLES.ADMIN)
+  @Get('/location-name/:name')
+  findByLocationName(@Param('name') name: string) {
+    return this.incidentsService.findByLocationName(name);
+  }
+
+  @Auth(ROLES.ADMIN)
   @Patch(':id')
   update(@Param('id', ParseUUIDPipe) id: string, @Body() updateIncidentDto: UpdateIncidentDto) {
     return this.incidentsService.update(id, updateIncidentDto);

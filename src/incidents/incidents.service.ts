@@ -4,6 +4,7 @@ import { UpdateIncidentDto } from './dto/update-incident.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Incident } from './entities/incident.entity';
 import { Repository } from 'typeorm';
+import { ILike } from 'typeorm';
 
 @Injectable()
 export class IncidentsService {
@@ -25,7 +26,10 @@ export class IncidentsService {
     return this.incidentRepository.find({
       relations:{
         department: true,
-        device: true,
+        device: {
+          department:true,
+          location:true
+        },
       }
     });
   }
@@ -37,11 +41,92 @@ export class IncidentsService {
       },
       relations:{
         department: true,
-        device: true
+        device: {
+          department:true,
+          location:true,
+        }
       }
     })
     if(!incident)throw new NotFoundException("No se encontró el incidente")
     return incident;
+  }
+
+  async findByReportNumber(name:string){
+    const incident = await this.incidentRepository.find({
+      where:{
+        reportNumber: ILike(`%${name}%`)
+      },
+      relations:{
+        department:true,
+        device:{
+          department:true,
+          location:true
+        }
+      }
+    })
+    return incident
+  }
+
+  async findByDepartmentName(name:string){
+    const incident = await this.incidentRepository.find({
+      where:[
+        {
+          device:{
+            department:{
+              departmentName: ILike(`%${name}%`)
+            }
+           }
+        }
+      ],
+      relations:{
+        department:true,
+        device:{
+          department:true,
+          location:true
+        }
+      }
+    })
+    return incident
+  }
+
+  async findByDeviceName(name:string){
+    const incident = await this.incidentRepository.find({
+      where:{
+        device:{
+          deviceBrand: ILike(`%${name}%`)
+        }
+      },
+      relations:{
+        department:true,
+        device:{
+          department:true,
+          location:true
+        }
+      }
+    })
+    return incident
+  }
+
+  async findByLocationName(name:string){
+    const incident = await this.incidentRepository.find({
+      where:[
+        {
+          device:{
+            location:{
+              locationName: ILike(`%${name}%`)
+            }
+          }
+        }
+      ],
+      relations:{
+        department:true,
+        device:{
+          department:true,
+          location:true
+        }
+      }
+    })
+    return incident
   }
 
   async update(id: string, updateIncidentDto: UpdateIncidentDto) {
