@@ -8,6 +8,8 @@ export class TicketIncident {
     ticketName: string
     @Column("text")
     ticketLink: string
+    @Column("text")
+    ticketDescription: string
     @Column({
         type: 'date',
         default: ()=>

@@ -13,4 +13,7 @@ export class CreateTicketIncidentDto {
     @IsString()
     @IsOptional()
     status?: string
+    @IsString()
+    @MaxLength(350)
+    ticketDescription: string
 }
