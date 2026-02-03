@@ -15,15 +15,15 @@ export default function SearchDeviceIncident(){
 
     const handleSearch = () => {
         if (!query.trim()) {
-            router.push("/dashboard/devices-incidents");
+            router.push("/dashboard/incidents");
         } else {
-            router.push(`/dashboard/devices-incidents?q=${encodeURIComponent(query)}&f=${filter}`);
+            router.push(`/dashboard/incidents?q=${encodeURIComponent(query)}&f=${filter}`);
         }
     };
 
     const handleClear = () => {
         setQuery("");
-        router.push("/dashboard/devices-incidents");
+        router.push("/dashboard/incidents");
     };
 
     const handleKeyDown = (e: React.KeyboardEvent) => {

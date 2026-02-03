@@ -113,5 +113,6 @@ export interface TicketIncident {
     ticketDateOpening:  Date
     ticketDateClose: Date
     status?: string
+    ticketDescription: string
 
 }
