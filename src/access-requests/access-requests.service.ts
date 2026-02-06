@@ -25,7 +25,6 @@ export class AccessRequestsService {
   findAll() {
     return this.accessRepository.find({
       relations:{
-        provider: true,
         location: true,
       }
     })
@@ -37,7 +36,6 @@ export class AccessRequestsService {
         accessId: id
       },
       relations:{
-        provider: true,
         location: true,
       }
     })
@@ -68,7 +66,7 @@ export class AccessRequestsService {
     });
     await browser.close();
 
-    const safeName = `${request.provider.providerName.trim()}_${request.accessDate}`.replace(/\s+/g,'_')
+    const safeName = `${request.providerName.trim()}_${request.accessDate}`.replace(/\s+/g,'_')
     
     return{
       buffer: Buffer.from(pdfBuffer),

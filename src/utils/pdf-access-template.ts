@@ -3,7 +3,7 @@ import { AccessRequest } from "src/access-requests/entities/access-request.entit
 export const generateAccessRequestHtml = (request: AccessRequest): string =>{
     const dateObj = new Date(request.accessDate);
     const dateStr = dateObj.toLocaleDateString('es-ES', {day: '2-digit', month:'2-digit', year: 'numeric'});
-    const providerName = request.provider ? request.provider.providerName : 'Externo/Independiente';
+    const providerName = request.providerName ? request.providerName : 'Externo/Independiente';
 
     const applicantCenterName = request.location?.locationName || 'N/A';
     const accessCenterName = request.location?.locationName || 'N/A';

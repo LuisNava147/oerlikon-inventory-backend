@@ -1,5 +1,4 @@
 import { Location } from "src/locations/entities/location.entity";
-import { Provider } from "src/providers/entities/provider.entity";
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 import { ManyToOne } from "typeorm";
 import { JoinColumn } from "typeorm";
@@ -27,14 +26,10 @@ export class AccessRequest {
     accessDuration: string
     @Column("text",{nullable: true})
     accessUrl: string
+    @Column("text",{nullable:true})
+    providerName: string
 
     //relaciones
-    @ManyToOne(()=> Provider, {nullable:true})
-    @JoinColumn({
-        name: "providerId"
-    })
-    provider: Provider
-
     @ManyToOne(()=> Location,(location)=>location.access_request, {nullable:false})
     @JoinColumn({
         name: "locationId"

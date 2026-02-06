@@ -6,7 +6,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from "@nestjs/config";
 import { LocationsModule } from './locations/locations.module';
 import { DevicesModule } from './devices/devices.module';
-import { ProvidersModule } from './providers/providers.module';
 import { AccessRequestsModule } from './access-requests/access-requests.module';
 import { IncidentsModule } from './incidents/incidents.module';
 import { TicketIncidentsModule } from './ticket-incidents/ticket-incidents.module';
@@ -27,7 +26,16 @@ import { AuthModule } from './auth/auth.module';
       entities:[],
       autoLoadEntities: true,
       synchronize: true,
-  }), EmployeesModule, LocationsModule, DevicesModule, ProvidersModule, AccessRequestsModule, IncidentsModule, TicketIncidentsModule, DeparmentsModule, AssignmentsModule, AuthModule],
+  }), EmployeesModule, 
+      LocationsModule, 
+      DevicesModule,  
+      AccessRequestsModule, 
+      IncidentsModule, 
+      TicketIncidentsModule, 
+      DeparmentsModule, 
+      AssignmentsModule, 
+      AuthModule],
+
   controllers: [AppController],
   providers: [AppService],
 })

@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsNotEmpty, IsOptional, IsNumber,MaxLength, MinLength, IsInt, IsUUID, IsDateString, Max } from 'class-validator';
 import { Location } from 'src/locations/entities/location.entity';
-import { Provider } from 'src/providers/entities/provider.entity';
 
 export class CreateAccessRequestDto {
     @IsString()
@@ -27,11 +26,11 @@ export class CreateAccessRequestDto {
     accessDuration: string
 
     @IsString()
+    providerName: string
+
+    @IsString()
     @IsOptional()
     accessUrl?: string
-
-    @IsUUID()
-    provider: Provider
 
     @IsString()
     location: Location
