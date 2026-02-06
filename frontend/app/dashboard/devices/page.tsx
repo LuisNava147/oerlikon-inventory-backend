@@ -16,6 +16,12 @@ export default async function DevicePage({searchParams, onClose}:{searchParams: 
         // Computadoras
         "laptop", "laptops",
         "desktop", "desktops","pc", "computadora",
+    ];
+
+    const EXCLUDED_TYPES = [
+        "printer", "impresora", "multifuncional", "copiadora", "scanner",
+        "phone", "celular", "smartphone", "iphone",
+        "tablet", "ipad", "android",
         // Periféricos
         "mouse", "mouses", 
         "keyboard", "teclado", 
@@ -23,12 +29,6 @@ export default async function DevicePage({searchParams, onClose}:{searchParams: 
         "monitor", "pantalla", 
         "diadema",
         "token"
-    ];
-
-    const EXCLUDED_TYPES = [
-        "printer", "impresora", "multifuncional", "copiadora", "scanner",
-        "phone", "celular", "smartphone", "iphone",
-        "tablet", "ipad", "android"
     ];
     
     let devices: Device[] = []

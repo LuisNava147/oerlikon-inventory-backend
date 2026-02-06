@@ -9,12 +9,6 @@ import { useFormState, useFormStatus } from "react-dom";
 const DEVICE_TYPE = [
     {key: "Laptop", label:"Laptop"},
     {key: "Desktop", label:"Desktop/PC"},
-    {key: "Monitor", label:"Monitor"},
-    {key: "Mouse", label:"Mouse"},
-    {key: "Teclado", label:"Teclado"},
-    {key: "Docking", label:"Docking Station"},
-    {key: "Diadema", label: "Diadema"},
-    {key: "Token", label: "Token"}
 ]
 
 const initialState = {

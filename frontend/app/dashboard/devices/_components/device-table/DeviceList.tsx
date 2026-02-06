@@ -10,11 +10,11 @@ import DeviceIcon from "./DeviceIcon";
 import DeviceActions from "./DeviceActions"; 
 
 const columns = [
-  { name: "DISPOSITIVO", uid: "device", align: "start" },
-  { name: "IDENTIFICADORES", uid: "ids", align: "center" },
-  { name: "ASIGNACIÓN", uid: "assignment", align: "center" },
-  { name: "UBICACIÓN", uid: "location", align: "center" },
-  { name: "ACCIONES", uid: "actions", align: "center" },
+  { name: "DISPOSITIVO", uid: "device", align: "start" as const},
+  { name: "IDENTIFICADORES", uid: "ids", align: "center" as const},
+  { name: "ASIGNACIÓN", uid: "assignment", align: "center" as const},
+  { name: "UBICACIÓN", uid: "location", align: "center" as const},
+  { name: "ACCIONES", uid: "actions", align: "center" as const},
 ];
 
 export default function DeviceList({ devices, employees, locations, onClose}: { devices: Device[], employees: Employee[], locations:Location[], onClose:()=>void }) {
@@ -32,7 +32,7 @@ export default function DeviceList({ devices, employees, locations, onClose}: { 
             case "device":
                 return (
                     <div className="flex items-center gap-3 min-w-[160px] ">
-                        <div className=" flex items-start justify-start p-2 bg-slate-100 rounded-md border border-slate-200 shrink-0">
+                        <div className=" flex items-start justify-start p-2 bg-red-50 rounded-md shrink-0">
                             <DeviceIcon type={device.deviceType} />
                             
                         </div>
@@ -40,7 +40,7 @@ export default function DeviceList({ devices, employees, locations, onClose}: { 
                             <p className="font-bold text-sm capitalize text-slate-800 whitespace-nowrap">
                                 {device.deviceBrand} {device.deviceModel}
                             </p>
-                            <p className="text-xs text-slate-500 capitalize">{device.deviceType}</p>
+                            <p className="text-xs text-slate-500 uppercase font-medium">{device.deviceType}</p>
                         </div>
                     </div>
                 );
@@ -84,7 +84,7 @@ export default function DeviceList({ devices, employees, locations, onClose}: { 
                     );
                 }
                 return <div className="min-w-[160px] items-center text-center">
-                        <Chip size="md" color="success" variant="flat" className="text-md">En stock</Chip>
+                        <Chip size="sm" color="success" variant="flat" className="text-sm">En stock</Chip>
                 </div>
                 
                 
