@@ -8,7 +8,6 @@ export interface AccessRequest {
     accessHour: string
     accessDuration: string
     accessUrl: string
-    provider: Provider
     location: Location
 }
 
@@ -90,20 +89,9 @@ export interface Location {
     locationAddress?: string
     employee: Employee[]
     device: Device[]
-    provider: Provider[]
     access_request: AccessRequest[]
     employeesCount?: number
     devicesCount?: number
-}
-
-export interface Provider {
-    providerId: string
-    providerName: string
-    providerEmail?: string 
-    providerPhoneNumber?: string
-    providerContactName: string    
-    location: Location
-    accessRequest: AccessRequest[]
 }
 
 export interface TicketIncident {
