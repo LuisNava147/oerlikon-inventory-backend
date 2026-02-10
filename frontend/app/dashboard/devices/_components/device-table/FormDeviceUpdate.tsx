@@ -1,7 +1,7 @@
 
 import { updateDevice } from "@/actions/devices/devices-update"
 import { Device, Employee, Location } from "@/entities"
-import { Autocomplete, AutocompleteItem, Button, Divider, Input, Modal, ModalBody, ModalContent, ModalHeader, Select, SelectItem, Spinner, Tooltip, useDisclosure } from "@heroui/react"
+import { Autocomplete, AutocompleteItem, Button, Divider, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Select, SelectItem, Spinner, Tooltip, useDisclosure } from "@heroui/react"
 import { MapPin, Pencil, Save } from "lucide-react"
 import { useEffect, useState } from "react"
 import { useFormState, useFormStatus } from "react-dom"
@@ -136,7 +136,12 @@ export default function FormUpdateDevice({locations=[], employees=[], devices, o
                     </Autocomplete>
             </div>
             <div className="flex justify-end pt-4">
-                <SubmitButton />
+            <ModalFooter className="justify-center">
+                    <Button color="danger" variant="light" onPress={onClose}>
+                        Cancelar
+                    </Button>   
+                    <SubmitButton />
+                </ModalFooter>
             </div>
             
                 </form>

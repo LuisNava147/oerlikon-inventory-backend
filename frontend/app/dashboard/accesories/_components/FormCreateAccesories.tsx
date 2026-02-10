@@ -88,7 +88,7 @@ export default function FormCreateAccesories({locations, employees, onClose}:{lo
             </div>
             <div className="flex justify-end pt-4">
             <ModalFooter className="justify-center">
-                    <Button color="secondary" variant="light" onPress={onClose}>
+                    <Button color="danger" variant="light" onPress={onClose}>
                         Cancelar
                     </Button>   
                     <SubmitButton />

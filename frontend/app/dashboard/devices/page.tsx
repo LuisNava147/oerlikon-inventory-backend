@@ -117,7 +117,7 @@ export default async function DevicePage({searchParams, onClose}:{searchParams: 
                 <div>
                     <h1 className="text-3xl font-bold text-slate-800 ml-4">Inventario de Equipos IT</h1>
                     <p className="text-slate-500 ml-4">
-                        Laptops, Desktops y Periféricos ({devices.length} encontrados)
+                        Laptops y Desktops ({devices.length} encontrados)
                     </p>
                 </div>
                

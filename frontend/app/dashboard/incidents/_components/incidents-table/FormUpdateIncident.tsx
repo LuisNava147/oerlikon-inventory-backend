@@ -80,7 +80,7 @@ export default function FormUpdateDeviceIncident({incidents, onClose}:{incidents
             </div>
             <div className="flex justify-end pt-2">
             <ModalFooter className="justify-center w-full gap-4">
-                    <Button color="secondary" variant="light" onPress={onClose}>
+                    <Button color="danger" variant="light" onPress={onClose}>
                         Cancelar
                     </Button>   
                     <SubmitButton />

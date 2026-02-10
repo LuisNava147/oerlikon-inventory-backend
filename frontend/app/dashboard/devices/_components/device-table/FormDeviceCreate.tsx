@@ -1,7 +1,7 @@
 'use client';
 import { createDevice } from "@/actions/devices/devices-create";
 import { Employee, Location } from "@/entities";
-import { Autocomplete, AutocompleteItem, Button, ButtonGroup, Divider, Input, Select, SelectItem } from "@heroui/react";
+import { Autocomplete, AutocompleteItem, Button, ButtonGroup, Divider, Input, ModalFooter, Select, SelectItem } from "@heroui/react";
 import { MapPin, Monitor, Save } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
@@ -80,7 +80,12 @@ export default function FormCreateDevice({locations, employees, onClose}:{locati
                     )}
             </div>
             <div className="flex justify-end pt-4">
-                <SubmitButton />
+            <ModalFooter className="justify-center">
+                    <Button color="danger" variant="light" onPress={onClose}>
+                        Cancelar
+                    </Button>   
+                    <SubmitButton />
+                </ModalFooter>
             </div>
         </form>
     )

@@ -16,15 +16,6 @@ const initialState = {
     error: null,
   }
 
-function SubmitButton(){
-    const {pending} = useFormStatus()
-    return(
-        <Button type="submit" color="primary" isLoading={pending} startContent={!pending && <Save size={18}/>} className="font-semibold shadow-md">
-            {pending ? "Guardando..." : "Crear Usuario Admin"}
-        </Button>
-    )
-    
-}
 
 export default function FormCreateUser({employee, onClose}:{employee:Employee, onClose:()=>void}){
     const [formData, setFormData] = useState({password:'',confirmPassword:''})
@@ -76,7 +67,7 @@ export default function FormCreateUser({employee, onClose}:{employee:Employee, o
                 </div>
                 <div className="flex justify-end pt-4">
                     <ModalFooter className="justify-center">
-                        <Button color="secondary" variant="light" onPress={onClose}>
+                        <Button color="danger" variant="light" onPress={onClose}>
                             Cancelar
                         </Button>   
                         <Button 

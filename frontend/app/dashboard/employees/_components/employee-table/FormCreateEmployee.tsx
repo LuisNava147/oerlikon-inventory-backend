@@ -61,7 +61,7 @@ export default function FormCreateEmployee({locations, onClose}:{locations:Locat
             </div>
             <div className="flex justify-end pt-4">
             <ModalFooter className="justify-center">
-                    <Button color="secondary" variant="light" onPress={onClose}>
+                    <Button color="danger" variant="light" onPress={onClose}>
                         Cancelar
                     </Button>   
                     <SubmitButton />

@@ -29,7 +29,7 @@ export default function FormUpdateDepartment({departments, onClose}:{departments
         <form action={formAction} className="flex flex-col gap-4">
             <Input label="Nombre del Departamento" name="departmentName" defaultValue={departments?.departmentName} variant="bordered" isRequired />
             <div className="flex justify-end gap-2">
-                <Button variant="light" onPress={onClose}>
+                <Button color="danger" variant="light" onPress={onClose}>
                     Cancelar
                 </Button>
                 <SubmitButton />
