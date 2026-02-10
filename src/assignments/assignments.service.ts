@@ -1,32 +1,76 @@
 import { Injectable, BadRequestException, NotFoundException, InternalServerErrorException } from '@nestjs/common';
 import { CreateAssignmentDto } from './dto/create-assignment.dto';
 import { UpdateAssignmentDto } from './dto/update-assignment.dto';
-import * as puppeteer from 'puppeteer';
-import { generateResponsivaHTML } from 'src/utils/pdf-template';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Assignment } from './entities/assignment.entity';
 import { Repository } from 'typeorm';
+import { Device } from 'src/devices/entities/device.entity';
+import { v4 as uuidv4 } from 'uuid';
+import { In } from 'typeorm';
+import { AssignmentDevice } from './entities/assignment-device.entity';
+import { Employee } from 'src/employees/entities/employee.entity';
 
 @Injectable()
 export class AssignmentsService {
   constructor(
     @InjectRepository(Assignment)
     private readonly assignmentRepository : Repository<Assignment>,
+    @InjectRepository(Device)
+    private readonly deviceRepository: Repository<Device>,
+    @InjectRepository(AssignmentDevice)
+    private readonly assignmentDeviceRepository: Repository<AssignmentDevice>,
+    @InjectRepository(Employee)
+    private readonly employeeRepository: Repository<Employee>,
   ){}
-  async create(createAssignmentDto: CreateAssignmentDto) {
-    try{
-      const assignment = this.assignmentRepository.create(createAssignmentDto)
-      return await this.assignmentRepository.save(assignment);
-    }catch(error){
-      this.handleDBError(error);
+
+  async create(dto: CreateAssignmentDto) {
+    const employee = await this.employeeRepository.findOne({
+      where: { 
+        employeeId: dto.employee
+      },
+    });
+  
+    if (!employee) {
+      throw new NotFoundException('Empleado no encontrado');
     }
+  
+    const assignment = this.assignmentRepository.create({
+      employee,
+      assignmentDate: dto.assignmentDate,
+      assigmentStatus: dto.assigmentStatus,
+    });
+  
+    await this.assignmentRepository.save(assignment);
+  
+    // 🔥 AQUÍ conectamos los devices
+    const assignmentDevices = dto.device.map(device =>
+      this.assignmentDeviceRepository.create({
+        assignment,
+        device: {deviceId: device} as any
+      }),
+    );
+  
+    await this.assignmentDeviceRepository.save(assignmentDevices);
+  
+    return this.assignmentRepository.findOne({
+      where: { assignmentId: assignment.assignmentId },
+      relations: {
+        employee: true,
+        assignmentDevice: {
+          device: true,
+        },
+      },
+    });
   }
+  
 
   findAll() {
     return this.assignmentRepository.find({
       relations:{
         employee: true,
-        device: true,
+        assignmentDevice: {
+          device: true
+        } 
       }
     })
   }
@@ -38,7 +82,9 @@ export class AssignmentsService {
       },
       relations:{
         employee: true,
-        device: true,
+        assignmentDevice: {
+          device: true
+        }
       }
     })
     if(!assignment)throw new NotFoundException("Responsiva no encontrada");
@@ -56,47 +102,6 @@ export class AssignmentsService {
     }
   }
 
-  async generatePdf(assignmentId: string): Promise<{buffer:Buffer; fileName: string}>{
-    const currentAssignment = await this.findOne(assignmentId)
-    const {employeeName, employeeLastName} = currentAssignment.employee;
-    const {deviceType, deviceBrand} = currentAssignment.device;
-    const allActiveAssignments = await this.assignmentRepository.find({
-      where:{
-        employee:{
-          employeeId: currentAssignment.employee.employeeId
-        },
-        assigmentStatus: 'Activo'
-      },
-      relations:{
-        employee: true,
-        device: true,
-      }
-    });
-    if(allActiveAssignments.length === 0){
-      throw new NotFoundException("Este empleado no tiene activos asignados actualmente")
-  }
-  const htmlContent = generateResponsivaHTML(allActiveAssignments);
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: ['--no-sandbox']
-  });
-  const page = await browser.newPage()
-  await page.setContent(htmlContent, {waitUntil: 'networkidle0'});
-
-  const pdfBuffer = await page.pdf({
-    format: 'Letter',
-    printBackground: true,
-    margin: {top: '30px', bottom: '30px', left: '20px', right: '20px'}
-  });
-  await browser.close();
-
-  const safeName = `${employeeName.trim()}_${employeeLastName.trim()}_${deviceType.trim()}_${deviceBrand.trim()}`.replace(/\s+/g,'_');
-  const fileName = `Carta_Responsiva_Legal_${safeName}.pdf`;
-  return{
-    buffer: Buffer.from(pdfBuffer),
-    fileName
-  };
-  }
 
   private handleDBError(error:any):never{
     if(error.code == '23505'){

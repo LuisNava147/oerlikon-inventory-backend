@@ -1,6 +1,8 @@
 import { Device } from "src/devices/entities/device.entity";
 import { Employee } from "src/employees/entities/employee.entity";
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { OneToMany } from "typeorm";
+import { AssignmentDevice } from "./assignment-device.entity";
 
 @Entity()
 export class Assignment {
@@ -14,6 +16,8 @@ export class Assignment {
     assigmentStatus: string
     @Column({nullable:true})
     responsivaUrl: string
+    @Column("text",{nullable:true})
+    folio: string
 
     //relaciones
     @ManyToOne(()=> Employee, {nullable:false})
@@ -22,9 +26,10 @@ export class Assignment {
     })
     employee: Employee
 
-    @ManyToOne(()=> Device,(device)=> device.assignment, {nullable:false})
-    @JoinColumn({
-        name: "deviceId"
-    })
-    device: Device
+    @OneToMany(
+        () => AssignmentDevice,
+        assignmentDevice => assignmentDevice.assignment,
+        { cascade: true }
+      )
+      assignmentDevice: AssignmentDevice[]
 }

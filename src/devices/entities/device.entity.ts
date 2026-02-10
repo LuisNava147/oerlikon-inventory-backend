@@ -1,3 +1,4 @@
+import { AssignmentDevice } from "src/assignments/entities/assignment-device.entity";
 import { Assignment } from "src/assignments/entities/assignment.entity";
 import { Deparment } from "src/deparments/entities/deparment.entity";
 import { Employee } from "src/employees/entities/employee.entity";
@@ -51,8 +52,12 @@ department: Deparment
 @JoinColumn({name: "employeeId"})
 employee: Employee
 
-@OneToMany(()=> Assignment,(assignment)=> assignment.device)
-assignment: Assignment[]
+@OneToMany(
+    () => AssignmentDevice,
+    assignmentDevice => assignmentDevice.device
+  )
+  assignments: AssignmentDevice[]
+
 
 @OneToMany(()=> Incident, (incident)=> incident.device)
 incident: Incident[]

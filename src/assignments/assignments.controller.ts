@@ -31,23 +31,7 @@ export class AssignmentsController {
     return this.assignmentsService.findOne(id);
   }
 
-  @Auth(ROLES.ADMIN)
-  @Get(':id/pdf')
-  async downloadPdf(@Param('id',ParseUUIDPipe) id: string, 
-  @Res() res: Response,
-  ){
-    const pdfBuffer = await this.assignmentsService.generatePdf(id)
-    res.set({
-      'Content-Type': 'application/pdf',
-      'Content-Length': pdfBuffer.buffer.length.toString(),
-
-      'Cache-Control':'no-cache, no-store, must-revalidate',
-      'Pragma':'no-cache',
-      'Expires':0,
-    });
-    res.attachment(pdfBuffer.fileName);
-    res.send(pdfBuffer.buffer);
-  }
+ 
 
   @Auth(ROLES.ADMIN)
   @Patch(':id')
