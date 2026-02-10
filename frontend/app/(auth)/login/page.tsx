@@ -5,6 +5,17 @@ import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { API_URL } from "@/constants";
+import { useFormStatus } from "react-dom";
+
+function SubmitButton(){
+    const {pending} = useFormStatus()
+    return(
+        <Button type="submit" color="primary" isLoading={pending} disabled={pending} className="font-semibold shadow-md">
+            {pending ? "Enviando..." : "Iniciar Sesión"}
+        </Button>
+    )
+    
+}
 
 export default function LoginPage(){
     const [submitting, setSubmitting] = useState(false)
@@ -34,15 +45,15 @@ export default function LoginPage(){
         return;
     }
     return (
-        <form className="bg-white px-100 px-20 py-2 rounded-md" onSubmit={handleSubmit}>
+        <form className="bg-white px-100 px-20 py-8 rounded-md" onSubmit={handleSubmit}>
             <Image src="/oe-logo.svg" alt="Logo de Oerlikon" className="my-6 bottom-10" width={200} height={0}/>
             <p className="text-2xl my-4 text-black">Iniciar Sesión</p>
             <div className="flex flex-col gap-3 my-5 items-center">
                 <Input label= "Correo" name="userEmail" placeholder= "firstname.lastname@oerlikon.com" type="email" isRequired={true} className="text-2xl"/>
                 <Input label= "Contraseña" name="userPassword" type="password" isRequired={true} size="sm" />
             </div>
-        <Button color="primary" variant="solid" className="text-xl" type="submit" disabled={submitting}>{submitting ? "Enviando..." : "Iniciar Sesión"}</Button>
-        <p className="my-6"><Link href="/signup" className="text-red-500 underline">Registrate</Link></p>
+            <Button color="primary" variant="solid" className="text-xl" type="submit" disabled={submitting}>{submitting ? "Enviando..." : "Iniciar Sesión"}</Button>
+        
         </form>
     )
 }

@@ -37,7 +37,7 @@ export default async function EmployeeStats({devices}:{devices: string | string[
     })
     const dataDevices: Device[] = await responseDevices.json()
 
-    const responseIncident = await fetch(`${API_URL}/devices-incidents`,{
+    const responseIncident = await fetch(`${API_URL}/incidents`,{
         headers:{
             ...authHeaders()
         },
@@ -112,8 +112,8 @@ export default async function EmployeeStats({devices}:{devices: string | string[
                     </div>
                 </div>
                 <div className="mt-6">
-                     <Link href="/dashboard/ticket-incidents" className="mt-6 flex items-center gap-2 text-xs font-semibold text-slate-600 hover:text-red-500 transition-colors group">
-                        Gestionar tickets <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform"/>
+                     <Link href="/dashboard/incidents" className="mt-6 flex items-center gap-2 text-xs font-semibold text-slate-600 hover:text-red-500 transition-colors group">
+                        Gestionar incidentes <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform"/>
                      </Link>
                 </div>
             </CardBody>
