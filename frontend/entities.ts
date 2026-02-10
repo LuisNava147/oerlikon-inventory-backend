@@ -18,6 +18,11 @@ export interface Assignment {
     assigmentStatus: string
     responsivaUrl?: string
     employee: Employee
+    assignmentDevice: AssignmentDevice[]
+}
+
+export interface AssignmentDevice {
+    assignmentDeviceId: string;
     device: Device
 }
 
