@@ -11,11 +11,11 @@ import PrinterActions from "./PrinterActions";
 
 
 const columns = [
-  { name: "IMPRESORAS", uid: "device", align: "start" },
-  { name: "IDENTIFICADORES", uid: "ids", align: "center" },
-  { name: "ASIGNACIÓN", uid: "assignment", align: "center" },
-  { name: "UBICACIÓN", uid: "location", align: "center" },
-  { name: "ACCIONES", uid: "actions", align: "center" },
+  { name: "IMPRESORAS", uid: "device", align: "start" as const},
+  { name: "IDENTIFICADORES", uid: "ids", align: "center" as const },
+  { name: "ASIGNACIÓN", uid: "assignment", align: "center" as const},
+  { name: "UBICACIÓN", uid: "location", align: "center" as const},
+  { name: "ACCIONES", uid: "actions", align: "center" as const},
 ];
 
 export default function PrinterList({ devices, departments, locations, onClose}: { devices: Device[], departments: Deparment[], locations:Location[], onClose:()=>void }) {
@@ -109,7 +109,10 @@ export default function PrinterList({ devices, departments, locations, onClose}:
                     );
                 }
                 return <div className="min-w-[160px] items-center text-center">
-                        <Chip size="md" color="success" variant="flat" className="text-md">Sin Departamento</Chip>
+                        <Chip size="sm" color={device.deviceStatus && device.deviceStatus === 'Stock' ? "success" : "danger"} 
+                        variant="flat" className="text-md font-semibold">
+                            {device.deviceStatus}
+                        </Chip>
                 </div>
                 
                 

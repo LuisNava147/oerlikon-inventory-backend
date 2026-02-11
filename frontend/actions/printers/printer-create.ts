@@ -17,13 +17,18 @@ export async function createPrinter(prevState:any,formData:FormData) {
         deviceModel: formData.get("deviceModel"),
         deviceBrand: formData.get("deviceBrand"),
         deviceSerialTag: formData.get("deviceSerialTag"),
+        deviceStatus: "Stock" || null,
         ipAddress: formData.get("ipAddress") || null,
         sapName: formData.get("sapName") || null,
         deviceMAC: formData.get("deviceMAC") || null,
         location: locationId ? locationId.toString() : null,    
         department: departmentId ? departmentId.toString() : null
+    }
 
-
+    if(departmentId){
+        deviceData.deviceStatus = "Asignado"
+    }else{
+        deviceData.deviceStatus = "Stock"
     }
     //console.log(deviceData)
 

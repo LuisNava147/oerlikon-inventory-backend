@@ -25,6 +25,7 @@ export async function updatePrinter(deviceId: string,prevState:any,formData:Form
         deviceModel: formData.get("deviceModel"),
         deviceBrand: formData.get("deviceBrand"),
         deviceSerialTag: formData.get("deviceSerialTag"),
+        deviceStatus: getVal("deviceStatus") || "Stock",
         ipAddress: formData.get("ipAddress") || null,
         sapName: formData.get("sapName") || null,
         deviceMAC: formData.get("deviceMAC") || null,

@@ -1,7 +1,7 @@
 
 import { Deparment, Device, Employee, Location } from "@/entities"
 import { Autocomplete, AutocompleteItem, Button, Divider, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Select, SelectItem, Spinner, Tooltip, useDisclosure } from "@heroui/react"
-import { MapPin, Pencil, Save } from "lucide-react"
+import { CircleQuestionMark, MapPin, Pencil, Save } from "lucide-react"
 import { useEffect, useState } from "react"
 import { useFormState, useFormStatus } from "react-dom"
 import { updatePrinter } from "@/actions/printers/printer-update"
@@ -128,6 +128,20 @@ export default function FormUpdatePrinter({locations=[], departments=[], devices
                             )
                         }
                     </Autocomplete>
+
+                    <Select label="Estatus del Equipo" placeholder="Selecciona el estado" name="deviceStatus" 
+                    defaultSelectedKeys={[devices.deviceStatus]} variant="bordered" classNames={{trigger:"bg-white"}}
+                    startContent={<CircleQuestionMark className="text-gray-400" size={18} />} isRequired>
+                    <SelectItem key="Stock" color="success" variant="flat" description="La impresora no tiene un Departamento asignado.">
+                        Stock
+                    </SelectItem>
+                    <SelectItem key="BAJA" color="danger" variant="flat" description="La impresora ya es obsoleta o está dañada.">
+                        BAJA
+                    </SelectItem>
+                    <SelectItem key="Asignado" color="default" variant="flat" description="La impresora ha sido asignada a un Departamento.">
+                        Asignado
+                    </SelectItem>
+                    </Select>
             </div>
             <div className="flex justify-end pt-4">
             <ModalFooter className="justify-center">
