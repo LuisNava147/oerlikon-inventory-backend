@@ -61,6 +61,11 @@ export class CreateDeviceDto {
     @IsOptional()
     deviceAccount?:string
 
+    @IsString()
+    @IsOptional()
+    @MaxLength(600)
+    deviceNote?:string
+
     //relaciones BD
     @IsString()
     @IsNotEmpty()

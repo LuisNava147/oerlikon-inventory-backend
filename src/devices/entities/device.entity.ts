@@ -39,6 +39,8 @@ sapName: string
 deviceMAC: string
 @Column("text",{nullable:true})
 deviceAccount: string
+@Column("text",{nullable:true})
+deviceNote: string
 
 @ManyToOne(()=> Location, {nullable:false, onDelete:'SET NULL'})
 @JoinColumn({name: "locationId"})
