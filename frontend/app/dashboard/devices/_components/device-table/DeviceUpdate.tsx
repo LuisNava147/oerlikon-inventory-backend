@@ -1,11 +1,11 @@
 "use client"
 
-import { Device, Employee, Location } from "@/entities";
+import { Deparment, Device, Employee, Location } from "@/entities";
 import { Modal, ModalBody, ModalContent, ModalHeader, Tooltip, useDisclosure } from "@heroui/react";
 import { MonitorCog, Pencil } from "lucide-react";
 import FormUpdateDevice from "./FormDeviceUpdate";
 
-export default function UpdateDevice({locations, employees, devices}:{locations: Location[], employees: Employee[], devices: Device}){
+export default function UpdateDevice({locations, employees, departments, devices}:{locations: Location[], employees: Employee[], departments:Deparment[], devices: Device}){
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
     return(
@@ -25,7 +25,7 @@ export default function UpdateDevice({locations, employees, devices}:{locations:
                            <p className="font-bold text-xl">Editar Equipo: <span className="text-red-600">{devices?.deviceBrand} {devices?.deviceModel}</span></p> 
                         </ModalHeader>
                         <ModalBody className="py-7 overflow-y-auto">
-                            <FormUpdateDevice employees={employees} locations={locations} devices={devices} onClose={onOpenChange}/>
+                            <FormUpdateDevice employees={employees} locations={locations} devices={devices} departments={departments} onClose={onOpenChange}/>
                         </ModalBody>
                         </>
                     )

@@ -57,6 +57,7 @@ export interface Device {
     sapName?: string
     deviceMAC?: string
     deviceAccount?: string
+    deviceNote?: string
     location: Location 
     department?: Deparment
     employee?: Employee

@@ -53,6 +53,9 @@ export default async function DevicePage({searchParams, onClose}:{searchParams: 
             case "type":
                 endpoint = `${API_URL}/devices/type/${query}`
                 break;
+            case "department":
+                endpoint = `${API_URL}/devices/department/${query}`
+                break;
             case "location":
                 endpoint = `${API_URL}/devices/location-name/${query}`
                 break;
@@ -107,9 +110,19 @@ export default async function DevicePage({searchParams, onClose}:{searchParams: 
         return await response.json()
     }
 
+    async function getDepartments() {
+        const response = await fetch(`${API_URL}/departments`,{
+            headers:{
+                ...authHeaders(),
+            },
+            cache: 'no-store'
+        })
+        return await response.json()
+    }
     
     const locations = await getLocations()
-    const employees = await getEmployees()    
+    const employees = await getEmployees()  
+    const departments = await getDepartments()  
 
     return(
         <div className="w-full h-auto flex flex-col gap-6 mt-4">
@@ -123,14 +136,14 @@ export default async function DevicePage({searchParams, onClose}:{searchParams: 
                
                 <div className="rounded-md mt-6">
                     <CreateDevice
-                      locations={locations} employees={employees}
+                      locations={locations} employees={employees} departments={departments}
                     />
                     
                 </div>
             </div>
             <SearchDevices />
             <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-2">
-            <DeviceList devices={devices} employees={employees} locations={locations} onClose={onClose} />
+            <DeviceList devices={devices} employees={employees} locations={locations} departments={departments} onClose={onClose} />
             </div>
         </div>
         

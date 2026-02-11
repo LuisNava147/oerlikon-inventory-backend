@@ -7,9 +7,10 @@ import { redirect } from "next/navigation";
 export async function createDevice(prevState:any,formData:FormData) {
     const locationId= formData.get("location")?.toString()
     const employeeId = formData.get("employee")?.toString()
+    const departmentId = formData.get("department")?.toString()
 
     try{
-    
+
     const deviceData = {
         deviceHostName: formData.get("deviceHostName") || null,
         deviceAssetNumber: formData.get("deviceAssetNumber") || null,
@@ -17,12 +18,21 @@ export async function createDevice(prevState:any,formData:FormData) {
         deviceModel: formData.get("deviceModel"),
         deviceBrand: formData.get("deviceBrand"),
         deviceSerialTag: formData.get("deviceSerialTag"),
+        deviceStatus: "Stock" || null,
+        deviceNote: formData.get("deviceNote") || null,
+
         location: locationId ? locationId.toString() : null,
-        employee: employeeId ? employeeId : null
-
-
+        employee: employeeId ? employeeId : null,
+        department: departmentId || null
     }
-    //console.log(deviceData)
+
+    if(employeeId){
+        deviceData.deviceStatus = "Asignado"
+    }else{
+        deviceData.deviceStatus = "Stock"
+    }
+
+    console.log(deviceData)
 
     const response = await fetch(`${API_URL}/devices`,{
         method: "POST",
@@ -32,7 +42,7 @@ export async function createDevice(prevState:any,formData:FormData) {
         },
         body: JSON.stringify(deviceData)
     })
-    //console.log(await response.json())
+    console.log(await response.json())
 
     revalidatePath('/dashboard/devices');
 

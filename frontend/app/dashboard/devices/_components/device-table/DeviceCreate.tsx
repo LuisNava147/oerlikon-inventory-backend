@@ -4,9 +4,9 @@ import { Button, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } fr
 import { Monitor, MonitorUp, Plus } from "lucide-react";
 import { Children, ReactNode } from "react";
 import FormCreateDevice from "./FormDeviceCreate";
-import { Employee, Location } from "@/entities";
+import { Deparment, Employee, Location } from "@/entities";
 
-export default function CreateDevice({locations, employees}:{locations: Location[], employees: Employee[]}){
+export default function CreateDevice({locations, employees, departments}:{locations: Location[], employees: Employee[], departments: Deparment[]}){
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
     return(
@@ -24,7 +24,7 @@ export default function CreateDevice({locations, employees}:{locations: Location
                         <p className="text-xl font-bold">Registrar nuevo Equipo</p>
                         </ModalHeader>
                         <ModalBody className="py-7 overflow-y-auto">  
-                        <FormCreateDevice locations={locations} employees={employees} onClose={onOpenChange}/>  
+                        <FormCreateDevice locations={locations} employees={employees} departments={departments} onClose={onOpenChange}/>  
                         </ModalBody>
                         </>
                     )

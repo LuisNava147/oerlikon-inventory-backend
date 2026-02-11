@@ -56,6 +56,7 @@ export default function SearchDevices() {
                     <SelectItem key="employee">Nombre Empleado</SelectItem>
                     <SelectItem key="brand">Marca</SelectItem>
                     <SelectItem key="type">Tipo de Dispositivo</SelectItem>
+                    <SelectItem key="department">Nombre de Departamento</SelectItem>
                     <SelectItem key="location">Ubicación</SelectItem>
                 </Select>
             </div>

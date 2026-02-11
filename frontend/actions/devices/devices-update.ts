@@ -15,6 +15,7 @@ export async function updateDevice(deviceId: string,prevState:any,formData:FormD
 
     const locationId= formData.get("location")?.toString()
     const employeeId = formData.get("employee")?.toString()
+    const departmentId = formData.get("department")?.toString()
 
     try{
 
@@ -25,11 +26,14 @@ export async function updateDevice(deviceId: string,prevState:any,formData:FormD
         deviceSerialTag: formData.get("deviceSerialTag"),
         deviceHostName: getVal("deviceHostName") || null,
         deviceAssetNumber: getVal("deviceAssetNumber") || null,
+        deviceStatus: getVal("deviceStatus") || "Stock",
+        deviceNote: formData.get("deviceNote") || null,
 
         location: locationId ? locationId.toString() : null,
-        employee: employeeId ? employeeId : null
+        employee: employeeId ? employeeId : null,
+        department: departmentId ? departmentId : null
     }
-   
+    console.log(deviceData)
     const response = await fetch(`${API_URL}/devices/${deviceId}`,{
         method: "PATCH",
         headers:{
@@ -39,9 +43,10 @@ export async function updateDevice(deviceId: string,prevState:any,formData:FormD
         },
         body: JSON.stringify(deviceData),
     })
+    console.log(await response.json())
     revalidatePath('/dashboard/devices');
-    return {success: true}
+    return {success: true, error:null}
     }catch(error:any){
-        return {success: false}
+        return {success: false, error: "Error de conexión"}
     }
 }

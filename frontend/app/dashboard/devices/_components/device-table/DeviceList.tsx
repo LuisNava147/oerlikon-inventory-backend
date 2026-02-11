@@ -4,7 +4,7 @@ import {
   Table, TableHeader, TableColumn, TableBody, TableRow, TableCell,
   User, Chip, Pagination
 } from "@heroui/react";
-import { Device, Employee, Location } from "@/entities";
+import { Deparment, Device, Employee, Location } from "@/entities";
 import { useState, useMemo } from "react";
 import DeviceIcon from "./DeviceIcon";       
 import DeviceActions from "./DeviceActions"; 
@@ -17,7 +17,15 @@ const columns = [
   { name: "ACCIONES", uid: "actions", align: "center" as const},
 ];
 
-export default function DeviceList({ devices, employees, locations, onClose}: { devices: Device[], employees: Employee[], locations:Location[], onClose:()=>void }) {
+interface Props {
+    devices: Device[]
+    employees: Employee[]
+    locations: Location[]
+    departments: Deparment[]
+    onClose: () => void
+}
+
+export default function DeviceList({ devices, employees, locations, departments, onClose}: Props) {
     const [page, setPage] = useState(1);
     const rowsPerPage = 10;
     const pages = Math.ceil(devices.length / rowsPerPage);
@@ -60,10 +68,20 @@ export default function DeviceList({ devices, employees, locations, onClose}: { 
                             </div>
                         )}
                          {device.deviceHostName && (
-                            <div className="text-xs text-slate-500 flex justify-between items-center w-full ">
+                            <div className="text-xs text-slate-500 flex justify-between items-center w-full border-b border-slate-200 pb-1">
                             <span className="font-semibold text-slate-700 block">HOSTNAME: </span>
                             <span className="font-semibold text-slate-500 text-right ml-2 truncate font-medum">{device.deviceHostName}</span>
                         </div>
+                        )}
+                        {device.department?.departmentName && (
+                            <div className=" text-xs flex justify-between items-center w-full">
+                                <span className="font-semibold text-slate-700 block">
+                                DEPARTAMENTO:
+                                </span>
+                                <span className="font-semibold text-slate-500 text-right ml-2 truncate font-medum">
+                                {device.department.departmentName}
+                                </span>
+                            </div>
                         )}
                     </div>
                 );
@@ -84,7 +102,10 @@ export default function DeviceList({ devices, employees, locations, onClose}: { 
                     );
                 }
                 return <div className="min-w-[160px] items-center text-center">
-                        <Chip size="sm" color="success" variant="flat" className="text-sm">En stock</Chip>
+                        <Chip size="sm" color={device.deviceStatus && device.deviceStatus === 'Stock' ? "success" : "danger"} 
+                        variant="flat" className="text-md font-semibold">
+                            {device.deviceStatus}
+                        </Chip>
                 </div>
                 
                 
@@ -99,7 +120,9 @@ export default function DeviceList({ devices, employees, locations, onClose}: { 
                 );
 
             case "actions":
-                return (<DeviceActions devices={device} employees={employees} locations={locations} onClose={onClose} />)
+                return (
+                <DeviceActions devices={device} employees={employees} locations={locations} departments={departments} onClose={onClose} />
+                )
             
         }
     };
