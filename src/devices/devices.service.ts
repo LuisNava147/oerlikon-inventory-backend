@@ -102,7 +102,8 @@ export class DevicesService {
       },
       relations:{
         department:true,
-        location:true
+        location:true,
+        employee:true
       }
       
     })
@@ -150,6 +151,7 @@ export class DevicesService {
     relations: {
       employee: true,
       location: true,
+      department:true
     }
     })
     return employee;
@@ -163,6 +165,7 @@ export class DevicesService {
     relations: {
       employee: true,
       location: true,
+      department:true
     }
     })
     return employee;
@@ -194,6 +197,7 @@ export class DevicesService {
       relations:{
         location: true,
         department: true,
+        employee:true
       }
     })
     return device;
@@ -206,7 +210,8 @@ export class DevicesService {
       },
       relations:{
         location: true,
-        department: true
+        department: true,
+        employee:true
       }
     })
     return device;
@@ -219,7 +224,8 @@ export class DevicesService {
       },
       relations:{
         location: true,
-        employee: true
+        employee: true,
+        department:true
       }
     })
     return device;
