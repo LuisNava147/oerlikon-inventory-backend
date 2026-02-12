@@ -7,6 +7,7 @@ import { revalidatePath } from "next/cache"
 export async function createMobile(prevState:any, formData: FormData){
     const locationId = formData.get("location")?.toString()
     const employeeId = formData.get("employee")?.toString()
+    const departmentId = formData.get("department")?.toString()
 
     try{
         const mobileData = {
@@ -18,11 +19,21 @@ export async function createMobile(prevState:any, formData: FormData){
             deviceSerialTag: formData.get("deviceSerialTag"),
             devicePassword: formData.get("devicePassword") || null,
             devicePin: formData.get("devicePin") || null,
+            deviceStatus: "Stock" || null,
             deviceAccount: formData.get("deviceAccount") || null,
+
             location: locationId ? locationId.toString() : null,
-            employee: employeeId ? employeeId : null
+            employee: employeeId ? employeeId : null,
+            department: departmentId || null
         }
-        //console.log(mobileData)
+
+        if(employeeId){
+            mobileData.deviceStatus = "Asignado"
+        }else{
+            mobileData.deviceStatus = "Stock"
+        }
+
+        console.log(mobileData)
 
         const response = await fetch(`${API_URL}/devices`,{
             method: "POST",
@@ -34,8 +45,8 @@ export async function createMobile(prevState:any, formData: FormData){
         })
         //console.log(await response.json())
         revalidatePath('/dashboard/smartphones')
-        return{success: true}
+        return{success: true, error: null}
     }catch(error:any){
-        return{success:false, error:error.message}
+        return{success:false, error:"Error de conexión"}
     }
 }

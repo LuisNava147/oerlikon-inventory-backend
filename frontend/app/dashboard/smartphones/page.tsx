@@ -51,6 +51,9 @@ export default async function SmartphonesPage({searchParams, onClose}:{searchPar
             case "phone-account":
                 endpoint = `${API_URL}/devices/mobile-account/${query}`
                 break;
+            case "department":
+                endpoint = `${API_URL}/devices/department/${query}`
+                break;
             case "location": 
                 endpoint = `${API_URL}/devices/location-name/${query}`
                 break;
@@ -102,8 +105,19 @@ export default async function SmartphonesPage({searchParams, onClose}:{searchPar
             return await response.json()
         }
 
+        async function getDepartments() {
+            const response = await fetch(`${API_URL}/departments`,{
+                headers:{
+                    ...authHeaders(),
+                },
+                cache: 'no-store'
+            })
+            return await response.json()
+        }
+
         const locations = await getLocations()
         const employees = await getEmployees()
+        const departments = await getDepartments() 
 
         return(
             <div className="w-full h-auto flex flex-col gap-6 mt-4">
@@ -117,12 +131,12 @@ export default async function SmartphonesPage({searchParams, onClose}:{searchPar
                         </p>
                     </div>
                     <div className="rounded-md mt-6">
-                        <CreateMobile employees={employees} locations={locations} />
+                        <CreateMobile employees={employees} locations={locations} departments={departments} />
                     </div>
                 </div>
                 <SearchMobile />
                 <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-2">
-                    <MobileList devices={mobile} employees={employees} locations={locations} onClose={onClose} />
+                    <MobileList devices={mobile} employees={employees} locations={locations} departments={departments} onClose={onClose} />
                 </div>
             </div>
         )

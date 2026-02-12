@@ -11,7 +11,7 @@ export default function UpdatePrinter({locations, departments, devices}:{locatio
     return(
         <>
         <Tooltip content="Editar Equipo">
-        <span className="text-lg text-default-400 cursor-pointer active:opacity-50 hover:text-slate-700" onClick={onOpen}>
+        <span className="text-lg text-default-400 cursor-pointer active:opacity-50 hover:text-blue-600" onClick={onOpen}>
             <Pencil size={18} />
         </span>
         </Tooltip>

@@ -41,7 +41,7 @@ export default function PrinterList({ devices, departments, locations, onClose}:
                             <p className="font-bold text-sm capitalize text-slate-800 whitespace-nowrap">
                                 {device.deviceBrand} {device.deviceModel}
                             </p>
-                            <p className="text-xs text-slate-500 capitalize">{device.deviceType}</p>
+                            <p className="text-xs text-slate-500 uppercase">{device.deviceType}</p>
                         </div>
                     </div>
                 );

@@ -57,6 +57,7 @@ export default function SearchMobile() {
                     <SelectItem key="employee">Nombre de Empleado</SelectItem>
                     <SelectItem key="phone-account">Cuenta de Usuario</SelectItem>
                     <SelectItem key="type">Tipo de Dispositivo</SelectItem>
+                    <SelectItem key="department">Nombre de Departamento</SelectItem>
                     <SelectItem key="location">Ubicación</SelectItem>
                 </Select>
             </div>

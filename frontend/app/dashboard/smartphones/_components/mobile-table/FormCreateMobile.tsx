@@ -29,9 +29,17 @@ function SubmitButton(){
     
 }
 
-export default function FormCreateMobile({locations, employees, onClose}:{locations: Location[], employees: Employee[], onClose: ()=>void}){
+interface Props {
+    locations: Location[],
+    employees: Employee[],
+    departments: Deparment[],
+    onClose: () => void
+}
+
+export default function FormCreateMobile({locations, employees, departments, onClose}:Props){
     const [state, formAction] = useFormState(createMobile, initialState)
     const [employeeId, setEmployeeId] = useState<string>("");
+    const [departmentId, setDepartmentId] = useState<string>("");
 
     useEffect(()=>{
         if(state.success){
@@ -48,7 +56,7 @@ export default function FormCreateMobile({locations, employees, onClose}:{locati
                 </Select>
             <Input isRequired label="Marca del Dispositivo" placeholder="Ej.Motorola" variant="bordered" name="deviceBrand" className="mb-3 bg-white rounded-2xl"/>
             <Input isRequired label="Modelo" placeholder="Ej. MOTO G5" variant="bordered" name="deviceModel" className="mb-3 bg-white rounded-2xl"/>
-            <Input isRequired label="Número de Serie(S/N)" variant="bordered" name="deviceSerialTag" className="mb-3 bg-white rounded-2xl" />
+            <Input isRequired label="IMEI" variant="bordered" name="deviceSerialTag" className="mb-3 bg-white rounded-2xl" />
             <Input label="Cuenta de Usuario" placeholder="Ej. firtsname@gmail.com" variant="bordered" name="deviceAccount" className="mb-3 bg-white rounded-2xl" />
             <Input label="Contraseña de Cuenta"  variant="bordered" name="devicePassword" className="mb-3 bg-white rounded-2xl" />
             <Input label="PIN de Bloqueo" placeholder="Ej. 12131415" variant="bordered" name="devicePin" className="mb-3 bg-white rounded-2xl" />
@@ -74,6 +82,20 @@ export default function FormCreateMobile({locations, employees, onClose}:{locati
                                     <div className="flex flex-col">
                                         <span className="text-small">{emp.employeeName} {emp.employeeLastName}</span>
                                         <span className="text-tiny text-default-400"> | {emp.employeePhoneNumber} | {emp.employeeEmail}</span>
+                                    </div>
+                                </AutocompleteItem>
+                            )
+                        }
+                    </Autocomplete>
+                    
+                    <input type="hidden" name="department" value={departmentId} />
+                    <Autocomplete name="department" label= "Selecciona un Departamento" placeholder="Escribe para buscar..." className="bg-white rounded-2xl" defaultItems={departments}variant="bordered"
+                    onSelectionChange={(key) => setDepartmentId(key as string)}>
+                        {
+                            (dep)=>(
+                                <AutocompleteItem key={dep.departmentId} textValue={`${dep.departmentName}`}>
+                                    <div className="flex flex-col">
+                                        <span className="text-small">{dep.departmentName}</span>
                                     </div>
                                 </AutocompleteItem>
                             )

@@ -7,6 +7,7 @@ import { revalidatePath } from "next/cache"
 export default async function updateMobile(deviceId:string, prevState:any, formData:FormData){
     const locationId= formData.get("location")?.toString()
     const employeeId = formData.get("employee")?.toString()
+    const departmentId = formData.get("department")?.toString()
 
     try{
         const mobileData = {
@@ -16,11 +17,14 @@ export default async function updateMobile(deviceId:string, prevState:any, formD
             deviceModel: formData.get("deviceModel"),
             deviceBrand: formData.get("deviceBrand"),
             deviceSerialTag: formData.get("deviceSerialTag"),
-            devicePassword: formData.get("devicePasswrod") || null,
+            devicePassword: formData.get("devicePassword") || null,
             devicePin: formData.get("devicePin") || null,
             deviceAccount: formData.get("deviceAccount") || null,
+            deviceStatus: formData.get("deviceStatus") || "Stock",
+
             location: locationId ? locationId.toString() : null,
-            employee: employeeId ? employeeId : null
+            employee: employeeId ? employeeId : null,
+            department: departmentId ? departmentId : null
         }
         //console.log(mobileData)
 
@@ -34,8 +38,8 @@ export default async function updateMobile(deviceId:string, prevState:any, formD
             body: JSON.stringify(mobileData),
         })
         revalidatePath('/dashboard/devices')
-        return{success:true}
+        return{success:true, error:null}
     }catch(error:any){
-        return{success:false}
+        return{success:false, error: "Error de conexión."}
     }
 }
