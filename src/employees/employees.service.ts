@@ -32,6 +32,7 @@ export class EmployeesService {
     .leftJoinAndSelect('employee.location','location')
     .leftJoinAndSelect('employee.device','device')
     .leftJoinAndSelect('employee.user','user')
+    .leftJoinAndSelect('employee.department','department')
 
     .loadRelationCountAndMap(
       'employee.devicesCount',
@@ -60,7 +61,8 @@ export class EmployeesService {
       relations:{
         location:true,
         device:true,
-        user:true
+        user:true,
+        department:true,
       }
     })
     if(!employee)throw new NotFoundException("empleado no encontrado")
@@ -77,7 +79,8 @@ export class EmployeesService {
       relations:{
         location:true,
         device:true,
-        user:true
+        user:true,
+        department:true,
       }
     })
     return employee;
@@ -93,7 +96,8 @@ export class EmployeesService {
       relations:{
         location:true,
         device:true,
-        user:true
+        user:true,
+        department:true,
       }
     })
     return location;
@@ -107,7 +111,8 @@ export class EmployeesService {
       relations:{
         location:true,
         device:true,
-        user:true
+        user:true,
+        department:true,
       }
     })
     return employee;
@@ -121,7 +126,25 @@ export class EmployeesService {
       relations:{
         location:true,
         device:true,
-        user:true
+        user:true,
+        department:true,
+      }
+    })
+    return employee
+  }
+
+  async findByDepartmentName(name:string){
+    const employee = await this.employeeRepository.find({
+      where:{
+        department:{
+          departmentName: ILike(`%${name}%`)
+        }
+      },
+      relations:{
+        location:true,
+        device:true,
+        user:true,
+        department:true,
       }
     })
     return employee

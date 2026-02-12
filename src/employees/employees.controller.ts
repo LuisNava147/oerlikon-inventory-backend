@@ -61,6 +61,12 @@ export class EmployeesController {
   }
 
   @Auth(ROLES.ADMIN)
+  @Get('/department/:name')
+  findByDepartmentName(@Param('name')name:string){
+    return this.employeesService.findByDepartmentName(name);
+  }
+
+  @Auth(ROLES.ADMIN)
   @Patch(':id')
   update(@Param('id', ParseUUIDPipe) id: string, @Body() updateEmployeeDto: UpdateEmployeeDto) {
     return this.employeesService.update(id, updateEmployeeDto);

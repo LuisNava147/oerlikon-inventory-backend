@@ -1,4 +1,5 @@
 import { User } from "src/auth/entities/user.entity";
+import { Deparment } from "src/deparments/entities/deparment.entity";
 import { Device } from "src/devices/entities/device.entity";
 import { Location } from "src/locations/entities/location.entity";
 import {Entity, Column, PrimaryGeneratedColumn }from "typeorm";
@@ -31,5 +32,10 @@ export class Employee {
     @OneToOne(()=> User, (user)=> user.employee)
     user: User
 
+    @ManyToOne(()=> Deparment, (department)=> department.employee, {onDelete:'SET NULL'})
+    @JoinColumn({
+        name: "departmentId"
+    })
+    department: Deparment
     
 }
