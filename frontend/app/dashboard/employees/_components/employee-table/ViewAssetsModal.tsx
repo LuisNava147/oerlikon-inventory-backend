@@ -61,7 +61,7 @@ interface ViewAssetsModalProps {
                                                     {dev.deviceBrand} {dev.deviceModel}
                                                 </span>
                                                 <span className="text-xs text-slate-500 font-normal">
-                                                    {dev.deviceAssetNumber} | {dev.deviceSerialTag}</span>
+                                                   {dev.deviceType} | {dev.deviceAssetNumber} | {dev.deviceSerialTag}</span>
                                             </li>
                                         ))}
                                     </ul>

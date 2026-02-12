@@ -10,6 +10,7 @@ export default async function createEmployee(prevState:any,formData: FormData){
     const email = formData.get("employeeEmail")?.toString().trim()
     const phone = formData.get("employeePhoneNumber")?.toString() || null
     const locationId = formData.get("location")?.toString() || null
+    const departmentId = formData.get("department")?.toString() || null
     /*const deviceId = formData.get("device")?.toString()
     const userId = formData.get("user")?.toString()*/
 
@@ -21,6 +22,7 @@ export default async function createEmployee(prevState:any,formData: FormData){
         employeeEmail: email,
         employeePhoneNumber: phone,
         location:locationId,
+        department: departmentId,
         /*deviceId:{deviceId: deviceId},
         userId:{userId:userId}*/
     }

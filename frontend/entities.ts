@@ -39,6 +39,7 @@ export interface Deparment {
     departmentName: string
     device: Device[]
     incident: Incident[]
+    employee: Employee[]
     printerCount?: number
 }
 
@@ -74,6 +75,7 @@ export interface Employee {
     devicesCount?:number
     location: Location 
     device: Device[]
+    department: Deparment
     user: User  
 }
 

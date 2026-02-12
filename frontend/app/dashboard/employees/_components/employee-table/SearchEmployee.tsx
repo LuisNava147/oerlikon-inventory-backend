@@ -49,6 +49,7 @@ export default function SearchEmployee(){
                     <SelectItem key="name">Nombre de Empleado</SelectItem>
                     <SelectItem key="email">Correo Del Empleado</SelectItem>
                     <SelectItem key="phone-number">Número de Teléfono</SelectItem>
+                    <SelectItem key="department">Nombre de Departamento</SelectItem>
                     <SelectItem key="location">Ubicación</SelectItem>
                 </Select>
             </div>

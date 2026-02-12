@@ -4,7 +4,7 @@ import {
     Table, TableHeader, TableColumn, TableBody, TableRow, TableCell,
     User, Chip, Pagination
   } from "@heroui/react";
-  import { Device, Employee, Location } from "@/entities";
+  import { Deparment, Device, Employee, Location } from "@/entities";
   import { useState, useMemo } from "react";
 import EmployeeActions from "./EmployeeActions";
 import ViewAssetsModal from "./ViewAssetsModal";
@@ -17,7 +17,14 @@ import ViewAssetsModal from "./ViewAssetsModal";
     {name: "ACCIONES", uid: "actions", align: "center" as const}
   ]
 
-  export default function EmployeeList({employees, devices, locations, onClose}: {employees: Employee[], devices:Device[], locations: Location[], onClose:()=>void}){
+  interface Props {
+    employees: Employee[]
+    devices:Device[]
+    locations: Location[]
+    departments: Deparment[]
+    onClose:()=>void
+  }
+  export default function EmployeeList({employees, devices, locations, departments, onClose}: Props){
     const [page, setPage] = useState(1);
     const rowsPerPage = 10;
     const pages = Math.ceil(employees.length / rowsPerPage);
@@ -58,12 +65,21 @@ import ViewAssetsModal from "./ViewAssetsModal";
                         )}
 
                         {employee.employeeEmail && (
-                            <div className="text-xs text-slate-500 flex justify-between items-center w-full pb-1">
+                            <div className="text-xs text-slate-500 flex justify-between items-center w-full border-b border-slate-200 pb-1">
                             <span className="font-semibold text-slate-700 block">CORREO: </span>
                             <span className="font-semibold text-slate-500 text-right ml-2 truncate font-medum">{employee.employeeEmail}</span>
                         </div>
                         )}
-
+                        {employee.department?.departmentName && (
+                            <div className=" text-xs flex justify-between items-center w-full">
+                                <span className="font-semibold text-slate-700 block">
+                                DEPARTAMENTO:
+                                </span>
+                                <span className="font-semibold text-slate-500 text-right ml-2 truncate font-medum">
+                                {employee.department.departmentName}
+                                </span>
+                            </div>
+                        )}
                         
                     </div>
                 )
@@ -84,7 +100,7 @@ import ViewAssetsModal from "./ViewAssetsModal";
                 )
             case "actions":
                 return(
-                    <EmployeeActions employees={employee} locations={locations} onClose={onClose} />
+                    <EmployeeActions employees={employee} departments={departments} locations={locations} onClose={onClose} />
                 )
         }   
     }

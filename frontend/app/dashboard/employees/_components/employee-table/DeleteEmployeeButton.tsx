@@ -56,6 +56,9 @@ return(
                         <p className="text-xs text-slate-500 font-mono mt-1">
                             TELÉFONO: {employee.employeePhoneNumber || null}
                         </p>
+                        <p className="text-xs text-slate-500 font-mono mt-1">
+                            DEPARTAMENTO: {employee.department.departmentName || null}
+                        </p>
                     </div>
                     <p className="text-xs text-slate-400 mt-4">
                         Esta acción es irreversible y se perderá el historial de asignaciones.

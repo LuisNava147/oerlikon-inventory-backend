@@ -1,8 +1,6 @@
 'use client';
-import { createDevice } from "@/actions/devices/devices-create";
+
 import createEmployee from "@/actions/employees/employee-create";
-import { createPrinter } from "@/actions/printers/printer-create";
-import { createMobile } from "@/actions/smartphones/mobile-create";
 import { Deparment, Employee, Location } from "@/entities";
 import { Autocomplete, AutocompleteItem, Button, ButtonGroup, Divider, Input, ModalFooter, Select, SelectItem } from "@heroui/react";
 import { MapPin, Monitor, Save } from "lucide-react";
@@ -24,8 +22,15 @@ function SubmitButton(){
     
 }
 
-export default function FormCreateEmployee({locations, onClose}:{locations:Location[], onClose: ()=>void}){
+interface Props {
+    locations:Location[]
+    departments: Deparment[]
+    onClose: ()=>void
+}
+
+export default function FormCreateEmployee({locations, departments, onClose}:Props){
     const [state, formAction] = useFormState(createEmployee, initialState)
+    const [departmentId, setDepartmentId] = useState<string>("");
 
     useEffect(()=>{
         if(state.success){
@@ -55,6 +60,20 @@ export default function FormCreateEmployee({locations, onClose}:{locations:Locat
                         ))}
                     </Select>
         
+                    <input type="hidden" name="department" value={departmentId} />
+                    <Autocomplete name="department" label= "Selecciona un Departamento" placeholder="Escribe para buscar..." className="bg-white rounded-2xl" defaultItems={departments}variant="bordered"
+                    onSelectionChange={(key) => setDepartmentId(key as string)}>
+                        {
+                            (dep)=>(
+                                <AutocompleteItem key={dep.departmentId} textValue={`${dep.departmentName}`}>
+                                    <div className="flex flex-col">
+                                        <span className="text-small">{dep.departmentName}</span>
+                                    </div>
+                                </AutocompleteItem>
+                            )
+                        }
+                    </Autocomplete>
+
                     {state.error && (
                         <p className="text-red-600 text-sm">{state.error}</p>
                     )}

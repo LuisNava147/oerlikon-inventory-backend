@@ -1,18 +1,24 @@
 import { Button, Tooltip } from "@heroui/react";
-import { Device, Employee, Location } from "@/entities";
+import { Deparment, Device, Employee, Location } from "@/entities";
 import UpdateEmployee from "./UpdateEmployee";
 import DeleteEmployeeButton from "./DeleteEmployeeButton";
 import FormCreateUser from "../user-table/FormCreateUser";
 import CreateUser from "../user-table/CreateUser";
 
-export default function EmployeeActions({locations, employees, onClose}:{locations:Location[], employees: Employee, onClose:()=>void}){
+interface Props {
+    locations:Location[]
+    employees: Employee
+    departments: Deparment[]
+    onClose:()=>void
+}
+export default function EmployeeActions({locations, employees, departments, onClose}:Props){
     return(
         <div className="flex items-center justify-center gap-2">
         <Tooltip content= "Admin">
             <CreateUser employees={employees}/>
         </Tooltip>
             <Tooltip content="Editar">
-            <UpdateEmployee locations={locations} employees={employees} />
+            <UpdateEmployee locations={locations} departments={departments} employees={employees} />
             </Tooltip>
 
             <Tooltip content="Eliminar">

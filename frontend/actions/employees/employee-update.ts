@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache"
 
 export default async function updateEmployee(employeeId:string, prevState:any, formData:FormData){
     const locationId = formData.get("location")?.toString() || null
+    const departmentId = formData.get("department")?.toString() || null
     /*const deviceId = formData.get("device")?.toString()
     const userId = formData.get("user")?.toString()*/
 
@@ -15,6 +16,7 @@ export default async function updateEmployee(employeeId:string, prevState:any, f
         employeeEmail: formData.get("employeeEmail"),
         employeePhoneNumber: formData.get("employeePhoneNumber")?.toString() || null,
         location:locationId,
+        department:departmentId
         /*device:{device: deviceId},
         user:{user:userId}*/
     }

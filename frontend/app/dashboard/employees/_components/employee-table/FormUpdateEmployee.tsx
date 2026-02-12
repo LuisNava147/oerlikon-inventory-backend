@@ -1,6 +1,6 @@
 import { updateDevice } from "@/actions/devices/devices-update"
 import updateEmployee from "@/actions/employees/employee-update"
-import { Device, Employee, Location } from "@/entities"
+import { Deparment, Device, Employee, Location } from "@/entities"
 import { Autocomplete, AutocompleteItem, Button, Divider, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Select, SelectItem, Spinner, Tooltip, useDisclosure } from "@heroui/react"
 import { MapPin, Pencil, Save } from "lucide-react"
 import { useEffect, useState } from "react"
@@ -20,8 +20,17 @@ function SubmitButton(){
     )
 }
 
-export default function FormUpdateEmployee({locations=[], employees, onClose}:{locations:Location[], employees:Employee, onClose:()=>void}){
+interface Props {
+    locations:Location[]
+    employees:Employee
+    departments: Deparment[]
+    onClose:()=>void
+}
+
+export default function FormUpdateEmployee({locations=[], departments=[], employees, onClose}:Props){
     const [locationId, setLocationId] = useState<string>("")
+    const [departmentId, setDepartmentId] = useState<string>("")
+    const [departmentInput, setDepartmentInput] = useState("")
     const employeeId = employees?.employeeId ? String(employees.employeeId) : ""
     const updateWithEmployeeId = updateEmployee.bind(null, employeeId)
     const [state, formAction] = useFormState(updateWithEmployeeId, initialState)
@@ -31,9 +40,21 @@ export default function FormUpdateEmployee({locations=[], employees, onClose}:{l
             if(employees.location?.locationId){
                 setLocationId(String(employees.location.locationId))
             }
+            if(employees.department?.departmentId){
+                setDepartmentId(String(employees.department.departmentId))
+            }
         }
     },[employees])
 
+    useEffect(()=>{
+        if(departments.length > 0 && departmentId){
+            const found = departments.find((d)=> String(d.departmentId) === String(departmentId))
+            if(found){
+                setDepartmentInput(`${found.departmentName}`)
+            }
+        }
+    }, [departmentId, departments])
+    
     useEffect(()=> {
         if(state.success){
             onClose()
@@ -74,6 +95,20 @@ export default function FormUpdateEmployee({locations=[], employees, onClose}:{l
                 ))}
             </Select>
         
+            <input type="hidden" name="department" defaultValue={departmentId} />
+                    <Autocomplete name="department" label= "Selecciona un Departamento" placeholder="Escribe para buscar..." className="flex-1 bg-white rounded-2xl" defaultItems={departments} variant="bordered"
+                        selectedKey={departmentId || null} onSelectionChange={(key) => setDepartmentId(key as string)} inputValue={departmentInput} onInputChange={setDepartmentInput}>
+                                {
+                                    (dep)=>(
+                                        <AutocompleteItem key={dep.departmentId} textValue={`${dep.departmentName}`}>
+                                            <div className="flex flex-col">
+                                                <span className="text-small">{dep.departmentName}</span>
+                                            </div>
+                                        </AutocompleteItem>
+                                    )
+                                }
+                    </Autocomplete>
+
                     {state.error && (
                         <p className="text-red-600 text-sm">{state.error}</p>
                     )}

@@ -23,6 +23,9 @@ export default async function EmployeePage({searchParams, onClose}:{searchParams
             case "phone-number":
                 endpoint = `${API_URL}/employees/employee-phone/${query}`
                 break;
+            case "department":
+                endpoint = `${API_URL}/employees/department/${query}`
+                break;
             case "location":
                 endpoint = `${API_URL}/employees/location-name/${query}`
                 break;
@@ -66,8 +69,19 @@ export default async function EmployeePage({searchParams, onClose}:{searchParams
         return await response.json()
     }
 
+    async function getDepartments() {
+        const response = await fetch(`${API_URL}/departments`,{
+            headers:{
+                ...authHeaders(),
+            },
+            cache: 'no-store'
+        })
+        return await response.json()
+    }
+
         const locations = await getLocations()
         const devices = await getDevices()
+        const departments = await getDepartments() 
 
         return(
             <div className="w-full h-auto flex flex-col gap-6 mt-4">
@@ -81,12 +95,12 @@ export default async function EmployeePage({searchParams, onClose}:{searchParams
                         </p>
                     </div>
                     <div className="rounded-md mt-6">
-                        <CreateEmployee locations={locations}/>
+                        <CreateEmployee departments={departments} locations={locations}/>
                     </div>
                 </div>
                 <SearchEmployee />
                 <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-2">
-                <EmployeeList devices={devices} employees={employees} locations={locations} onClose={onClose}/>
+                <EmployeeList devices={devices} employees={employees} departments={departments} locations={locations} onClose={onClose}/>
                 </div>
             </div>
         ) 

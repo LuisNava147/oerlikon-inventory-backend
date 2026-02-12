@@ -3,10 +3,10 @@
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@heroui/react";
 import { Monitor, MonitorUp, Plus, TabletSmartphone, UserRoundPlus } from "lucide-react";
 import { Children, ReactNode } from "react";
-import { Employee, Location } from "@/entities";
+import { Deparment, Employee, Location } from "@/entities";
 import FormCreateEmployee from "./FormCreateEmployee";
 
-export default function CreateEmployee({locations}:{locations:Location[]}){
+export default function CreateEmployee({locations, departments}:{locations:Location[], departments:Deparment[]}){
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
     return(
@@ -24,7 +24,7 @@ export default function CreateEmployee({locations}:{locations:Location[]}){
                         <p className="text-xl font-bold">Registrar nuevo Equipo</p>
                         </ModalHeader>
                         <ModalBody className="py-7 overflow-y-auto">  
-                        <FormCreateEmployee locations={locations} onClose={onOpenChange}/>  
+                        <FormCreateEmployee locations={locations} departments={departments} onClose={onOpenChange}/>  
                         </ModalBody>
                         </>
                     )
