@@ -21,7 +21,7 @@ export default async function SmartphonesPage({searchParams, onClose}:{searchPar
          "docking", 
          "monitor", "pantalla", 
          "diadema",
-         "token",
+         "token", "lector de barras", "bocina",
          //printers
          "printer","impresora"
     ];

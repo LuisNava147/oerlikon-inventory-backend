@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache"
 export async function createAccesories(prevState:any,formData:FormData) {
     const locationId= formData.get("location")?.toString()
     const employeeId = formData.get("employee")?.toString()
+    const departmentId = formData.get("department")?.toString()
 
     try{
     
@@ -15,9 +16,12 @@ export async function createAccesories(prevState:any,formData:FormData) {
         deviceModel: formData.get("deviceModel"),
         deviceBrand: formData.get("deviceBrand"),
         deviceSerialTag: formData.get("deviceSerialTag"),
-        location: locationId ? locationId.toString() : null || null,
-        employee: employeeId ? employeeId : null
+        deviceStatus: "Stock" || null,
+        deviceNote: formData.get("deviceNote") || null,
 
+        location: locationId ? locationId.toString() : null || null,
+        employee: employeeId ? employeeId : null,
+        department: departmentId || null
 
     }
     //console.log(deviceData)
@@ -34,8 +38,8 @@ export async function createAccesories(prevState:any,formData:FormData) {
 
     revalidatePath('/dashboard/devices');
 
-    return{success: true}
+    return{success: true, error:null}
 }catch(error:any){
-    return{success:false, error: error.message}
+    return{success:false, error: "Error de conexión"}
 }
 }

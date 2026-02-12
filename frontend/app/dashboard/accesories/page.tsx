@@ -14,7 +14,7 @@ export default async function AccesoriesPage({searchParams, onClose}:{searchPara
         "docking", 
         "monitor", "pantalla", 
         "diadema",
-        "token"
+        "token", "lector de barras", "bocina"
     ]
 
     const EXCLUDED_TYPES = [
@@ -43,6 +43,9 @@ export default async function AccesoriesPage({searchParams, onClose}:{searchPara
                 break;
             case "type":
                 endpoint = `${API_URL}/devices/type/${query}`
+                break;
+            case "department":
+                endpoint = `${API_URL}/devices/department/${query}`
                 break;
             case "location":
                 endpoint = `${API_URL}/devices/location-name/${query}`
@@ -96,9 +99,19 @@ export default async function AccesoriesPage({searchParams, onClose}:{searchPara
         return await response.json()
     }
 
-    
+    async function getDepartments() {
+        const response = await fetch(`${API_URL}/departments`,{
+            headers:{
+                ...authHeaders(),
+            },
+            cache: 'no-store'
+        })
+        return await response.json()
+    }
+
     const locations = await getLocations()
-    const employees = await getEmployees()    
+    const employees = await getEmployees()   
+    const departments = await getDepartments()   
 
     return(
         <div className="w-full h-auto flex flex-col gap-6 mt-4">
@@ -111,13 +124,13 @@ export default async function AccesoriesPage({searchParams, onClose}:{searchPara
                 </div>
                
                 <div className="rounded-md mt-6">
-                    <CreateAccesories locations={locations} employees={employees}/>
+                    <CreateAccesories locations={locations} employees={employees} departments={departments}/>
                     
                 </div>
             </div>
             <SearchAccesories />
             <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-2">
-            <AccesoriesList devices={devices} locations={locations} employees={employees} onClose={onClose}/>
+            <AccesoriesList devices={devices} locations={locations} employees={employees} departments={departments} onClose={onClose}/>
             </div>
         </div>
         

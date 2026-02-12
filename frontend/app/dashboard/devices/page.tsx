@@ -28,7 +28,7 @@ export default async function DevicePage({searchParams, onClose}:{searchParams: 
         "docking", 
         "monitor", "pantalla", 
         "diadema",
-        "token"
+        "token", "lector de barras", "bocina"
     ];
     
     let devices: Device[] = []

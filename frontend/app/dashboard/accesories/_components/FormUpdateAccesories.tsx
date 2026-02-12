@@ -1,7 +1,7 @@
 import { updateAccesories } from "@/actions/accesories/update-accesorie"
-import { Device, Employee, Location } from "@/entities"
+import { Deparment, Device, Employee, Location } from "@/entities"
 import { Autocomplete, AutocompleteItem, Button, Divider, Input, ModalFooter, Select, SelectItem, Spinner } from "@heroui/react"
-import { MapPin, Save } from "lucide-react"
+import { CircleQuestionMark, MapPin, Save } from "lucide-react"
 import { useEffect, useState } from "react"
 import { useFormState, useFormStatus } from "react-dom"
 
@@ -25,13 +25,22 @@ const initialState = {
         <Button type="submit" color="primary" isLoading={pending} startContent={!pending && <Save size={18}/>} className="font-semibold shadow-md">
             {pending ? "Guardando..." : "Editar Periférico"}
         </Button>
-    )
-    
+    )  
 }
 
-export default function FormUpdateAccesories({locations, employees, devices, onClose}:{locations:Location[], employees:Employee[], devices:Device, onClose:()=>void}){
+interface Props {
+    locations: Location[],
+    employees: Employee[],
+    departments: Deparment[],
+    devices: Device
+    onClose: () => void
+}
+
+export default function FormUpdateAccesories({locations, employees, devices, departments, onClose}:Props){
     const [employeeId, setEmployeeId] = useState<string>("")
     const [employeeInput, setEmployeeInput] = useState("")
+    const [departmentId, setDepartmentId] = useState<string>("");
+    const [departmentInput, setDepartmentInput] = useState("")
     const [locationId, setLocationId] = useState<string>("")
     const [deviceType, setDeviceType] = useState<string>("");
 
@@ -46,6 +55,9 @@ export default function FormUpdateAccesories({locations, employees, devices, onC
             }
             if(devices.location?.locationId){
                 setLocationId(String(devices.location.locationId))
+            }
+            if(devices.department?.departmentId){
+                setDepartmentId(String(devices.department.departmentId))
             }
             if(devices.deviceType){
                 setDeviceType(devices.deviceType)
@@ -62,6 +74,15 @@ export default function FormUpdateAccesories({locations, employees, devices, onC
             }
         }
     }, [employeeId, employees])
+
+    useEffect(()=>{
+        if(departments.length > 0 && departmentId){
+            const found = departments.find((d)=> String(d.departmentId) === String(departmentId))
+            if(found){
+                setDepartmentInput(`${found.departmentName}`)
+            }
+        }
+    }, [departmentId, departments])
 
     useEffect(()=>{
         if(state.success){
@@ -126,6 +147,35 @@ export default function FormUpdateAccesories({locations, employees, devices, onC
                             )
                         }
                     </Autocomplete>
+
+                    <Select label="Estatus del Equipo" placeholder="Selecciona el estado" name="deviceStatus" 
+                    defaultSelectedKeys={[devices.deviceStatus]} variant="bordered" classNames={{trigger:"bg-white"}}
+                    startContent={<CircleQuestionMark className="text-gray-400" size={18} />} isRequired>
+                    <SelectItem key="Stock" color="success" variant="flat" description="El Periférico no tiene un Empleado asignado.">
+                        Stock
+                    </SelectItem>
+                    <SelectItem key="BAJA" color="danger" variant="flat" description="El Périférico ya es obsoleto.">
+                        BAJA
+                    </SelectItem>
+                    <SelectItem key="Asignado" color="default" variant="flat" description="El Periférico ha sido asignado a un Empleado.">
+                        Asignado
+                    </SelectItem>
+                    </Select>
+
+                    <input type="hidden" name="department" defaultValue={departmentId} />
+                    <Autocomplete name="department" label= "Selecciona un Departamento" placeholder="Escribe para buscar..." className="flex-1 bg-white rounded-2xl" defaultItems={departments} variant="bordered"
+                        selectedKey={departmentId || null} onSelectionChange={(key) => setDepartmentId(key as string)} inputValue={departmentInput} onInputChange={setDepartmentInput}>
+                                {
+                                    (dep)=>(
+                                        <AutocompleteItem key={dep.departmentId} textValue={`${dep.departmentName}`}>
+                                            <div className="flex flex-col">
+                                                <span className="text-small">{dep.departmentName}</span>
+                                            </div>
+                                        </AutocompleteItem>
+                                    )
+                                }
+                    </Autocomplete>
+                    
             </div>
             <div className="flex justify-end pt-4">
             <ModalFooter className="justify-center">

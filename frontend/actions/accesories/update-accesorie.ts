@@ -11,6 +11,7 @@ export async function updateAccesories(accesorieId: string, prevState:any, formD
 
     const locationId= formData.get("location")?.toString()
     const employeeId = formData.get("employee")?.toString()
+    const departmentId = formData.get("department")?.toString()
 
     try{
         const accesorieData = {
@@ -19,8 +20,11 @@ export async function updateAccesories(accesorieId: string, prevState:any, formD
         deviceModel: formData.get("deviceModel"),
         deviceBrand: formData.get("deviceBrand"),
         deviceSerialTag: formData.get("deviceSerialTag"),
+        deviceStatus: getVal("deviceStatus") || "Stock",
+
         location: locationId ? locationId.toString() : null || null,
-        employee: employeeId ? employeeId : null
+        employee: employeeId ? employeeId : null,
+        department: departmentId ? departmentId : null
         }
 
         const response = await fetch(`${API_URL}/devices/${accesorieId}`,{

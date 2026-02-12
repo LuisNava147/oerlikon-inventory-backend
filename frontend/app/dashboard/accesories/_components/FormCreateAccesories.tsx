@@ -14,7 +14,9 @@ const DEVICE_TYPE = [
     {key: "Teclado", label:"Teclado"},
     {key: "Docking", label:"Docking Station"},
     {key: "Diadema", label: "Diadema"},
-    {key: "Token", label: "Token"}
+    {key: "Token", label: "Token"},
+    {key: "Lector de barras", label: "Lector de barras"},
+    {key:"Bocina", label: "Bocina"}
 ]
 
 const initialState = {
@@ -32,10 +34,17 @@ const initialState = {
     
 }
 
+interface Props {
+    locations: Location[],
+    employees: Employee[],
+    departments: Deparment[],
+    onClose: () => void
+}
 
-export default function FormCreateAccesories({locations, employees, onClose}:{locations:Location[], employees:Employee[], onClose:()=>void}){
+export default function FormCreateAccesories({locations, employees, departments, onClose}:Props){
     const [state, formAction] = useFormState(createAccesories, initialState)
     const [employeeId, setEmployeeId] = useState<string>("")
+    const [departmentId, setDepartmentId] = useState<string>("");
 
     useEffect(() =>{
         if(state.success){
@@ -82,6 +91,21 @@ export default function FormCreateAccesories({locations, employees, onClose}:{lo
                             )
                         }
                     </Autocomplete>
+
+                    <input type="hidden" name="department" value={departmentId} />
+                    <Autocomplete name="department" label= "Selecciona un Departamento" placeholder="Escribe para buscar..." className="bg-white rounded-2xl" defaultItems={departments}variant="bordered"
+                    onSelectionChange={(key) => setDepartmentId(key as string)}>
+                        {
+                            (dep)=>(
+                                <AutocompleteItem key={dep.departmentId} textValue={`${dep.departmentName}`}>
+                                    <div className="flex flex-col">
+                                        <span className="text-small">{dep.departmentName}</span>
+                                    </div>
+                                </AutocompleteItem>
+                            )
+                        }
+                    </Autocomplete>
+
                     {state.error && (
                         <p className="text-red-600 text-sm">{state.error}</p>
                     )}
