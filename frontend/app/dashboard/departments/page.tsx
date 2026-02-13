@@ -29,6 +29,18 @@ export default async function DepartmentPage({searchParams, onClose}:{searchPara
         })
     }
 
+    async function getLocations() {
+        const response = await fetch(`${API_URL}/locations`,{
+            headers:{
+                ...authHeaders(),
+            },
+            cache: 'no-store'
+        })
+        return await response.json()
+    }
+
+    const locations = await getLocations()
+
     return (
         <div className="w-full h-full flex flex-col gap-8 mt-4">
            
@@ -56,7 +68,7 @@ export default async function DepartmentPage({searchParams, onClose}:{searchPara
                      <SearchDepartment />
                 </div>
                 <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-2">
-                    <DepartmentList departments={departments} />
+                    <DepartmentList departments={departments} locations={locations}/>
                 </div>
             </div>
     
@@ -64,7 +76,7 @@ export default async function DepartmentPage({searchParams, onClose}:{searchPara
             {/* DERECHA: Formulario (ocupa 1 espacio de 3) */}
             <div className="lg:col-span-1 sticky top-6 flex flex-col gap-4" >
             
-                <CreateDepartment />
+                <CreateDepartment locations={locations}/>
             </div>
     
           </div>

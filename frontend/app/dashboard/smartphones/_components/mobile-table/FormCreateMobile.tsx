@@ -60,6 +60,7 @@ export default function FormCreateMobile({locations, employees, departments, onC
             <Input label="Cuenta de Usuario" placeholder="Ej. firtsname@gmail.com" variant="bordered" name="deviceAccount" className="mb-3 bg-white rounded-2xl" />
             <Input label="Contraseña de Cuenta"  variant="bordered" name="devicePassword" className="mb-3 bg-white rounded-2xl" />
             <Input label="PIN de Bloqueo" placeholder="Ej. 12131415" variant="bordered" name="devicePin" className="mb-3 bg-white rounded-2xl" />
+            <Input label="Número de Activo" placeholder="BMX-0000" variant="bordered" name="deviceAssetNumber" className="mb-3 bg-white rounded-2xl" />
             </div>
            <Divider className="my-2"/>
 
@@ -96,6 +97,7 @@ export default function FormCreateMobile({locations, employees, departments, onC
                                 <AutocompleteItem key={dep.departmentId} textValue={`${dep.departmentName}`}>
                                     <div className="flex flex-col">
                                         <span className="text-small">{dep.departmentName}</span>
+                                        <span className="text-tiny text-default-400"> | {dep.location.locationName}</span>
                                     </div>
                                 </AutocompleteItem>
                             )

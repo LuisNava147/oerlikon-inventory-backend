@@ -40,7 +40,14 @@ export interface Deparment {
     device: Device[]
     incident: Incident[]
     employee: Employee[]
+    location: Location
     printerCount?: number
+    employeeCount?: number
+    deviceCount?: number
+    mobileCount?: number
+    accesoriesCount?: number
+    barcodeCount?: number
+    monitorCount?: number
 }
 
 export interface Device { 

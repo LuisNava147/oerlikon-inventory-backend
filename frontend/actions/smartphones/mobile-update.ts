@@ -37,7 +37,9 @@ export default async function updateMobile(deviceId:string, prevState:any, formD
             },
             body: JSON.stringify(mobileData),
         })
+        revalidatePath('/dashboard/departments')
         revalidatePath('/dashboard/devices')
+        
         return{success:true, error:null}
     }catch(error:any){
         return{success:false, error: "Error de conexión."}

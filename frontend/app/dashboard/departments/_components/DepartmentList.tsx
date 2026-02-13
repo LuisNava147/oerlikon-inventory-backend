@@ -2,20 +2,21 @@
 
 import {
   Table, TableHeader, TableColumn, TableBody, TableRow, TableCell,
-  Pagination, Chip
+  Pagination, Chip, Tooltip
 } from "@heroui/react";
-import { Deparment } from "@/entities";
+import { Deparment, Location } from "@/entities";
 import { useState, useMemo } from "react";
 import DepartmentActions from "./DepartmentActions";
+import { BriefcaseBusiness, Laptop, Users } from "lucide-react";
 // import DepartmentActions from "./DepartmentActions"; // Lo crearemos después
 
 const columns = [
-  { name: "DEPARTAMENTO", uid: "name", align: "start" as const},
+  { name: "DEPARTAMENTO", uid: "name", align: "start" as const, width: 250},
   {name: "ASIGNACIONES", uid:"count", align:"center" as const},
-  { name: "ACCIONES", uid: "actions", align: "center" as const},
+  { name: "ACCIONES", uid: "actions", align: "center" as const, width: 100},
 ];
 
-export default function DepartmentList({ departments }: { departments: Deparment[] }) {
+export default function DepartmentList({ departments, locations }: { departments: Deparment[], locations:Location[] }) {
     const [page, setPage] = useState(1);
     const rowsPerPage = 10;
     const pages = Math.ceil(departments.length / rowsPerPage);
@@ -25,28 +26,78 @@ export default function DepartmentList({ departments }: { departments: Deparment
         return departments.slice(start, start + rowsPerPage);
     }, [page, departments]);
 
+
     const renderCell = (dept: Deparment, columnKey: React.Key) => {
         switch (columnKey) {
             case "name":
                 return (
-                    <div className="font-bold text-slate-700">
-                        {dept.departmentName}
+                    <div className="flex items-center gap-3">
+                        <div className="p-2 bg-red-50 rounded-lg text-red-500">
+                            <BriefcaseBusiness size={30}/>
+                        </div>
+                        <div className="flex flex-col text-start">
+                            <span className="font-bold text-sm text-slate-800">
+                                {dept.departmentName}
+                            </span>
+                            <span className="text-xs text-slate-400 uppercase font-medium">
+                                {dept.location?.locationName || "Sin ubicación"}
+                            </span>
+                        </div>
                     </div>
+                    
                 );
             case "count":
                 return(
-                    <div className="flex justify-center items-center">
-                        <Chip size="md" variant="flat" color={dept.printerCount && dept.printerCount > 0 ? "primary" : "default"} 
-                        classNames={{content:""}}>
-                            {dept.printerCount || 0} impresoras asignadas.
-                        </Chip>
+                    <div className="flex flex-col gap-1 max-w-sm">
+                            <div className="text-xs text-slate-500 flex justify-between items-center w-full border-b border-slate-200 pb-1 ">
+                                <span className="font-semibold text-slate-700 block">Empleados: </span>
+                                <span className="font-semibold text-slate-500 text-right ml-2 truncate font-medum">
+                                    <strong className="text-red-600">{dept.employeeCount || 0}</strong>  asignados
+                                </span>
+                            </div>
+                            <div className="text-xs text-slate-500 flex justify-between items-center w-full border-b border-slate-200 pb-1 ">
+                                <span className="font-semibold text-slate-700 block">Equipos: </span>
+                                <span className="font-semibold text-slate-500 text-right ml-2 truncate font-medum">
+                                    <strong className="text-red-600">{dept.deviceCount || 0}</strong>  asignados
+                                </span>
+                            </div>
+                            <div className="text-xs text-slate-500 flex justify-between items-center w-full border-b border-slate-200 pb-1 ">
+                                <span className="font-semibold text-slate-700 block">Impresoras: </span>
+                                <span className="font-semibold text-slate-500 text-right ml-2 truncate font-medum">
+                                    <strong className="text-red-600">{dept.printerCount || 0}</strong>  asignados
+                                </span>
+                            </div>
+                            <div className="text-xs text-slate-500 flex justify-between items-center w-full border-b border-slate-200 pb-1 ">
+                                <span className="font-semibold text-slate-700 block">Dispositivos Moviles: </span>
+                                <span className="font-semibold text-slate-500 text-right ml-2 truncate font-medum">
+                                    <strong className="text-red-600">{dept.mobileCount || 0}</strong>  asignados
+                                </span>
+                            </div>
+                            <div className="text-xs text-slate-500 flex justify-between items-center w-full border-b border-slate-200 pb-1 ">
+                                <span className="font-semibold text-slate-700 block">Periféricos: </span>
+                                <span className="font-semibold text-slate-500 text-right ml-2 truncate font-medum">
+                                    <strong className="text-red-600">{dept.accesoriesCount || 0}</strong>  asignados
+                                </span>
+                            </div>
+                            <div className="text-xs text-slate-500 flex justify-between items-center w-full border-b border-slate-200 pb-1 ">
+                                <span className="font-semibold text-slate-700 block">Monitores: </span>
+                                <span className="font-semibold text-slate-500 text-right ml-2 truncate font-medum">
+                                    <strong className="text-red-600">{dept.monitorCount || 0}</strong>  asignados
+                                </span>
+                            </div>
+                            <div className="text-xs text-slate-500 flex justify-between items-center w-full ">
+                                <span className="font-semibold text-slate-700 block">Lectores de Barras: </span>
+                                <span className="font-semibold text-slate-500 text-right ml-2 truncate font-medum">
+                                    <strong className="text-red-600">{dept.barcodeCount || 0}</strong>  asignados
+                                </span>
+                            </div>
                     </div>
                     
                 )
             case "actions":
                 return (
                     <div className="flex flex-col justify-center items-center">
-                        <DepartmentActions departments={dept}/>
+                        <DepartmentActions departments={dept} locations={locations}/>
                     </div>
                 );
             default:

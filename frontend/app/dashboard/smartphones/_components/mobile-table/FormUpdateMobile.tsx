@@ -113,6 +113,7 @@ export default function FormUpdateMobile({locations=[], employees=[], devices, d
                 <Input label="Cuenta de Usuario" placeholder="Ej. firtsname@gmail.com" variant="bordered" name="deviceAccount" defaultValue={devices?.deviceAccount} className="mb-3 bg-white rounded-2xl" />
                 <Input label="Contraseña de Cuenta"  variant="bordered" name="devicePassword" defaultValue={devices?.devicePassword} className="mb-3 bg-white rounded-2xl" />
                 <Input label="PIN de Bloqueo" placeholder="Ej. 12131415" variant="bordered" name="devicePin" defaultValue={devices?.devicePin} className="mb-3 bg-white rounded-2xl" />
+                <Input label="Número de Activo" placeholder="BMX-0000" variant="bordered" name="deviceAssetNumber" defaultValue={devices?.deviceAssetNumber} className="mb-3 bg-white rounded-2xl" />
                     </div>
                 <Divider className="my-2"/>
 

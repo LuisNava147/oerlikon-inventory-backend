@@ -1,11 +1,11 @@
 "use client"
 
-import { Deparment } from "@/entities";
+import { Deparment, Location } from "@/entities";
 import { Modal, ModalBody, ModalContent, ModalHeader, Tooltip, useDisclosure } from "@heroui/react";
 import { Pencil, SquarePen } from "lucide-react";
 import FormUpdateDepartment from "./FormUpdateDepartment";
 
-export default function UpdateDepartment({departments}:{departments:Deparment}){
+export default function UpdateDepartment({departments, locations}:{departments:Deparment, locations:Location[]}){
     const{isOpen, onOpen, onOpenChange} = useDisclosure()
     return(
         <>
@@ -22,7 +22,7 @@ export default function UpdateDepartment({departments}:{departments:Deparment}){
                        <SquarePen size={30} className="border border-red-50 bg-red-50 rounded-lg text-red-600" />
                         Editar Departamento</ModalHeader>
                        <ModalBody className="py-7 overflow-y-auto">
-                       <FormUpdateDepartment departments={departments} onClose={onOpenChange} />
+                       <FormUpdateDepartment departments={departments} locations={locations} onClose={onOpenChange} />
                        </ModalBody>
                        </> 
                     )}

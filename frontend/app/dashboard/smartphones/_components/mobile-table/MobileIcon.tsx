@@ -6,9 +6,9 @@ export default function MobileIcon({type}:{type:string}){
     const t = type.toLowerCase();
 
     if(t.includes("phone") || t.includes("celular"))
-    return <Smartphone size={30} className="text-red-600"/>
+    return <Smartphone size={30} className="text-blue-600"/>
     if(t.includes("ipad") || t.includes("tablet"))
-    return <Tablet size={30} className="text-red-600" />
+    return <Tablet size={30} className="text-red-500" />
 
     return <CircleQuestionMark size={30} className="text-red-600"/>
 }
