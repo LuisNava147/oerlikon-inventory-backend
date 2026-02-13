@@ -1,4 +1,5 @@
 import { AccessRequest } from "src/access-requests/entities/access-request.entity";
+import { Deparment } from "src/deparments/entities/deparment.entity";
 import { Device } from "src/devices/entities/device.entity";
 import { Employee } from "src/employees/entities/employee.entity";
 import {Entity, Column, PrimaryGeneratedColumn }from "typeorm";
@@ -22,4 +23,7 @@ export class Location {
 
     @OneToMany(()=> AccessRequest, (access_request)=> access_request.location)
     access_request: AccessRequest[]
+
+    @OneToMany(()=> Deparment, (department)=> department.location)
+    department: Deparment
 }

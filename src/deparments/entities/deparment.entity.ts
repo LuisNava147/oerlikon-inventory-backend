@@ -1,7 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from "typeorm";
 import { Device } from "src/devices/entities/device.entity";
 import { Incident } from "src/incidents/entities/incident.entity";
 import { Employee } from "src/employees/entities/employee.entity";
+import { Location } from "src/locations/entities/location.entity";
+import { JoinColumn } from "typeorm";
 
 @Entity()
 export class Deparment {
@@ -18,4 +20,8 @@ departmentName: string
 
 @OneToMany(()=> Employee, (employee)=> employee.department)
     employee: Employee[]
+
+@ManyToOne(()=> Location, (location)=> location.department, {nullable:true, onDelete:'SET NULL'})
+@JoinColumn({name: "locationId"})
+    location: Location
 }
