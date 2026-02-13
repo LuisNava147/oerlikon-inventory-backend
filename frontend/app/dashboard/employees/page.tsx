@@ -4,6 +4,9 @@ import { authHeaders } from "@/app/helpers/authHeaders";
 import SearchEmployee from "./_components/employee-table/SearchEmployee";
 import CreateEmployee from "./_components/employee-table/CreateEmployee";
 import EmployeeList from "./_components/employee-table/EmployeeList";
+import Link from "next/link";
+import { Button } from "@heroui/react";
+import { BriefcaseBusiness } from "lucide-react";
 
 export default async function EmployeePage({searchParams, onClose}:{searchParams:{[key:string]: string | string[] | undefined}, onClose:()=>void}){
     
@@ -94,7 +97,12 @@ export default async function EmployeePage({searchParams, onClose}:{searchParams
                         Gestiona el personal y sus asignaciones ({employees.length} empleados encontrados)
                         </p>
                     </div>
-                    <div className="rounded-md mt-6">
+                    <div className="rounded-md mt-6 flex flex-col md:flex-row gap-3">
+                        <Link href={"/dashboard/departments"}>
+                                <Button color="secondary" variant="flat" className="font-bold w-full md:w-auto" startContent={<BriefcaseBusiness size={20}/>}>
+                                    Departamentos
+                                </Button>
+                        </Link>
                         <CreateEmployee departments={departments} locations={locations}/>
                     </div>
                 </div>

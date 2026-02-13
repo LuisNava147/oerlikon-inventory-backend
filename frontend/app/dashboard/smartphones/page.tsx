@@ -4,6 +4,9 @@ import { authHeaders } from "@/app/helpers/authHeaders";
 import MobileList from "./_components/mobile-table/MobileList";
 import SearchMobile from "./_components/mobile-table/SearchMobile";
 import CreateMobile from "./_components/mobile-table/CreateMobile";
+import Link from "next/link";
+import { Button } from "@heroui/react";
+import { BriefcaseBusiness } from "lucide-react";
 
 
 export default async function SmartphonesPage({searchParams, onClose}:{searchParams:{[key:string]: string | string[] | undefined}, onClose:()=>void}){
@@ -130,7 +133,12 @@ export default async function SmartphonesPage({searchParams, onClose}:{searchPar
                             Celulares, Tablets y iPads ({mobile.length} encontrados)
                         </p>
                     </div>
-                    <div className="rounded-md mt-6">
+                    <div className="rounded-md mt-6 flex flex-col md:flex-row gap-3">
+                        <Link href={"/dashboard/departments"}>
+                            <Button color="secondary" variant="flat" className="font-bold w-full md:w-auto" startContent={<BriefcaseBusiness size={20}/>}>
+                                Departamentos
+                            </Button>
+                        </Link>
                         <CreateMobile employees={employees} locations={locations} departments={departments} />
                     </div>
                 </div>

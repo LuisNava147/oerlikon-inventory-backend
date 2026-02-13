@@ -1,4 +1,4 @@
-import { LayoutDashboard, Users, Monitor, Ticket, FileText, Settings, Printer, Smartphone, Laptop, FileStack, Headset, TriangleAlert, Keyboard } from 'lucide-react';
+import { LayoutDashboard, Users, Monitor, Ticket, FileText, Settings, Printer, Smartphone, Laptop, FileStack, Headset, TriangleAlert, Keyboard, BriefcaseBusiness } from 'lucide-react';
 import NavItem from "./NavItem";
 
 export default function Sidebar() {

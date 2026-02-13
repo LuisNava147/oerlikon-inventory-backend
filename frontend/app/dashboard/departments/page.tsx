@@ -52,11 +52,7 @@ export default async function DepartmentPage({searchParams, onClose}:{searchPara
            
             
             <div className="rounded-md mt-6 flex md:flex-row gap-3">
-                <Link href={"/dashboard/printers"}>
-                <Button color="secondary" variant="flat" className="font-bold w-full md:w-auto" startContent={<Printer size={20}/>}>
-                            Impresoras
-                        </Button>
-                </Link>
+                
             </div>
            
           </div>
