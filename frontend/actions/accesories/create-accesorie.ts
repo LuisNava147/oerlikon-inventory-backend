@@ -24,6 +24,13 @@ export async function createAccesories(prevState:any,formData:FormData) {
         department: departmentId || null
 
     }
+
+    if(employeeId){
+        deviceData.deviceStatus = "Asignado"
+    }else{
+        deviceData.deviceStatus = "Stock"
+    }
+    
     //console.log(deviceData)
 
     const response = await fetch(`${API_URL}/devices`,{

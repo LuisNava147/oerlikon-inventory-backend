@@ -27,6 +27,12 @@ export async function updateAccesories(accesorieId: string, prevState:any, formD
         department: departmentId ? departmentId : null
         }
 
+        if(!employeeId){
+            accesorieData.deviceStatus = "Stock"
+        }else{
+            accesorieData.deviceStatus = "Asignado"
+        }
+
         const response = await fetch(`${API_URL}/devices/${accesorieId}`,{
             method:"PATCH",
             headers:{

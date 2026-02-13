@@ -33,6 +33,13 @@ export async function updatePrinter(deviceId: string,prevState:any,formData:Form
         location: locationId ? locationId.toString() : null,    
         department: departmentId ? departmentId : null
     }
+
+    if(!departmentId){
+        deviceData.deviceStatus = "Stock"
+    }else{
+        deviceData.deviceStatus = "Asignado"
+    }
+
     //console.log(deviceData)
     const response = await fetch(`${API_URL}/devices/${deviceId}`,{
         method: "PATCH",

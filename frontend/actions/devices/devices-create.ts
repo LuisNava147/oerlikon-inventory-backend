@@ -32,7 +32,7 @@ export async function createDevice(prevState:any,formData:FormData) {
         deviceData.deviceStatus = "Stock"
     }
 
-    console.log(deviceData)
+    //console.log(deviceData)
 
     const response = await fetch(`${API_URL}/devices`,{
         method: "POST",
@@ -42,7 +42,7 @@ export async function createDevice(prevState:any,formData:FormData) {
         },
         body: JSON.stringify(deviceData)
     })
-    console.log(await response.json())
+    //console.log(await response.json())
 
     revalidatePath('/dashboard/devices');
 

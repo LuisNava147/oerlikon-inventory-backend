@@ -33,7 +33,12 @@ export async function updateDevice(deviceId: string,prevState:any,formData:FormD
         employee: employeeId ? employeeId : null,
         department: departmentId ? departmentId : null
     }
-    console.log(deviceData)
+    if(!employeeId){
+        deviceData.deviceStatus = "Stock"
+    }else{
+        deviceData.deviceStatus = "Asignado"
+    }
+    //console.log(deviceData)
     const response = await fetch(`${API_URL}/devices/${deviceId}`,{
         method: "PATCH",
         headers:{
@@ -43,7 +48,7 @@ export async function updateDevice(deviceId: string,prevState:any,formData:FormD
         },
         body: JSON.stringify(deviceData),
     })
-    console.log(await response.json())
+    //console.log(await response.json())
     revalidatePath('/dashboard/devices');
     return {success: true, error:null}
     }catch(error:any){

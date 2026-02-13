@@ -26,6 +26,12 @@ export default async function updateMobile(deviceId:string, prevState:any, formD
             employee: employeeId ? employeeId : null,
             department: departmentId ? departmentId : null
         }
+
+        if(!employeeId){
+            mobileData.deviceStatus = "Stock"
+        }else{
+            mobileData.deviceStatus = "Asignado"
+        }
         //console.log(mobileData)
 
         const response = await fetch(`${API_URL}/devices/${deviceId}`,{
