@@ -7,6 +7,7 @@ import CreateAccesories from "./_components/CreateAccesories";
 import SearchAccesories from "./_components/SearchAccesories";
 import AccesoriesList from "./_components/AccesoriesList";
 import { BriefcaseBusiness } from "lucide-react";
+import { LinkToLow } from "../devices/_components/device-table/LinkToLow";
 
 export default async function AccesoriesPage({searchParams, onClose}:{searchParams: {[key:string]: string | string[] | undefined}, onClose: ()=>void}){
     const ALLOWED_TYPES = [
@@ -125,6 +126,7 @@ export default async function AccesoriesPage({searchParams, onClose}:{searchPara
                 </div>
                
                 <div className="rounded-md mt-6 flex flex-col md:flex-row gap-3">
+                    <LinkToLow category="peripheral"/>
                     <Link href={"/dashboard/departments"}>
                             <Button color="secondary" variant="flat" className="font-bold w-full md:w-auto" startContent={<BriefcaseBusiness size={20}/>}>
                                 Departamentos

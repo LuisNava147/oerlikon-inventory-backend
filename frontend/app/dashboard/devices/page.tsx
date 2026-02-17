@@ -11,6 +11,7 @@ import FormCreateDevice from "./_components/device-table/FormDeviceCreate";
 import CreateDevice from "./_components/device-table/DeviceCreate";
 import { json } from "stream/consumers";
 import Link from "next/link";
+import { LinkToLow } from "./_components/device-table/LinkToLow";
 
 
 export default async function DevicePage({searchParams, onClose}:{searchParams: {[key:string]: string | string[] | undefined}, onClose: ()=>void}) {
@@ -144,7 +145,7 @@ export default async function DevicePage({searchParams, onClose}:{searchParams: 
                         </Link>
                     </Tooltip>
                     </div>
-                   
+                   <LinkToLow category="computing"/>
                     <Link href={"/dashboard/departments"}>
                             <Button color="secondary" variant="flat" className="font-bold w-full md:w-auto" startContent={<BriefcaseBusiness size={20}/>}>
                                 Departamentos

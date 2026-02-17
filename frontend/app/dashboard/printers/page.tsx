@@ -7,6 +7,7 @@ import CreatePrinter from "./_components/printer-table/PrinterCreate";
 import Link from "next/link";
 import { Button } from "@heroui/react";
 import { BriefcaseBusiness, Building } from "lucide-react";
+import { LinkToLow } from "../devices/_components/device-table/LinkToLow";
 
 export default async function DevicePage({searchParams, onClose}:{searchParams: {[key:string]: string | string[] | undefined}, onClose: ()=>void}){
     const ALLOWED_TYPES = [
@@ -126,6 +127,7 @@ export default async function DevicePage({searchParams, onClose}:{searchParams: 
                 </div>
                
                 <div className="rounded-md mt-6 flex flex-col md:flex-row gap-3">
+                    <LinkToLow category="printing"/>
                     <Link href={"/dashboard/departments"}>
                         <Button color="secondary" variant="flat" className="font-bold w-full md:w-auto" startContent={<BriefcaseBusiness size={20}/>}>
                             Departamentos
