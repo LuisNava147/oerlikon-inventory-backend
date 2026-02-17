@@ -11,7 +11,9 @@ const DEVICE_TYPE = [
     {key: "Teclado", label:"Teclado"},
     {key: "Docking", label:"Docking Station"},
     {key: "Diadema", label: "Diadema"},
-    {key: "Token", label: "Token"}
+    {key: "Token", label: "Token"},
+    {key: "Lector de barras", label: "Lector de barras"},
+    {key:"Bocina", label: "Bocina"}
 ]
 
 const initialState = {

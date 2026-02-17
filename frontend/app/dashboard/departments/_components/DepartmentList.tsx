@@ -7,7 +7,7 @@ import {
 import { Deparment, Location } from "@/entities";
 import { useState, useMemo } from "react";
 import DepartmentActions from "./DepartmentActions";
-import { BriefcaseBusiness, Laptop, Users } from "lucide-react";
+import { BriefcaseBusiness, Keyboard, Laptop, Monitor, Printer, QrCode, TabletSmartphone, User, Users } from "lucide-react";
 // import DepartmentActions from "./DepartmentActions"; // Lo crearemos después
 
 const columns = [
@@ -50,43 +50,65 @@ export default function DepartmentList({ departments, locations }: { departments
                 return(
                     <div className="flex flex-col gap-1 max-w-sm">
                             <div className="text-xs text-slate-500 flex justify-between items-center w-full border-b border-slate-200 pb-1 ">
-                                <span className="font-semibold text-slate-700 block">Empleados: </span>
+                                <div className="flex items-center">
+                                <User size={20} className="text-slate-400 mr-2"/>
+                                <span className="font-semibold text-slate-700 text-start">Empleados: </span>
+                                </div>
+                                
                                 <span className="font-semibold text-slate-500 text-right ml-2 truncate font-medum">
                                     <strong className="text-red-600">{dept.employeeCount || 0}</strong>  asignados
                                 </span>
                             </div>
                             <div className="text-xs text-slate-500 flex justify-between items-center w-full border-b border-slate-200 pb-1 ">
-                                <span className="font-semibold text-slate-700 block">Equipos: </span>
+                                <div className="flex items-center">
+                                <Laptop size={20} className="text-slate-400 mr-2"/>
+                                <span className="font-semibold text-slate-700 text-start">Equipos: </span>
+                                </div>
                                 <span className="font-semibold text-slate-500 text-right ml-2 truncate font-medum">
                                     <strong className="text-red-600">{dept.deviceCount || 0}</strong>  asignados
                                 </span>
                             </div>
                             <div className="text-xs text-slate-500 flex justify-between items-center w-full border-b border-slate-200 pb-1 ">
-                                <span className="font-semibold text-slate-700 block">Impresoras: </span>
+                                <div className="flex items-center">
+                                <Printer size={20} className="text-slate-400 mr-2"/>
+                                <span className="font-semibold text-slate-700">Impresoras: </span>
+                                </div>
                                 <span className="font-semibold text-slate-500 text-right ml-2 truncate font-medum">
                                     <strong className="text-red-600">{dept.printerCount || 0}</strong>  asignados
                                 </span>
                             </div>
                             <div className="text-xs text-slate-500 flex justify-between items-center w-full border-b border-slate-200 pb-1 ">
-                                <span className="font-semibold text-slate-700 block">Dispositivos Moviles: </span>
+                                <div className="flex items-center">
+                                <TabletSmartphone size={20} className="text-slate-400 mr-2"/>
+                                <span className="font-semibold text-slate-700">Dispositivos Moviles: </span>
+                                </div>
                                 <span className="font-semibold text-slate-500 text-right ml-2 truncate font-medum">
                                     <strong className="text-red-600">{dept.mobileCount || 0}</strong>  asignados
                                 </span>
                             </div>
                             <div className="text-xs text-slate-500 flex justify-between items-center w-full border-b border-slate-200 pb-1 ">
-                                <span className="font-semibold text-slate-700 block">Periféricos: </span>
+                                <div className="flex items-center">
+                                <Keyboard size={20} className="text-slate-400 mr-2"/>
+                                <span className="font-semibold text-slate-700">Periféricos: </span>
+                                </div>
                                 <span className="font-semibold text-slate-500 text-right ml-2 truncate font-medum">
                                     <strong className="text-red-600">{dept.accesoriesCount || 0}</strong>  asignados
                                 </span>
                             </div>
                             <div className="text-xs text-slate-500 flex justify-between items-center w-full border-b border-slate-200 pb-1 ">
-                                <span className="font-semibold text-slate-700 block">Monitores: </span>
+                                <div className="flex items-center">
+                                <Monitor size={20} className="text-slate-400 mr-2"/>
+                                <span className="font-semibold text-slate-700">Monitores: </span>
+                                </div>
                                 <span className="font-semibold text-slate-500 text-right ml-2 truncate font-medum">
                                     <strong className="text-red-600">{dept.monitorCount || 0}</strong>  asignados
                                 </span>
                             </div>
                             <div className="text-xs text-slate-500 flex justify-between items-center w-full ">
+                                <div className="flex items-center">
+                                <QrCode size={20} className="text-slate-400 mr-2"/>
                                 <span className="font-semibold text-slate-700 block">Lectores de Barras: </span>
+                                </div>
                                 <span className="font-semibold text-slate-500 text-right ml-2 truncate font-medum">
                                     <strong className="text-red-600">{dept.barcodeCount || 0}</strong>  asignados
                                 </span>
