@@ -3,14 +3,15 @@ export const revalidate = 0;
 import { Device } from "@/entities";
 import { API_URL } from "@/constants";
 import { authHeaders } from "@/app/helpers/authHeaders";
-import { Button } from "@heroui/react";
-import { BriefcaseBusiness, Plus } from "lucide-react";
+import { Button, Tooltip } from "@heroui/react";
+import { ArchiveX, BriefcaseBusiness, Plus } from "lucide-react";
 import SearchDevices from "./_components/device-table/SearchDevices";
 import DeviceList from "./_components/device-table/DeviceList";
 import FormCreateDevice from "./_components/device-table/FormDeviceCreate";
 import CreateDevice from "./_components/device-table/DeviceCreate";
 import { json } from "stream/consumers";
 import Link from "next/link";
+
 
 export default async function DevicePage({searchParams, onClose}:{searchParams: {[key:string]: string | string[] | undefined}, onClose: ()=>void}) {
     const ALLOWED_TYPES = [
@@ -136,6 +137,14 @@ export default async function DevicePage({searchParams, onClose}:{searchParams: 
                 </div>
                
                 <div className="rounded-md mt-6 flex flex-col md:flex-row gap-3">
+                    <div className="flex items-center">
+                    <Tooltip content="Baja de Equipos">
+                        <Link href="/dashboard/down-active">
+                            <ArchiveX size={35} className="text-slate-400 hover:text-blue-600 transition" />
+                        </Link>
+                    </Tooltip>
+                    </div>
+                   
                     <Link href={"/dashboard/departments"}>
                             <Button color="secondary" variant="flat" className="font-bold w-full md:w-auto" startContent={<BriefcaseBusiness size={20}/>}>
                                 Departamentos

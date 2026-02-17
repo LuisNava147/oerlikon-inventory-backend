@@ -54,7 +54,6 @@ export default function FormUpdateDevice({locations=[], employees=[], department
 
     const deviceId = devices?.deviceId ? String(devices.deviceId) : ""
     const updateWithDeviceId = updateDevice.bind(null, deviceId)
-
     const [state, formAction] = useFormState(updateWithDeviceId, initialState)
     useEffect(()=>{
         if(devices){
@@ -157,9 +156,10 @@ export default function FormUpdateDevice({locations=[], employees=[], department
                         }
                     </Autocomplete>
                 
-                    <Select label="Estatus del Equipo" placeholder="Selecciona el estado" name="deviceStatus" 
+                    <Select label="Estatus del Equipo" placeholder="Selecciona el estado" name="deviceStatus"
                     defaultSelectedKeys={[devices.deviceStatus]} variant="bordered" classNames={{trigger:"bg-white"}}
-                    startContent={<CircleQuestionMark className="text-gray-400" size={18} />} isRequired>
+                    startContent={<CircleQuestionMark className="text-gray-400" size={18} />} isRequired selectionMode="single" 
+                    disallowEmptySelection={true}>
                     <SelectItem key="Stock" color="success" variant="flat" description="El equipo no tiene un Empleado asignado.">
                         Stock
                     </SelectItem>

@@ -26,19 +26,31 @@ export async function updateDevice(deviceId: string,prevState:any,formData:FormD
         deviceSerialTag: formData.get("deviceSerialTag"),
         deviceHostName: getVal("deviceHostName") || null,
         deviceAssetNumber: getVal("deviceAssetNumber") || null,
-        deviceStatus: getVal("deviceStatus") || "Stock",
+        deviceStatus: formData.get("deviceStatus"),
         deviceNote: formData.get("deviceNote") || null,
 
         location: locationId ? locationId.toString() : null,
         employee: employeeId ? employeeId : null,
         department: departmentId ? departmentId : null
     }
-    if(!employeeId){
-        deviceData.deviceStatus = "Stock"
-    }else{
-        deviceData.deviceStatus = "Asignado"
+    if (deviceData.deviceStatus === "BAJA") {
+        deviceData.deviceStatus = "BAJA";
+        deviceData.employee = null; // Aseguramos que no tenga empleado
+        console.log(">> Aplicando lógica de BAJA");
+    } 
+    // CASO B: Si NO es baja, aplicamos la lógica automática (Stock vs Asignado)
+    else {
+        if (!employeeId) {
+            deviceData.deviceStatus = "Stock";
+            console.log(">> Sin empleado -> Forzando Stock");
+        } else {
+            deviceData.deviceStatus = "Asignado";
+            console.log(">> Con empleado -> Forzando Asignado");
+        }
     }
-    //console.log(deviceData)
+
+    console.log("OBJETO FINAL A ENVIAR:", deviceData);
+    console.log(deviceData)
     const response = await fetch(`${API_URL}/devices/${deviceId}`,{
         method: "PATCH",
         headers:{
@@ -48,7 +60,7 @@ export async function updateDevice(deviceId: string,prevState:any,formData:FormD
         },
         body: JSON.stringify(deviceData),
     })
-    //console.log(await response.json())
+    console.log(await response.json())
     revalidatePath('/dashboard/devices');
     return {success: true, error:null}
     }catch(error:any){

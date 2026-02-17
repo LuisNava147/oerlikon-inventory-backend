@@ -20,17 +20,27 @@ export async function updateAccesories(accesorieId: string, prevState:any, formD
         deviceModel: formData.get("deviceModel"),
         deviceBrand: formData.get("deviceBrand"),
         deviceSerialTag: formData.get("deviceSerialTag"),
-        deviceStatus: getVal("deviceStatus") || "Stock",
+        deviceStatus: formData.get("deviceStatus"),
 
         location: locationId ? locationId.toString() : null || null,
         employee: employeeId ? employeeId : null,
         department: departmentId ? departmentId : null
         }
 
-        if(!employeeId){
-            accesorieData.deviceStatus = "Stock"
-        }else{
-            accesorieData.deviceStatus = "Asignado"
+        if (accesorieData.deviceStatus === "BAJA") {
+            accesorieData.deviceStatus = "BAJA";
+            accesorieData.employee = null; // Aseguramos que no tenga empleado
+            console.log(">> Aplicando lógica de BAJA");
+        } 
+        // CASO B: Si NO es baja, aplicamos la lógica automática (Stock vs Asignado)
+        else {
+            if (!employeeId) {
+                accesorieData.deviceStatus = "Stock";
+                console.log(">> Sin empleado -> Forzando Stock");
+            } else {
+                accesorieData.deviceStatus = "Asignado";
+                console.log(">> Con empleado -> Forzando Asignado");
+            }
         }
 
         const response = await fetch(`${API_URL}/devices/${accesorieId}`,{

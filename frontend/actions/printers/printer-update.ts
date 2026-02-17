@@ -25,7 +25,7 @@ export async function updatePrinter(deviceId: string,prevState:any,formData:Form
         deviceModel: formData.get("deviceModel"),
         deviceBrand: formData.get("deviceBrand"),
         deviceSerialTag: formData.get("deviceSerialTag"),
-        deviceStatus: getVal("deviceStatus") || "Stock",
+        deviceStatus: formData.get("deviceStatus"),
         ipAddress: formData.get("ipAddress") || null,
         sapName: formData.get("sapName") || null,
         deviceMAC: formData.get("deviceMAC") || null,
@@ -34,11 +34,19 @@ export async function updatePrinter(deviceId: string,prevState:any,formData:Form
         department: departmentId ? departmentId : null
     }
 
+    if (deviceData.deviceStatus === "BAJA") {
+        deviceData.deviceStatus = "BAJA";
+        deviceData.department = null; // Aseguramos que no tenga empleado
+        console.log(">> Aplicando lógica de BAJA");
+    } 
+    // CASO B: Si NO es baja, aplicamos la lógica automática (Stock vs Asignado)
+    else {
     if(!departmentId){
         deviceData.deviceStatus = "Stock"
     }else{
         deviceData.deviceStatus = "Asignado"
     }
+}
 
     //console.log(deviceData)
     const response = await fetch(`${API_URL}/devices/${deviceId}`,{

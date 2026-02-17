@@ -20,17 +20,27 @@ export default async function updateMobile(deviceId:string, prevState:any, formD
             devicePassword: formData.get("devicePassword") || null,
             devicePin: formData.get("devicePin") || null,
             deviceAccount: formData.get("deviceAccount") || null,
-            deviceStatus: formData.get("deviceStatus") || "Stock",
+            deviceStatus: formData.get("deviceStatus"),
 
             location: locationId ? locationId.toString() : null,
             employee: employeeId ? employeeId : null,
             department: departmentId ? departmentId : null
         }
 
-        if(!employeeId){
-            mobileData.deviceStatus = "Stock"
-        }else{
-            mobileData.deviceStatus = "Asignado"
+        if (mobileData.deviceStatus === "BAJA") {
+            mobileData.deviceStatus = "BAJA";
+            mobileData.employee = null; // Aseguramos que no tenga empleado
+            console.log(">> Aplicando lógica de BAJA");
+        } 
+        // CASO B: Si NO es baja, aplicamos la lógica automática (Stock vs Asignado)
+        else {
+            if (!employeeId) {
+                mobileData.deviceStatus = "Stock";
+                console.log(">> Sin empleado -> Forzando Stock");
+            } else {
+                mobileData.deviceStatus = "Asignado";
+                console.log(">> Con empleado -> Forzando Asignado");
+            }
         }
         //console.log(mobileData)
 

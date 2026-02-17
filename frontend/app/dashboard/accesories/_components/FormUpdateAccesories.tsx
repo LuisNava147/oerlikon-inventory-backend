@@ -152,7 +152,8 @@ export default function FormUpdateAccesories({locations, employees, devices, dep
 
                     <Select label="Estatus del Equipo" placeholder="Selecciona el estado" name="deviceStatus" 
                     defaultSelectedKeys={[devices.deviceStatus]} variant="bordered" classNames={{trigger:"bg-white"}}
-                    startContent={<CircleQuestionMark className="text-gray-400" size={18} />} isRequired>
+                    startContent={<CircleQuestionMark className="text-gray-400" size={18} />} isRequired selectionMode="single" 
+                    disallowEmptySelection={true}>
                     <SelectItem key="Stock" color="success" variant="flat" description="El Periférico no tiene un Empleado asignado.">
                         Stock
                     </SelectItem>
