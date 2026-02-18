@@ -138,13 +138,6 @@ export default async function DevicePage({searchParams, onClose}:{searchParams: 
                 </div>
                
                 <div className="rounded-md mt-6 flex flex-col md:flex-row gap-3">
-                    <div className="flex items-center">
-                    <Tooltip content="Baja de Equipos">
-                        <Link href="/dashboard/down-active">
-                            <ArchiveX size={35} className="text-slate-400 hover:text-blue-600 transition" />
-                        </Link>
-                    </Tooltip>
-                    </div>
                    <LinkToLow category="computing"/>
                     <Link href={"/dashboard/departments"}>
                             <Button color="secondary" variant="flat" className="font-bold w-full md:w-auto" startContent={<BriefcaseBusiness size={20}/>}>

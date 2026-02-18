@@ -5,11 +5,14 @@ import { Button } from "@heroui/react";
 import { ArrowLeft, ArchiveX } from "lucide-react";
 import Link from "next/link";
 import LowDeviceList from "./_components/LowDeviceList";
+import { response } from "express";
+import { types } from "util";
+import SearchLowDevices from "./_components/SearchLowDevice";
 
 
 const CATEGORY_CONFIG = {
     computing:{
-        label: "Computadoras (Laptops y Desktops)",
+        label: "Laptops y Desktops ",
         types: ["Laptop","Desktop"],
         backUrl: "/dashboard/devices"
     },
@@ -31,50 +34,95 @@ const CATEGORY_CONFIG = {
 
 
 }
-    interface Props {
-        searchParams: { category?: string };
-      }
+  
      
-      export default async function BajaPage({ searchParams }: Props) {
+      export default async function BajaPage({ searchParams }:{searchParams: {[key:string]: string | string[] | undefined}}) {
         // 1. Obtener configuración
-        const categoryKey = (searchParams.category || 'computing') as keyof typeof CATEGORY_CONFIG;
-        const config = CATEGORY_CONFIG[categoryKey] || CATEGORY_CONFIG.computing;
+        const rawCategory = typeof searchParams?.category === 'string' ? searchParams.category : 'computing';
+        const categoryKey = (CATEGORY_CONFIG[rawCategory as keyof typeof CATEGORY_CONFIG] ? rawCategory : 'computing') as keyof typeof CATEGORY_CONFIG;
+        //console.log("categoria: ",categoryKey)
+        const config = CATEGORY_CONFIG[categoryKey];
+        //console.log("Configuración seleccionada:", config.label);
      
+        let devices : Device[] = []
+
+        const query = typeof searchParams?.q === 'string' ? searchParams.q : ""
+        const filterBy = typeof searchParams?.f === 'string' ? searchParams.f : ""
+
+        let endpoint = `${API_URL}/devices`
+        if(query && filterBy){
+            switch(filterBy){
+                case "hostname":
+                    endpoint = `${API_URL}/devices/hostname/${query}`
+                    break;
+                case "asset":
+                    endpoint = `${API_URL}/devices/asset-number/${query}`
+                    break;
+                case "department":
+                    endpoint = `${API_URL}/devices/department/${query}`
+                    break;
+                case "brand":
+                    endpoint = `${API_URL}/devices/brand/${query}`
+                    break;
+                case "type":
+                    endpoint = `${API_URL}/devices/type/${query}`
+                    break;
+                case "location":
+                    endpoint = `${API_URL}/devices/location-name/${query}`
+                    break;
+                case "model":    
+                endpoint = `${API_URL}/devices/model/${query}`
+                break;
+                default: break
+            }
+        }
         // 2. Fetch de datos
-        const res = await fetch(`${API_URL}/devices`, {
+        const res = await fetch(endpoint, {
           headers: { ...authHeaders() },
-          cache: "no-store",
+          cache: "no-cache",
         });
-        const devices: Device[] = await res.json();
-     
-        // 3. Filtrar: Solo BAJAS + Tipos correctos
-        const bajaDevices = devices.filter((device) => {
-          return device.deviceStatus === "BAJA" &&
-                 config.types.includes(device.deviceType || "");
-        });
+        
+        if(res.ok){
+            const data = await res.json()
+            const rawDevices = Array.isArray(data) ? data : [data]
+
+            devices = rawDevices.filter((d: Device)=>{
+                const type = d.deviceType?.toLowerCase().trim() || ""
+                const status = d.deviceStatus?.toUpperCase() || ""
+
+                const isBaja = status === "BAJA"
+                const isAllowed = config.types.some(t => type.includes(t.toLowerCase()))
+
+                return isBaja && isAllowed
+            })
+        }
      
         return (
-          <div className="p-6 space-y-6">
-            <div className="flex items-center gap-4">
-              <Link href={config.backUrl}>
-                <Button isIconOnly variant="flat" radius="full">
-                  <ArrowLeft size={20} />
-                </Button>
-              </Link>
+          <div className="w-full h-auto flex flex-col gap-6 mt-4">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
               <div>
-                <h1 className="text-2xl font-bold flex items-center gap-2 text-slate-800">
-                  <ArchiveX className="text-red-600" />
-                  Historial de Bajas
+                <h1 className="text-3xl font-bold flex items-center gap-2 text-slate-800 ml-4">
+                  Historial de Bajas Equipos IT
                 </h1>
-                <p className="text-slate-500 text-sm">
-                  Categoría: <span className="font-semibold text-slate-700">{config.label}</span>
+                <p className="text-slate-500 ml-4">
+                  {config.label}
+                  ({devices.length} encontrados)
                 </p>
               </div>
+              <div className="rounded-md mt-6 flex flex-col md:flex-row gap-3">
+              <Link href={config.backUrl}>
+                <Button  color="secondary" variant="flat" radius="full" className="font-bold w-full md:w-auto" startContent={<ArrowLeft size={20} />}>
+                  Volver
+                </Button>
+              </Link>
+              </div>
+              
             </div>
-     
-            <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-              <LowDeviceList devices={bajaDevices}/>
+            <SearchLowDevices/>
+            <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-2">
+                <LowDeviceList devices={devices}/>
             </div>
           </div>
+          
         );
 }

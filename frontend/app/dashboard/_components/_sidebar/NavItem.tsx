@@ -9,20 +9,21 @@ import { ReactNode } from "react";
 interface NavItemProps {
   icon: ReactNode;
   path: string;
-  title: string
+  title: string;
+  isActive?: boolean
 }
 
-export const NavItem = ({ icon, path, title }: NavItemProps) => {
+export const NavItem = ({ icon, path, title, isActive: externalActive }: NavItemProps) => {
   const pathName = usePathname();
-  // Verificamos si la ruta actual coincide exactamente o empieza con el path (para subrutas)
-  const isActive = pathName === path || (path !== '/dashboard' && pathName.startsWith(path));
-
+  //si mandan 'isActive' manual, se usa esto, sino se verifica si el pathname empieza con mi path (sub rutas)
+  const active = externalActive !== undefined ? externalActive : pathName === path || (path !== '/dashboard' && pathName.startsWith(path));
+ 
   return (
     <Tooltip content={title} placement="right" color="foreground" closeDelay={0}>
             <Link 
                 href={path} 
                 className={`p-3 rounded-xl flex justify-center transition-colors ${
-                    isActive ? "bg-white text-red-600 shadow-md" : "text-white hover:bg-red-500"
+                    active ? "bg-white text-red-600 shadow-md" : "text-white hover:bg-red-500"
                 }`}
             >
                 {icon}
