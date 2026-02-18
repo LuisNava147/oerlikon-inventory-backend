@@ -8,6 +8,7 @@ import LowDeviceList from "./_components/LowDeviceList";
 import { response } from "express";
 import { types } from "util";
 import SearchLowDevices from "./_components/SearchLowDevice";
+import DownloadBajasButton from "./_components/DownloadBajasButton";
 
 
 const CATEGORY_CONFIG = {
@@ -97,6 +98,9 @@ const CATEGORY_CONFIG = {
             })
         }
      
+        // Usamos un Set para eliminar duplicados y ordenamos alfabéticamente
+        const uniqueModels = Array.from(new Set(devices.map(d => d.deviceModel))).filter(Boolean).sort();
+    
         return (
           <div className="w-full h-auto flex flex-col gap-6 mt-4">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -115,6 +119,8 @@ const CATEGORY_CONFIG = {
                   Volver
                 </Button>
               </Link>
+
+              <DownloadBajasButton category={categoryKey} availableModels={uniqueModels}/>
               </div>
               
             </div>
