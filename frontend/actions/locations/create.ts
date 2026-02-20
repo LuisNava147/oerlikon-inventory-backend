@@ -10,19 +10,31 @@ export async function createLocation(formData:FormData) {
         locationName: formData.get("locationName"),
         locationAddress: formData.get("locationAddress")
     }
-    
-    const response = await fetch(`${API_URL}/locations/`,{
-        method: "POST",
-        body: JSON.stringify(locationData),
-        headers:{
-            'content-type': 'application/json',
-            ...authHeaders()
+
+    let newLocationId = null;
+
+    try{
+        const response = await fetch(`${API_URL}/locations/`,{
+            method: "POST",
+            body: JSON.stringify(locationData),
+            headers:{
+                'content-type': 'application/json',
+                ...authHeaders()
+            }
+        })
+        
+        
+        if(response.status == 201){
+            const data: Location = await response.json()
+            newLocationId= data.locationId
+            revalidateTag("dashboard:locations");
+            revalidatePath("/dashboard")
         }
-    })
-    const {locationId}:Location = await response.json()
+    }catch(error){
+        console.error("Error creando la ubicación: ", error)
+    }
     
-    if(response.status == 201){
-        revalidateTag("dashboard:locations");
-        redirect(`/dashboard?devices=${locationId}`)
+    if(newLocationId){
+        redirect(`/dashboard?devices=${newLocationId}`)
     }
 }

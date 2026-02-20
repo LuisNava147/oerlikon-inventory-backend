@@ -19,21 +19,22 @@ const LocationPage = async({searchParams}:{searchParams: {[key:string]: string |
             tags:["dashboard:locations"]
         }
     });
-    let data: Location[] = await response.json()
+    let locations: Location[] = await response.json()
 
-    data= [
+    locations= [
         {
             locationId: 0,
             locationName: "Nombre de ubicación",
             locationAddress: "Direccion de ubicación",
             employee: [],
             device: [],
-            provider: [],
             access_request: []
         },
-        ...data
+        ...locations
     ]
-    
+    const selectedLocationId = searchParams?.devices;
+    const selectedLocation = locations.find(loc => String(loc.locationId) === String(selectedLocationId));
+
     return(
         <div className="w-full h-auto flex flex-col gap-6">
              <div className="mt-4">
@@ -41,7 +42,7 @@ const LocationPage = async({searchParams}:{searchParams: {[key:string]: string |
         <p className="text-slate-500">Resumen, creación, actualización y eliminación de ubicaciones plantas Oerlikon México</p>
       </div>
             <div className="w-full sticky top-0 z-10 bg-slate-50 pt-2 pb-4 pr-2">
-        <SelectLocation locations={data} devices={searchParams?.devices} />
+        <SelectLocation locations={locations} devices={searchParams?.devices} />
             </div>
             <div className="w-full pr-2">
         <LocationCard devices={searchParams?.devices} />
@@ -52,11 +53,12 @@ const LocationPage = async({searchParams}:{searchParams: {[key:string]: string |
         <FormNewLocation devices={searchParams?.devices} />
         
         <div className="flex flex-row gap-4 justify-center">
-          <DeleteLocationButtom devices={searchParams?.devices} />
-          
-          <UpdateLocation devices={searchParams?.devices}>
-            <FormUpdateLocation devices={searchParams?.devices} />
-          </UpdateLocation>
+          {selectedLocation && (
+            <>
+            <DeleteLocationButtom locations={selectedLocation} />
+            <UpdateLocation locations={selectedLocation} />
+            </>
+          )}
         </div>
        
       </div>
