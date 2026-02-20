@@ -56,7 +56,7 @@ export default function FormCreateIncident({devices, onClose}:{devices:Device[],
                                             S/N: {dev.deviceSerialTag}
                                         </span>
                                         {dev.location && (
-                                            <span>{dev.location.locationName}</span>
+                                            <span>{dev.location?.locationName || "Sin Ubicación"}</span>
                                         )}
                                         {dev.department && (
                                             <span>| {dev.department.departmentName}</span>

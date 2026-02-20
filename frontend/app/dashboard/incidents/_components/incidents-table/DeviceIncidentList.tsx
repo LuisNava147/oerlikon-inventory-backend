@@ -100,7 +100,7 @@ export default function DeviceIncidentList({incidents, departments, devices, onC
                                 <strong>Ubicación:</strong>
                                 </span>
                                 <span className="text-xs text-slate-500 text-right ml-2">
-                                {incident.device.location.locationName}
+                                {incident.device.location?.locationName || "Sin Ubicación"}
                                 </span>
                             </div>
                         )}

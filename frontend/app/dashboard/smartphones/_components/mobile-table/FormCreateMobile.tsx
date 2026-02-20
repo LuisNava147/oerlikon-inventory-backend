@@ -97,7 +97,7 @@ export default function FormCreateMobile({locations, employees, departments, onC
                                 <AutocompleteItem key={dep.departmentId} textValue={`${dep.departmentName}`}>
                                     <div className="flex flex-col">
                                         <span className="text-small">{dep.departmentName}</span>
-                                        <span className="text-tiny text-default-400"> | {dep.location.locationName}</span>
+                                        <span className="text-tiny text-default-400"> | {dep.location?.locationName || "Sin Ubicación"}</span>
                                     </div>
                                 </AutocompleteItem>
                             )

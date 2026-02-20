@@ -165,7 +165,7 @@ export default function LowDeviceList({ devices }: {devices:Device[]}){
                 return (
                     <div className="flex flex-col min-w-[100px]">
                         <span className="text-sm text-slate-700 whitespace-nowrap">
-                            {typeof device.location === 'object' ? device.location?.locationName : "Sin ubicación"}
+                            {device.location?.locationName || "Sin ubicación"}
                         </span>
                     </div>
                 );

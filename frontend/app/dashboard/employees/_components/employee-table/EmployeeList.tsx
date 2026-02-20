@@ -94,7 +94,7 @@ import ViewAssetsModal from "./ViewAssetsModal";
                 return(
                     <div className="flex flex-col min-w-[100px]">
                         <span className="text-sm text-slate-700 whitespace-nowrap">
-                            {locationName}
+                            {locationName || "Sin Ubicación"}
                         </span>
                     </div>
                 )
