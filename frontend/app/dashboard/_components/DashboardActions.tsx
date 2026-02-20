@@ -14,7 +14,7 @@ export default function DashboardActions() {
                 color="hover:border-red-300 hover:bg-red-600 text-red-600 hover:text-white"/>
                 <QuickAction icon={<Users size={24}/>} title = "Nuevo Empleado" href="/dashboard/employees"
                 color="hover:border-red-300 hover:bg-red-600 text-red-600 hover:text-white"/>
-                <QuickAction icon={<TriangleAlert size={24}/>} title = "Incidencias de Equipos" href="/dashboard/devices-incidents"
+                <QuickAction icon={<TriangleAlert size={24}/>} title = "Incidencias de Equipos" href="/dashboard/incidents"
                 color="hover:border-red-300 hover:bg-red-600 text-red-600 hover:text-white"/>
                 <QuickAction icon={<PlusCircle size={24}/>} title = "Generar Responsiva" href="/dashboard/assignments"
                 color="hover:border-red-300 hover:bg-red-600 text-red-600 hover:text-white"/>  

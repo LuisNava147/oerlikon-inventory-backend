@@ -8,10 +8,36 @@ const isPrinter= (type:string)=>{
     return t.includes("printer") || t.includes("impresora")
 }
 
+const isMobile= (type:string)=>{
+    if(!type)return false
+    const t = type.toLowerCase();
+    return t.includes("celular") || t.includes("ipad") || t.includes("tablet")
+}
+
+const isAccesorie= (type:string)=>{
+    if(!type)return false
+    const t = type.toLowerCase();
+    return t.includes("token") || t.includes("mouse") || t.includes("teclado") 
+    || t.includes("docking") || t.includes("diadema") || t.includes("bocina") || t.includes("monitor")
+}
+
+const isComputer = (type: string) => {
+    if(!type) return false;
+    const t = type.toLowerCase();
+    // Filtramos explícitamente solo lo que consideramos "Equipo IT" principal
+    return t.includes("laptop") || t.includes("desktop") || t.includes("pc") || t.includes("computadora");
+}
+
+const isBaja= (type: string)=>{
+    if(!type)return false
+    const t = type.toLowerCase()
+    return t.includes("baja")
+}
+
 export default function StockAlert({available}:{available:any[]}){
     if(!available || !Array.isArray(available))return null
    
-    const availableCount = available.filter((d: any)=> !d.employee && !d.employeeId && !isPrinter(d.deviceType)).length
+    const availableCount = available.filter((d: any) => isComputer(d.deviceType) && !isBaja(d.deviceStatus) && (!d.employee && !d.employeeId)).length
     //console.log("Total Dispositivos Recibidos:", available.length);
     //console.log("Dispositivos Disponibles (Filtrados):", availableCount);
     if(availableCount === 0){
