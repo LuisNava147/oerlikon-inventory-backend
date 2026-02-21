@@ -33,7 +33,7 @@ export default function PrinterList({ devices, departments, locations, onClose}:
             case "device":
                 return (
                     <div className="flex items-center gap-3 min-w-[160px] ">
-                        <div className=" flex items-start justify-start p-2 bg-slate-100 rounded-md border border-slate-200 shrink-0">
+                        <div className=" flex items-start justify-start p-2 bg-red-50 rounded-md shrink-0">
                             <PrinterIcon type={device.deviceType} />
                             
                         </div>
@@ -74,19 +74,19 @@ export default function PrinterList({ devices, departments, locations, onClose}:
                         )}
                         {device.ipAddress && (
                             <div className="text-xs text-slate-500 flex justify-between items-center w-full border-b border-slate-200">
-                            <span className="font-semibold text-slate-700 block">Dirección IP: </span>
+                            <span className="font-semibold text-slate-700 block">DIRECCIÓN IP: </span>
                             <span className="font-semibold text-slate-500 text-right ml-2 truncate font-medum">{device.ipAddress}</span>
                             </div>
                         )}
                         {device.deviceMAC && (
                             <div className="text-xs text-slate-500 flex justify-between items-center w-full border-b border-slate-200">
-                            <span className="font-semibold text-slate-700 block">Dirección MAC: </span>
+                            <span className="font-semibold text-slate-700 block">DIRECCIÓN MAC: </span>
                             <span className="font-semibold text-slate-500 text-right ml-2 truncate font-medum">{device.deviceMAC}</span>
                             </div>
                         )}
                         {device.sapName && (
                             <div className="text-xs text-slate-500 flex justify-between items-center w-ful">
-                            <span className="font-semibold text-slate-700 block">Nombre en SAP: </span>
+                            <span className="font-semibold text-slate-700 block">NOMBRE EN SAP: </span>
                             <span className="font-semibold text-slate-500 text-right ml-2 truncate font-medum">{device.sapName}</span>
                             </div>
                         )}

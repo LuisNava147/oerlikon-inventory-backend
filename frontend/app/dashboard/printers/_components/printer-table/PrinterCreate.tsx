@@ -14,16 +14,21 @@ export default function CreatePrinter({locations, departments}:{locations: Locat
         <Button onPress={onOpen} color="primary" className="font-bold">
             <Plus size={20}/> Nuevo Equipo
         </Button>
-        <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="4xl" scrollBehavior="inside" backdrop="blur">
+        <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="3xl" scrollBehavior="inside" backdrop="blur">
             <ModalContent className="w-full h-[90vh] md:h-auto max-h-[90vh]">
                 {
                     ()=>(
                         <>
-                        <ModalHeader className="flex flex-row gap-3 items-center text-slate-700">
-                        <PrinterCheck size={30} className="text-red-600"/>
-                        <p className="text-xl font-bold">Registrar nueva Impresora</p>
+                        <ModalHeader className="flex gap-3 items-center">
+                        <div className="p-2 bg-red-100 rounded-lg text-red-600">
+                            <PrinterCheck size={30}/>
+                        </div>
+                        <div>
+                            <h3 className="text-lg font-bold">Registrar una Impresora</h3>
+                            <p className="text-sm text-gray-500 font-normal">Registra una nueva Impresora.</p>
+                        </div>
                         </ModalHeader>
-                        <ModalBody className="py-7 overflow-y-auto">  
+                        <ModalBody className="py-1 overflow-y-auto font-bold">  
                         <FormCreatePrinter locations={locations} departments={departments} onClose={onOpenChange}/>  
                         </ModalBody>
                         </>
