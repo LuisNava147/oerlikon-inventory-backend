@@ -57,7 +57,7 @@ return(
                             TELÉFONO: {employee.employeePhoneNumber || null}
                         </p>
                         <p className="text-xs text-slate-500 font-mono mt-1">
-                            DEPARTAMENTO: {employee.department.departmentName || null}
+                            DEPARTAMENTO: {employee.department?.departmentName || null}
                         </p>
                     </div>
                     <p className="text-xs text-slate-400 mt-4">
