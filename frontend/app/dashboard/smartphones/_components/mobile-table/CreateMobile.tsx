@@ -19,16 +19,21 @@ export default function CreateMobile({locations, employees, departments}:Props){
         <Button onPress={onOpen} color="primary" className="font-bold">
             <Plus size={20}/> Nuevo Equipo
         </Button>
-        <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="4xl" scrollBehavior="inside" backdrop="blur">
+        <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="3xl" scrollBehavior="inside" backdrop="blur">
             <ModalContent className="w-full h-[90vh] md:h-auto max-h-[90vh]">
                 {
                     ()=>(
                         <>
-                        <ModalHeader className="flex flex-row gap-3 items-center text-slate-700">
-                        <TabletSmartphone size={30} className="border border-red-50 bg-red-50 rounded-lg text-red-600"/>
-                        <p className="text-xl font-bold">Registrar nuevo Equipo</p>
+                        <ModalHeader className="flex gap-3 items-center">
+                        <div className="p-2 bg-red-100 rounded-lg text-red-600">
+                            <TabletSmartphone size={30} />
+                        </div>
+                        <div>
+                            <h3 className="text-lg font-bold">Crear un Dispositivo Móviles</h3>
+                            <p className="text-sm text-gray-500 font-normal">Crea un nuevo Dispositivo Móvil.</p>
+                        </div>
                         </ModalHeader>
-                        <ModalBody className="py-7 overflow-y-auto">  
+                        <ModalBody className="py-1 overflow-y-auto font-bold">  
                         <FormCreateMobile locations={locations} employees={employees} departments={departments} onClose={onOpenChange}/>  
                         </ModalBody>
                         </>

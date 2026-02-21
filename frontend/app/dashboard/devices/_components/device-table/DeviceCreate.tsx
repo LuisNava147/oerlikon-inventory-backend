@@ -24,7 +24,7 @@ export default function CreateDevice({locations, employees, departments}:{locati
                             <LaptopMinimalCheck size={30} />
                         </div>
                         <div>
-                            <h3 className="text-lg font-bold">Editar Ubicación</h3>
+                            <h3 className="text-lg font-bold">Crear un Equipo de computo</h3>
                             <p className="text-sm text-gray-500 font-normal">Crea un nuevo Equipo de computo.</p>
                         </div>
                         </ModalHeader>
