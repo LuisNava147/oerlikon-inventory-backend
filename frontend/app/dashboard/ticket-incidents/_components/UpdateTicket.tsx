@@ -20,11 +20,16 @@ export default function UpdateTicket({tickets}:{tickets:TicketIncident}){
                 {
                     ()=>(
                         <>
-                        <ModalHeader className="flex flex-row gap-3 items-center text-slate-700">
-                        <CircleCheck size={30} className="text-red-600 pd-2 rounded-lg bg-red-50"/>
-                        <p className="text-xl font-bold">Actualizar como resuelto el Ticket</p>
+                        <ModalHeader className="flex gap-3 items-center">
+                            <div className="p-2 bg-red-100 rounded-lg text-red-600">
+                                <CircleCheck size={30} />
+                            </div>
+                            <div>
+                                <h3 className="text-lg font-bold">Actualizar como resuelto el Ticket</h3>
+                                <p className="text-sm text-gray-500 font-normal">Actualice el estado del ticket.</p>
+                            </div>
                         </ModalHeader>  
-                        <ModalBody className="py-7 overflow-y-auto">  
+                        <ModalBody className="py-1 overflow-y-auto font-bold">  
                         <FormUpdateTicket tickets={tickets} onClose={onOpenChange} />
                         </ModalBody>
                         </>

@@ -32,21 +32,21 @@ export default function FormCreateTicket({onClose}:{onClose:()=>void}){
     }, [state.success, onClose])
 
     return(
-        <form action={formAction} className="bg-slate-50 p-6 rounded-none flex flex-col gap-4 w-full">
-            <div className="flex flex-col gap-4 w-full font-semibold">
-            <Input color="primary" label="Nombre del Ticket" isRequired variant="bordered" name="ticketName" classNames={{inputWrapper:'bg-white'}}/>
+        <form action={formAction} className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 w-full font-bold">
+            <Input color="primary" label="Nombre del Ticket" isRequired variant="bordered" name="ticketName" classNames={{inputWrapper:'bg-slate-50'}}/>
                 
                 <Textarea color="primary" label="Descripción del Ticket" placeholder="Escriba a detalle el problema relacionado con el Ticket..." 
-                isRequired name="ticketDescription" variant="bordered" minRows={5} maxLength={350} classNames={{inputWrapper:'bg-white'}} 
+                isRequired name="ticketDescription" variant="bordered" minRows={5} maxLength={350} classNames={{inputWrapper:'bg-slate-50'}} 
                 startContent={<FileText className="text-gray-400 mt-1" size={18}/>}/>
 
-                <Input color="primary" label="Liga del Ticket" isRequired variant="bordered" name="ticketLink" classNames={{inputWrapper:'bg-white'}}/>
+                <Input color="primary" label="Liga del Ticket" isRequired variant="bordered" name="ticketLink" classNames={{inputWrapper:'bg-slate-50'}}/>
                 {state.error && (
                         <p className="text-red-600 text-sm">{state.error}</p>
                     )}
             </div>
-            <div className="flex justify-end pt-4">
-            <ModalFooter className="justify-center">
+            <div className="flex justify-end ml-6">
+            <ModalFooter className="justify-end items-end">
                     <Button color="danger" variant="light" onPress={onClose}>
                         Cancelar
                     </Button>   

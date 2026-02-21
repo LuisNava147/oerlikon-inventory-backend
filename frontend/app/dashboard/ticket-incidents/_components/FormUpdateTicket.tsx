@@ -40,14 +40,14 @@ function SubmitButton(){
         }
 
         return(
-            <form action={formAction} className="bg-slate-50 p-6 rounded-none flex flex-col gap-4 w-full">
-                <div className="flex flex-col gap-4 w-full font-semibold">
+            <form action={formAction} className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4 w-full font-bold">
                     <Textarea label="Descripción del Ticket" placeholder="Escriba a detalle el problema relacionado con el Ticket..." 
-                    variant="bordered" minRows={5} maxLength={350} name="ticketDescription" classNames={{inputWrapper: "bg-white"}}
+                    variant="bordered" minRows={5} maxLength={350} name="ticketDescription" color="primary" classNames={{inputWrapper: "bg-slate-50"}}
                     startContent={<FileText className="text-gray-400 mt-1" size={18} />} defaultValue={tickets?.ticketDescription ?? ""}/>
     
                     <Select label="Estatus del Ticket" placeholder="Selecciona el estado" name="status" 
-                        defaultSelectedKeys={[tickets.status || "PENDIENTE"]} variant="bordered" classNames={{trigger:"bg-white"}}
+                        defaultSelectedKeys={[tickets.status || "PENDIENTE"]} variant="bordered" color="primary" classNames={{trigger:"bg-slate-50"}}
                         startContent={<CircleQuestionMark className="text-gray-400" size={18} />} isRequired>
                         <SelectItem key="PENDIENTE" color="danger" variant="flat" description="El reporte sigue abierto bajo revisión.">
                             PENDIENTE
@@ -60,14 +60,14 @@ function SubmitButton(){
                             <p className="text-red-600 text-sm">{state.error}</p>
                         )}
                 </div>
-                <div className="flex justify-end pt-2">
-                <ModalFooter className="justify-center w-full gap-4">
-                        <Button color="danger" variant="light" onPress={onClose}>
-                            Cancelar
-                        </Button>   
-                        <SubmitButton />
-                    </ModalFooter>
-                </div>
+                <div className="flex justify-end ml-6">
+            <ModalFooter className="justify-end items-end">
+                    <Button color="danger" variant="light" onPress={onClose}>
+                        Cancelar
+                    </Button>   
+                    <SubmitButton />
+                </ModalFooter>
+            </div>
             </form>
         )
     }
