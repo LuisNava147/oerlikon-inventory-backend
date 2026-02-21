@@ -20,11 +20,16 @@ export default function AddDeviceNote({devices}:{devices:Device}){
                 {
                     ()=>(
                         <>
-                        <ModalHeader className="flex flex-row gap-3 items-center text-slate-700">
-                        <FileText size={30} className="text-red-600 pd-2 rounded-lg bg-red-50"/>
-                        <p className="text-xl font-bold">Añade una nota del historial del Equipo</p>
+                        <ModalHeader className="flex gap-3 items-center">
+                            <div className="p-2 bg-red-100 rounded-lg text-red-600">
+                            <FileText size={30}/>
+                            </div>
+                            <div>
+                            <h3 className="text-lg font-bold">Notas</h3>
+                            <p className="text-sm text-gray-500 font-normal">Añade una nota del historial del Equipo.</p>
+                            </div>
                         </ModalHeader>  
-                        <ModalBody className="py-7 overflow-y-auto">  
+                        <ModalBody className="py-1 overflow-y-auto font-bold">  
                         <FormAddNote devices={devices} onClose={onOpenChange} />
                         </ModalBody>
                         </>

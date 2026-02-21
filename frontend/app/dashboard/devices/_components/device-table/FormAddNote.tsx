@@ -35,7 +35,7 @@ export default function FormAddNote({devices, onClose}:{devices:Device, onClose:
     }, [state.success, onClose])
 
     return(
-        <form action={formAction} className="bg-slate-50 p-6 rounded-none flex flex-col gap-4 w-full">
+        <form action={formAction} className="flex flex-col gap-4">
         {devices?.deviceId && (
             <input type="hidden" name="device" value={devices.deviceId} />
         )}
@@ -47,10 +47,10 @@ export default function FormAddNote({devices, onClose}:{devices:Device, onClose:
             </h3>
         </div>
 
-        <div className="flex flex-col gap-4 w-full font-semibold">
+        <div className="flex flex-col gap-4 w-full font-bold">
            
             <Textarea color="primary" label="Notas Técnicas (opcional)" placeholder="Observaciones adicionales, historial de asignación."
-            variant="bordered" minRows={5} maxLength={600} name="deviceNote" classNames={{inputWrapper: "bg-white"}}
+            variant="bordered" minRows={5} maxLength={600} name="deviceNote" classNames={{inputWrapper: "bg-slate-50"}}
             startContent={<FileText className="text-gray-400 mt-1" size={18} />} defaultValue={devices?.deviceNote ?? ""}/>
 
         {state.error && (
