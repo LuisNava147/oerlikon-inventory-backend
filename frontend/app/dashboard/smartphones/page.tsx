@@ -30,6 +30,10 @@ export default async function SmartphonesPage({searchParams, onClose}:{searchPar
          "printer","impresora"
     ];
 
+    const IS_BAJA = [
+        "baja"
+    ]
+
     let mobile: Device[] = []
     const query = typeof searchParams?.q === 'string' ? searchParams.q : ""
     const filterBy = typeof searchParams?.f === 'string' ? searchParams.f : ""
@@ -83,10 +87,13 @@ export default async function SmartphonesPage({searchParams, onClose}:{searchPar
 
         mobile = rawDevices.filter((d: Device)=> {
             const type = d.deviceType?.toLowerCase().trim() || ""
+            const down = d.deviceStatus?.toLowerCase() || ""
+
             const isAllowed = ALLOWED_TYPES.some(allowed => type.includes(allowed))
             const isExcluded = EXCLUDED_TYPES.some(excluded => type.includes(excluded))
+            const isBaja = IS_BAJA.some(excluded => down.includes(excluded))
 
-            return isAllowed && !isExcluded
+            return isAllowed && !isExcluded && !isBaja
         })
 
         async function getLocations() {
