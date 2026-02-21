@@ -24,7 +24,7 @@ export default function PrinterActions({devices, locations, departments, onClose
             </Tooltip>
 
             <Tooltip content="Eliminar">
-            <DeleteDeviceButton  device={devices}/>
+            <DeleteDeviceButton  device={devices} category="printing"/>
             </Tooltip>
         </div>
     )

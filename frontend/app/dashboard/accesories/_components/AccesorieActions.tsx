@@ -5,6 +5,7 @@ import { Deparment, Device, Employee, Location } from "@/entities";
 import UpdateAccesories from "./UpdateAccesories";
 import DeleteAccesorieButton from "./DeleteAccesoriesButton";
 import AddDeviceNote from "../../devices/_components/device-table/AddDeviceNote";
+import DeleteDeviceButton from "@/app/dashboard/devices/_components/device-table/DeleteDeviceButton";
 
 interface Props {
     locations: Location[],
@@ -26,7 +27,7 @@ export default function AccesorieActions({devices, locations, employees, departm
             </Tooltip>
 
             <Tooltip content="Eliminar">
-            <DeleteAccesorieButton device={devices} />
+            <DeleteDeviceButton device={devices} category="peripheral"/>
             </Tooltip>
         </div>
     )

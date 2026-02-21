@@ -27,7 +27,7 @@ export default function DeviceActions({devices, locations, employees, onClose, d
             </Tooltip>
 
             <Tooltip content="Eliminar">
-            <DeleteDeviceButton device={devices} />
+            <DeleteDeviceButton device={devices} category="computing"/>
             </Tooltip>
         </div>
     )

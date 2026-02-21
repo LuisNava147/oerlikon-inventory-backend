@@ -3,6 +3,7 @@ import { Button, Tooltip } from "@heroui/react";
 import { Deparment, Device, Employee, Location } from "@/entities";
 import UpdateMobile from "./UpdateMobile";
 import DeleteMobileButton from "./DeleteMobileButton";
+import DeleteDeviceButton from "@/app/dashboard/devices/_components/device-table/DeleteDeviceButton";
 import AddDeviceNote from "@/app/dashboard/devices/_components/device-table/AddDeviceNote";
 
 interface Props {
@@ -25,7 +26,7 @@ export default function MobileActions({devices, locations, employees, department
             </Tooltip>
 
             <Tooltip content="Eliminar">
-            <DeleteMobileButton device={devices} />
+            <DeleteDeviceButton device={devices} category="mobile"/>
             </Tooltip>
         </div>
     )
