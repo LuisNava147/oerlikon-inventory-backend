@@ -134,7 +134,7 @@ export default async function DevicePage({searchParams, onClose}:{searchParams: 
                
                 <div className="rounded-md mt-6 flex flex-col md:flex-row gap-3">
                     <LinkToLow category="printing"/>
-                    <Link href={"/dashboard/departments"}>
+                    <Link href={"/dashboard/departments?category=printing"}>
                         <Button color="secondary" variant="flat" className="font-bold w-full md:w-auto" startContent={<BriefcaseBusiness size={20}/>}>
                             Departamentos
                         </Button>

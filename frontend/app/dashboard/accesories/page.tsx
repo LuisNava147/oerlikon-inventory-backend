@@ -133,7 +133,7 @@ export default async function AccesoriesPage({searchParams, onClose}:{searchPara
                
                 <div className="rounded-md mt-6 flex flex-col md:flex-row gap-3">
                     <LinkToLow category="peripheral"/>
-                    <Link href={"/dashboard/departments"}>
+                    <Link href={"/dashboard/departments?category=peripheral"}>
                             <Button color="secondary" variant="flat" className="font-bold w-full md:w-auto" startContent={<BriefcaseBusiness size={20}/>}>
                                 Departamentos
                             </Button>

@@ -143,7 +143,7 @@ export default async function SmartphonesPage({searchParams, onClose}:{searchPar
                     </div>
                     <div className="rounded-md mt-6 flex flex-col md:flex-row gap-3">
                         <LinkToLow category="mobile"/>
-                        <Link href={"/dashboard/departments"}>
+                        <Link href={"/dashboard/departments?category=mobile"}>
                             <Button color="secondary" variant="flat" className="font-bold w-full md:w-auto" startContent={<BriefcaseBusiness size={20}/>}>
                                 Departamentos
                             </Button>

@@ -8,8 +8,27 @@ import Link from "next/link"
 import { Button } from "@heroui/react"
 import { ArrowLeft, Printer } from "lucide-react"
 
+const CATEGORY_CONFIG = {
+    computing:{
+        backUrl: "/dashboard/devices"
+    },
+    printing:{
+        backUrl: "/dashboard/printers"
+    },
+    mobile:{
+        backUrl: "/dashboard/smartphones"
+    },
+    peripheral:{
+        backUrl: "/dashboard/accesories"
+    }
+}
+
 export default async function DepartmentPage({searchParams, onClose}:{searchParams: {[key:string]: string | string[] | undefined}, onClose: ()=>void}){
     const query = typeof searchParams?.q === 'string' ? searchParams.q : ""
+
+    const rawCategory = typeof searchParams?.category === 'string' ? searchParams.category : 'computing';
+    const categoryKey = (CATEGORY_CONFIG[rawCategory as keyof typeof CATEGORY_CONFIG] ? rawCategory : 'computing') as keyof typeof CATEGORY_CONFIG;
+    const config = CATEGORY_CONFIG[categoryKey];
 
     const response = await fetch(`${API_URL}/departments`, {
         headers:{
@@ -52,7 +71,11 @@ export default async function DepartmentPage({searchParams, onClose}:{searchPara
            
             
             <div className="rounded-md mt-6 flex md:flex-row gap-3">
-                
+            <Link href={config.backUrl}>
+                <Button  color="secondary" variant="flat" radius="full" className="font-bold w-full md:w-auto" startContent={<ArrowLeft size={20} />}>
+                  Volver
+                </Button>
+              </Link>
             </div>
            
           </div>
