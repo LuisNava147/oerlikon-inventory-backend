@@ -101,33 +101,35 @@ export default function FormUpdateAccesories({locations, employees, devices, dep
     }
 
     return(
-        <form action={formAction} className="bg-slate-50 p-6 rounded-none flex flex-col gap-4 w-full">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <form action={formAction} className="flex flex-col gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-bold">
                     <input type="hidden" name="deviceType" value={deviceType} />
-                    <Select label="Tipo de Dispositivo" placeholder="Selecciona uno" variant="bordered" isRequired items={DEVICE_TYPE} className="bg-white rounded-3xl"
-                    selectedKeys={deviceType ? [deviceType] : []} onSelectionChange={(keys)=> setDeviceType(Array.from(keys)[0] as string)} color="primary">
+                    <Select label="Tipo de Dispositivo" placeholder="Selecciona uno" variant="bordered" isRequired items={DEVICE_TYPE} color="primary" classNames={{trigger:'bg-slate-50'}}
+                    selectedKeys={deviceType ? [deviceType] : []} onSelectionChange={(keys)=> setDeviceType(Array.from(keys)[0] as string)}>
                     {DEVICE_TYPE.map((item)=>(
                         <SelectItem key={item.key}>
                             {item.label}
                         </SelectItem>
                     ))}
                 </Select>
-                <Input isRequired label="Marca del Dispositivo" placeholder="Ej. logitech" variant="bordered" name="deviceBrand" defaultValue={devices?.deviceBrand} color="primary" classNames={{inputWrapper:'bg-white'}}/>
+                <Input isRequired label="Marca del Dispositivo" placeholder="Ej. logitech" variant="bordered" name="deviceBrand" defaultValue={devices?.deviceBrand} color="primary" classNames={{inputWrapper:'bg-slate-50'}}/>
                 <Input isRequired label="Modelo"  variant="bordered" name="deviceModel" defaultValue={devices?.deviceModel} color="primary" classNames={{inputWrapper:'bg-white'}}/>
-                <Input isRequired label="Número de Serie(S/N)" variant="bordered" name="deviceSerialTag" defaultValue={devices?.deviceSerialTag} color="primary" classNames={{inputWrapper:'bg-white'}}/>
-                <Input label="Número de Activo" placeholder="BMX-0000" variant="bordered" name="deviceAssetNumber" defaultValue={devices?.deviceAssetNumber} color="primary" classNames={{inputWrapper:'bg-white'}}/>
+                <Input isRequired label="Número de Serie(S/N)" variant="bordered" name="deviceSerialTag" defaultValue={devices?.deviceSerialTag} color="primary" classNames={{inputWrapper:'bg-slate-50'}}/>
+                <Input label="Número de Activo" placeholder="BMX-0000" variant="bordered" name="deviceAssetNumber" defaultValue={devices?.deviceAssetNumber} color="primary" classNames={{inputWrapper:'bg-slate-50'}}/>
             </div>
 
-            <Divider className="my-2"/>
+            <Divider className="my-3"/>
 
-            <div className="flex items-center gap-2 mb-4 text-slate-700">
-            <MapPin size={24} className="text-red-600"/>
-            <h3 className="text-xl font-bold">Ubicación y Asignación</h3>
-            </div> 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <h3 className="text-start text-lg font-bold text-slate-800 flex items-center gap-2 mr-2">
+                <div className="p-2 bg-red-100 rounded-lg text-red-600">
+                <MapPin size={30} className="text-red-600"/>
+                </div> 
+                Ubicación y Asignación
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 font-bold">
             <input type="hidden" name="location" value={locationId} />
             <Select name="location" selectedKeys={locationId ? [locationId] : []} onSelectionChange={(keys)=> setLocationId(Array.from(keys)[0] as string)}
-            label="Selecciona una Ubicación" placeholder="Selecciona una Ubicación" variant="bordered" className="bg-white rounded-2xl">
+            label="Selecciona una Ubicación" placeholder="Selecciona una Ubicación" variant="bordered" color="primary" classNames={{trigger:'bg-slate-50'}}>
                 {locations.map((loc)=>(
                     <SelectItem key={String(loc.locationId)} textValue={loc.locationName}>
                         {loc.locationName}
@@ -136,7 +138,7 @@ export default function FormUpdateAccesories({locations, employees, devices, dep
             </Select>
             
             <input type="hidden" name="employee" defaultValue={employeeId} />
-            <Autocomplete name="employee" label= "Selecciona un Empleado" placeholder="Escribe para buscar..." className="flex-1 bg-white rounded-2xl" defaultItems={employees}variant="bordered"
+            <Autocomplete name="employee" label= "Selecciona un Empleado" placeholder="Escribe para buscar..." color="primary" className="flex-1 bg-slate-50 rounded-2xl" defaultItems={employees}variant="bordered"
                  selectedKey={employeeId || null} onSelectionChange={(key) => setEmployeeId(key as string)} inputValue={employeeInput} onInputChange={setEmployeeInput}>
                         {
                             (emp)=>(
@@ -151,7 +153,7 @@ export default function FormUpdateAccesories({locations, employees, devices, dep
                     </Autocomplete>
 
                     <Select label="Estatus del Equipo" placeholder="Selecciona el estado" name="deviceStatus" 
-                    defaultSelectedKeys={[devices.deviceStatus]} variant="bordered" classNames={{trigger:"bg-white"}}
+                    defaultSelectedKeys={[devices.deviceStatus]} variant="bordered" color="primary" classNames={{trigger:"bg-slate-50"}}
                     startContent={<CircleQuestionMark className="text-gray-400" size={18} />} isRequired selectionMode="single" 
                     disallowEmptySelection={true}>
                     <SelectItem key="Stock" color="success" variant="flat" description="El Periférico no tiene un Empleado asignado.">
@@ -166,7 +168,7 @@ export default function FormUpdateAccesories({locations, employees, devices, dep
                     </Select>
 
                     <input type="hidden" name="department" defaultValue={departmentId} />
-                    <Autocomplete name="department" label= "Selecciona un Departamento" placeholder="Escribe para buscar..." className="flex-1 bg-white rounded-2xl" defaultItems={departments} variant="bordered"
+                    <Autocomplete name="department" label= "Selecciona un Departamento" placeholder="Escribe para buscar..." color="primary" className="flex-1 bg-slate-50 rounded-2xl" defaultItems={departments} variant="bordered"
                         selectedKey={departmentId || null} onSelectionChange={(key) => setDepartmentId(key as string)} inputValue={departmentInput} onInputChange={setDepartmentInput}>
                                 {
                                     (dep)=>(
@@ -181,8 +183,8 @@ export default function FormUpdateAccesories({locations, employees, devices, dep
                     </Autocomplete>
                     
             </div>
-            <div className="flex justify-end pt-4">
-            <ModalFooter className="justify-center">
+            <div className="flex justify-end ml-6">
+            <ModalFooter className="justify-end items-end">
                     <Button color="danger" variant="light" onPress={onClose}>
                         Cancelar
                     </Button>   

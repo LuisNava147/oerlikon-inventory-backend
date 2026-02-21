@@ -27,11 +27,16 @@ export default function UpdateAccesories({locations, employees, devices, departm
                 {
                     ()=>(
                         <>
-                        <ModalHeader className="flex flex-row gap-3 items-center text-slate-700">
-                            <HardDriveDownload size={30} className="border border-red-50 bg-red-50 rounded-lg text-red-600 text-xl" />
-                           <p className="font-bold text-xl">Editar Periférico: <span className="text-red-600">{devices?.deviceBrand} {devices?.deviceModel}</span></p> 
+                        <ModalHeader className="flex gap-3 items-center">
+                            <div className="p-2 bg-red-100 rounded-lg text-red-600">
+                            <HardDriveDownload size={30}/>
+                            </div>
+                            <div>
+                                <h3 className="text-lg font-bold">Editar un Periférico</h3>
+                                <p className="text-sm text-gray-500 font-normal">{devices?.deviceBrand} {devices?.deviceModel}.</p>
+                            </div>
                         </ModalHeader>
-                        <ModalBody className="py-7 overflow-y-auto">
+                        <ModalBody className="py-1 overflow-y-auto font-bold">
                             <FormUpdateAccesories employees={employees} locations={locations} departments={departments} devices={devices} onClose={onOpenChange}/>
                         </ModalBody>
                         </>
