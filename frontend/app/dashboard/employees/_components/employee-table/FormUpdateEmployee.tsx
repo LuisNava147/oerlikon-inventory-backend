@@ -70,24 +70,26 @@ export default function FormUpdateEmployee({locations=[], departments=[], employ
     }
 
     return(
-        <form action={formAction} className="bg-slate-50 p-8 rounded-none flex flex-col gap-2">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <form action={formAction} className="flex flex-col gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-bold">
                 
-            <Input isRequired label="Nombre(s) de Empleado" variant="bordered" name="employeeName" defaultValue={employees?.employeeName} className="mb-3 bg-white rounded-2xl"/>
-            <Input isRequired label="Apellido(s) de Empleado" variant="bordered" name="employeeLastName" defaultValue={employees?.employeeLastName} className="mb-3 bg-white rounded-2xl"/>
-            <Input isRequired label="Correo Electrónico" placeholder="Ej. firtsname.lastname@oerlikon.com" defaultValue={employees?.employeeEmail} variant="bordered" name="employeeEmail" className="mb-3 bg-white rounded-2xl" />
-            <Input label="Número Telefónico" placeholder="Ej. 442XXXXXXX" variant="bordered" name="employeePhoneNumber" defaultValue={employees?.employeePhoneNumber} className="mb-3 bg-white rounded-2xl" />
+            <Input isRequired label="Nombre(s) de Empleado" variant="bordered" name="employeeName" defaultValue={employees?.employeeName} color="primary" classNames={{inputWrapper: "bg-slate-50"}}/>
+            <Input isRequired label="Apellido(s) de Empleado" variant="bordered" name="employeeLastName" defaultValue={employees?.employeeLastName} color="primary" classNames={{inputWrapper: "bg-slate-50"}}/>
+            <Input isRequired label="Correo Electrónico" placeholder="Ej. firtsname.lastname@oerlikon.com" defaultValue={employees?.employeeEmail} variant="bordered" name="employeeEmail" color="primary" classNames={{inputWrapper: "bg-slate-50"}} />
+            <Input label="Número Telefónico" placeholder="Ej. 442XXXXXXX" variant="bordered" name="employeePhoneNumber" defaultValue={employees?.employeePhoneNumber} color="primary" classNames={{inputWrapper: "bg-slate-50"}} />
             </div>
-           <Divider className="my-2"/>
+           <Divider className="my-3"/>
 
-           <div className="flex items-center gap-2 mb-4 text-slate-700">
-            <MapPin size={24} className="text-red-600"/>
-            <h3 className="text-xl font-bold">Ubicación y Asignación</h3>
-            </div> 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <h3 className="text-start text-lg font-bold text-slate-800 flex items-center gap-2 mr-2">
+                <div className="p-2 bg-red-100 rounded-lg text-red-600">
+                <MapPin size={30} className="text-red-600"/>
+                </div> 
+                Ubicación y Asignación
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 font-bold">
             <input type="hidden" name="location" value={locationId} />
             <Select name="location" selectedKeys={locationId ? [locationId] : []} onSelectionChange={(keys)=> setLocationId(Array.from(keys)[0] as string)}
-            label="Selecciona una Ubicación" placeholder="Selecciona una Ubicación" variant="bordered" className="bg-white rounded-2xl">
+            label="Selecciona una Ubicación" placeholder="Selecciona una Ubicación" variant="bordered" color="primary" classNames={{trigger:"bg-slate-50"}}>
                 {locations.map((loc)=>(
                     <SelectItem key={String(loc.locationId)} textValue={loc.locationName}>
                         {loc.locationName}
@@ -96,7 +98,7 @@ export default function FormUpdateEmployee({locations=[], departments=[], employ
             </Select>
         
             <input type="hidden" name="department" defaultValue={departmentId} />
-                    <Autocomplete name="department" label= "Selecciona un Departamento" placeholder="Escribe para buscar..." className="flex-1 bg-white rounded-2xl" defaultItems={departments} variant="bordered"
+                    <Autocomplete name="department" label= "Selecciona un Departamento" placeholder="Escribe para buscar..." color="primary" className="flex-1 bg-slate-50 rounded-2xl" defaultItems={departments} variant="bordered"
                         selectedKey={departmentId || null} onSelectionChange={(key) => setDepartmentId(key as string)} inputValue={departmentInput} onInputChange={setDepartmentInput}>
                                 {
                                     (dep)=>(
@@ -114,8 +116,8 @@ export default function FormUpdateEmployee({locations=[], departments=[], employ
                         <p className="text-red-600 text-sm">{state.error}</p>
                     )}
             </div>
-            <div className="flex justify-end pt-4">
-            <ModalFooter className="justify-center">
+            <div className="flex justify-end ml-6">
+            <ModalFooter className="justify-end items-end">
                     <Button color="danger" variant="light" onPress={onClose}>
                         Cancelar
                     </Button>   

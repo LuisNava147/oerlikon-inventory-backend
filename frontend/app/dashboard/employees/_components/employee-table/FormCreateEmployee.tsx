@@ -39,29 +39,31 @@ export default function FormCreateEmployee({locations, departments, onClose}:Pro
     }, [state.success, onClose])
 
     return(
-        <form action={formAction} className="bg-slate-50 p-8 rounded-none flex flex-col gap-2">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <form action={formAction} className="flex flex-col gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-bold">
                 
-            <Input isRequired label="Nombre(s) de Empleado" variant="bordered" name="employeeName" className="mb-3 bg-white rounded-2xl"/>
-            <Input isRequired label="Apellido(s) de Empleado" variant="bordered" name="employeeLastName" className="mb-3 bg-white rounded-2xl"/>
-            <Input isRequired label="Correo Electrónico" placeholder="Ej. firtsname.lastname@oerlikon.com" variant="bordered" name="employeeEmail" className="mb-3 bg-white rounded-2xl" />
-            <Input label="Número Telefónico" placeholder="Ej. 442XXXXXXX" variant="bordered" name="employeePhoneNumber" className="mb-3 bg-white rounded-2xl" />
+            <Input isRequired label="Nombre(s) de Empleado" variant="bordered" name="employeeName" color="primary" classNames={{inputWrapper: "bg-slate-50"}}/>
+            <Input isRequired label="Apellido(s) de Empleado" variant="bordered" name="employeeLastName" color="primary" classNames={{inputWrapper: "bg-slate-50"}}/>
+            <Input isRequired label="Correo Electrónico" placeholder="Ej. firtsname.lastname@oerlikon.com" variant="bordered" name="employeeEmail" color="primary" classNames={{inputWrapper: "bg-slate-50"}} />
+            <Input label="Número Telefónico" placeholder="Ej. 442XXXXXXX" variant="bordered" name="employeePhoneNumber" color="primary" classNames={{inputWrapper: "bg-slate-50"}} />
             </div>
-           <Divider className="my-2"/>
+           <Divider className="my-3"/>
 
-           <div className="flex items-center gap-2 mb-4 text-slate-700">
-            <MapPin size={24} className="text-red-600"/>
-            <h3 className="text-xl font-bold">Ubicación y Asignación</h3>
-            </div> 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <Select name="location" label="Ubicación" placeholder="Selecciona una Ubicación" variant="bordered" items={locations} className="bg-white rounded-2xl">
+           <h3 className="text-start text-lg font-bold text-slate-800 flex items-center gap-2 mr-2">
+                <div className="p-2 bg-red-100 rounded-lg text-red-600">
+                <MapPin size={30} className="text-red-600"/>
+                </div> 
+                Ubicación y Asignación
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 font-bold">
+                    <Select name="location" label="Ubicación" placeholder="Selecciona una Ubicación" variant="bordered" items={locations} color="primary" classNames={{trigger:"bg-slate-50"}}>
                         {locations.map((loc)=>(
                             <SelectItem key={loc.locationId} value={loc.locationId}>{loc.locationName}</SelectItem>
                         ))}
                     </Select>
         
                     <input type="hidden" name="department" value={departmentId} />
-                    <Autocomplete name="department" label= "Selecciona un Departamento" placeholder="Escribe para buscar..." className="bg-white rounded-2xl" defaultItems={departments}variant="bordered"
+                    <Autocomplete name="department" label= "Selecciona un Departamento" placeholder="Escribe para buscar..." color="primary" className="bg-slate-50 rounded-2xl" defaultItems={departments}variant="bordered"
                     onSelectionChange={(key) => setDepartmentId(key as string)}>
                         {
                             (dep)=>(
@@ -79,8 +81,8 @@ export default function FormCreateEmployee({locations, departments, onClose}:Pro
                         <p className="text-red-600 text-sm">{state.error}</p>
                     )}
             </div>
-            <div className="flex justify-end pt-4">
-            <ModalFooter className="justify-center">
+            <div className="flex justify-end ml-6">
+            <ModalFooter className="justify-end items-end">
                     <Button color="danger" variant="light" onPress={onClose}>
                         Cancelar
                     </Button>   
