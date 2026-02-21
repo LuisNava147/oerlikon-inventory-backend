@@ -36,13 +36,13 @@ export default function FormCreateIncident({devices, onClose}:{devices:Device[],
     }, [state.success, onClose])
 
     return(
-        <form action={formAction} className="bg-slate-50 p-8 rounded-none flex flex-col gap-2 font-semibold">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <form action={formAction} className="flex flex-col gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-bold">
                 <div className="animate-in fade-in slide-in-from-top-2 duaration-300">
                     <input type="hidden" name="device" value={deviceId}/>
                     <Autocomplete color="primary" label="Buscar Equipo Dañado" placeholder="Escriba Marca, modelo o S/N..." isRequired
                     name="device" variant="bordered" defaultItems={devices} startContent={<Search className="text-gray-400" size={18}/>}
-                    onSelectionChange={(key) => setDeviceId(key as string)} className="bg-white rounded-2xl">
+                    onSelectionChange={(key) => setDeviceId(key as string)} className="bg-slate-50 rounded-2xl">
                         {
                             (dev)=>(
                                 <AutocompleteItem key={dev.deviceId} 
@@ -72,19 +72,19 @@ export default function FormCreateIncident({devices, onClose}:{devices:Device[],
                     </p>
                 </div>
 
-                <Input color="primary" isRequired label="Número de Reporte #" placeholder="Ej. #1234" variant="bordered" name="reportNumber" classNames={{inputWrapper: "bg-white"}}/>
+                <Input color="primary" isRequired label="Número de Reporte #" placeholder="Ej. #1234" variant="bordered" name="reportNumber" classNames={{inputWrapper: "bg-slate-50"}}/>
                 <Textarea color="primary" isRequired label="Descripción del problema" placeholder="Describa detalladamente la falla o error del equipo."
-                variant="bordered" minRows={4} maxLength={350} name="incidentDescription" className="mb-3 bg-white rounded-2xl"/>
+                variant="bordered" minRows={4} maxLength={350} name="incidentDescription" className="mb-3 bg-slate-50 rounded-2xl"/>
                 <Textarea color="primary" label="Notas Técnicas (opcional)" placeholder="Observaciones adicionales, descripción de resolución."
-                variant="bordered" minRows={4} maxLength={350} name="incidentNote" className="mb-3 bg-white rounded-2xl"
+                variant="bordered" minRows={4} maxLength={350} name="incidentNote" className="mb-3 bg-slate-50 rounded-2xl"
                 startContent={<FileText className="text-gray-400 mt-1" size={18} />}/>
                 
                 {state.error && (
                         <p className="text-red-600 text-sm">{state.error}</p>
                     )}
             </div>
-            <div className="flex justify-end pt-4">
-            <ModalFooter className="justify-center">
+            <div className="flex justify-end ml-6">
+            <ModalFooter className="justify-end items-end">
                     <Button color="danger" variant="light" onPress={onClose}>
                         Cancelar
                     </Button>   

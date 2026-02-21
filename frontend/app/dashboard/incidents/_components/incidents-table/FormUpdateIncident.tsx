@@ -46,7 +46,7 @@ export default function FormUpdateDeviceIncident({incidents, onClose}:{incidents
     }
 
     return(
-        <form action={formAction} className="bg-slate-50 p-6 rounded-none flex flex-col gap-4 w-full">
+        <form action={formAction} className="flex flex-col gap-4">
             {incidents?.device?.deviceId && (
                 <input type="hidden" name="device" value={incidents.device.deviceId} />
             )}
@@ -58,14 +58,14 @@ export default function FormUpdateDeviceIncident({incidents, onClose}:{incidents
                 </h3>
             </div>
 
-            <div className="flex flex-col gap-4 w-full font-semibold">
+            <div className="flex flex-col gap-4 w-full font-bold">
                
                 <Textarea color="primary" label="Notas Técnicas (opcional)" placeholder="Observaciones adicionales, descripción de resolución."
-                variant="bordered" minRows={5} maxLength={350} name="incidentNote" classNames={{inputWrapper: "bg-white"}}
+                variant="bordered" minRows={5} maxLength={350} name="incidentNote" classNames={{inputWrapper: "bg-slate-50"}}
                 startContent={<FileText className="text-gray-400 mt-1" size={18} />} defaultValue={incidents?.incidentNote ?? ""}/>
 
                 <Select label="Estatus del Reporte" placeholder="Selecciona el estado" name="status" 
-                    defaultSelectedKeys={[incidents.status || "PENDIENTE"]} variant="bordered" classNames={{trigger:"bg-white"}}
+                    defaultSelectedKeys={[incidents.status || "PENDIENTE"]} variant="bordered" color="primary" classNames={{trigger:"bg-slate-50"}}
                     startContent={<CircleQuestionMark className="text-gray-400" size={18} />} isRequired>
                     <SelectItem key="PENDIENTE" color="danger" variant="flat" description="El reporte sigue abierto bajo revisión.">
                         PENDIENTE
@@ -78,8 +78,8 @@ export default function FormUpdateDeviceIncident({incidents, onClose}:{incidents
                         <p className="text-red-600 text-sm">{state.error}</p>
                     )}
             </div>
-            <div className="flex justify-end pt-2">
-            <ModalFooter className="justify-center w-full gap-4">
+            <div className="flex justify-end ml-6">
+            <ModalFooter className="justify-end items-end">
                     <Button color="danger" variant="light" onPress={onClose}>
                         Cancelar
                     </Button>   
