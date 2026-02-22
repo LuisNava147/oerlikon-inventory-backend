@@ -98,7 +98,7 @@ export default async function EmployeePage({searchParams, onClose}:{searchParams
                         </p>
                     </div>
                     <div className="rounded-md mt-6 flex flex-col md:flex-row gap-3">
-                        <Link href={"/dashboard/departments"}>
+                        <Link href={"/dashboard/departments?category=employees"}>
                                 <Button color="secondary" variant="flat" className="font-bold w-full md:w-auto" startContent={<BriefcaseBusiness size={20}/>}>
                                     Departamentos
                                 </Button>

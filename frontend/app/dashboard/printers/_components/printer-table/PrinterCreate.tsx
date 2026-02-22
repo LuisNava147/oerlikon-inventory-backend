@@ -12,7 +12,7 @@ export default function CreatePrinter({locations, departments}:{locations: Locat
     return(
         <>
         <Button onPress={onOpen} color="primary" className="font-bold">
-            <Plus size={20}/> Nuevo Equipo
+            <Plus size={20}/> Nueva Impresora
         </Button>
         <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="3xl" scrollBehavior="inside" backdrop="blur">
             <ModalContent className="w-full h-[90vh] md:h-auto max-h-[90vh]">
@@ -25,7 +25,7 @@ export default function CreatePrinter({locations, departments}:{locations: Locat
                         </div>
                         <div>
                             <h3 className="text-lg font-bold">Registrar una Impresora</h3>
-                            <p className="text-sm text-gray-500 font-normal">Registra una nueva Impresora.</p>
+                            <p className="text-sm text-gray-500 font-normal">Registre una nueva Impresora.</p>
                         </div>
                         </ModalHeader>
                         <ModalBody className="py-1 overflow-y-auto font-bold">  

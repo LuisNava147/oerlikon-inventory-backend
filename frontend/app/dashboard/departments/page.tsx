@@ -20,6 +20,9 @@ const CATEGORY_CONFIG = {
     },
     peripheral:{
         backUrl: "/dashboard/accesories"
+    },
+    employees:{
+        backUrl: "/dashboard/employees"
     }
 }
 

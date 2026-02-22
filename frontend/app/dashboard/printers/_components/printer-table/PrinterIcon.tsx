@@ -6,7 +6,7 @@ export default function PrinterIcon({type}:{type:string}){
     const t = type.toLowerCase();
 
     if(t.includes("printer"))
-    return <Printer size={30} className="text-red-600"/>
+    return <Printer size={30} className="text-purple-600"/>
    
     return <CircleQuestionMark size={30} className="text-red-600"/>
 }
