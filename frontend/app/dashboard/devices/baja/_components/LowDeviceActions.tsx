@@ -6,12 +6,17 @@ import Link from "next/link";
 import { Device } from "@/entities";
 import AddDeviceNote from "../../_components/device-table/AddDeviceNote";
 import DeleteDeviceButton from "../../_components/device-table/DeleteDeviceButton";
+import UpdateDeviceStatus from "./UpdateStatus";
 
 export default function LowDeviceActions({devices}:{devices:Device}){
     return(
         <div className="flex items-center justify-center gap-2">
             <Tooltip content="Historial/Nota">
             <AddDeviceNote devices={devices} />
+            </Tooltip>
+
+            <Tooltip content="Editar">
+            <UpdateDeviceStatus devices={devices}/>  
             </Tooltip>
 
             <Tooltip content="Eliminar">

@@ -37,7 +37,7 @@ export async function updatePrinter(deviceId: string,prevState:any,formData:Form
     if (deviceData.deviceStatus === "BAJA") {
         deviceData.deviceStatus = "BAJA";
         deviceData.department = null; // Aseguramos que no tenga empleado
-        console.log(">> Aplicando lógica de BAJA");
+        //console.log(">> Aplicando lógica de BAJA");
     } 
     // CASO B: Si NO es baja, aplicamos la lógica automática (Stock vs Asignado)
     else {
