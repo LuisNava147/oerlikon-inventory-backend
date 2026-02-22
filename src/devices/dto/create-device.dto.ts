@@ -68,8 +68,8 @@ export class CreateDeviceDto {
 
     //relaciones BD
     @IsString()
-    @IsNotEmpty()
-    location: Location
+    @IsOptional()
+    location?: Location
 
     @IsUUID()
     @IsOptional()

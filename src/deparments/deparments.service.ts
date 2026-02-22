@@ -38,7 +38,7 @@ export class DeparmentsService {
       }))
 
       .loadRelationCountAndMap('department.mobileCount', 'department.device', 'mobile', 
-      (qb) => qb.where("(mobile.deviceType ILIKE '%Celular%' OR mobile.deviceType ILIKE '%iPad%' OR mobile.deviceType ILIKE '%Tablet%')"))
+      (qb) => qb.where("(mobile.deviceType ILIKE '%Celular%' OR mobile.deviceType ILIKE '%iPad%' OR mobile.deviceType ILIKE '%Tablet%')")) 
 
       .loadRelationCountAndMap('department.accesoriesCount', 'department.device', 'accessory',
       (qb) => qb.where('accessory.deviceType ILIKE :acc1 OR accessory.deviceType ILIKE :acc2 OR accessory.deviceType ILIKE :acc3', {

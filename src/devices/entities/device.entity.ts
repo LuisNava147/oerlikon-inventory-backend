@@ -42,7 +42,7 @@ deviceAccount: string
 @Column("text",{nullable:true})
 deviceNote: string
 
-@ManyToOne(()=> Location, {nullable:false, onDelete:'SET NULL'})
+@ManyToOne(()=> Location, {nullable:true, onDelete:'SET NULL'})
 @JoinColumn({name: "locationId"})
 location: Location | string
 

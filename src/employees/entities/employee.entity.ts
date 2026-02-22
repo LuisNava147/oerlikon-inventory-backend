@@ -21,18 +21,18 @@ export class Employee {
     @Column("text",{unique:true})
     employeeEmail: string
     
-    @ManyToOne(()=> Location, (location)=> location.employee,{onDelete:'SET NULL'})
+    @ManyToOne(()=> Location, (location)=> location.employee,{onDelete:'SET NULL', nullable:true})
     @JoinColumn({
         name:"LocationId",
     })
     location: Location | string
 
-    @OneToMany(()=> Device, (device)=> device.employee, {onDelete:'SET NULL'})
+    @OneToMany(()=> Device, (device)=> device.employee, {onDelete:'SET NULL', nullable:true})
     device: Device[]
     @OneToOne(()=> User, (user)=> user.employee)
     user: User
 
-    @ManyToOne(()=> Deparment, (department)=> department.employee, {onDelete:'SET NULL'})
+    @ManyToOne(()=> Deparment, (department)=> department.employee, {onDelete:'SET NULL', nullable:true})
     @JoinColumn({
         name: "departmentId"
     })
