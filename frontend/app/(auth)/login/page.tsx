@@ -65,13 +65,13 @@ export default function LoginPage(){
                 <CardBody className="px-6 py-2 overflow-hidden">
                 <h1 className="text-2xl font-bold text-slate-800 text-center mb-6">Iniciar Sesión</h1>
                 <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
-                <div className="flex flex-col gap-5 w-full mb-8">
+                <div className="flex flex-col gap-5 w-full mb-8 font-bold">
                     <Input label= "Correo" name="userEmail" placeholder= "firstname.lastname@oerlikon.com" type="email" isRequired variant="bordered" radius="sm" 
-                   classNames={{inputWrapper: "bg-slate-50 border-slate-200 group-data-[focus=true]:border-red-500",
-                   label: "text-slate-600 font-medium"}}/>
-                    <Input label= "Contraseña" name="userPassword" type="password" isRequired variant="bordered" radius="sm" 
-                    classNames={{inputWrapper: "bg-slate-50 border-slate-200 group-data-[focus=true]:border-red-500",
-                    label: "text-slate-600 font-medium"}}/>
+                   classNames={{inputWrapper: "font-bold bg-slate-50 border-slate-200 group-data-[focus=true]:border-red-500",
+                   label: "text-slate-600 font-bold"}}/>
+                    <Input label= "Contraseña" name="userPassword" type="password" placeholder="Introduce tu contraseña" isRequired variant="bordered" radius="sm" 
+                    classNames={{inputWrapper: "font-bold bg-slate-50 border-slate-200 group-data-[focus=true]:border-red-500",
+                    label: "text-slate-600 font-bold"}}/>
                     
                     {error && (
                         <div className="flex items-center justify-center gap-2
