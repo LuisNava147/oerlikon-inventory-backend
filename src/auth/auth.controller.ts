@@ -7,6 +7,8 @@ import type { Response } from 'express';
 import { Res } from '@nestjs/common';
 import { Cookies } from './decorators/cookie.decorator';
 import { TOKEN_NAME } from './constants/jwt.constants';
+import { Auth } from './decorators/auth.decorator';
+import { ROLES } from 'src/auth/constants/roles.constants';
 
 @Controller('auth')
 export class AuthController {
@@ -32,5 +34,17 @@ export class AuthController {
       maxAge: 1000 * 60 * 60 *8
     })
     return token;
+  }
+
+  @Auth(ROLES.ADMIN)
+  @Patch('update-password/:id')
+  async updatePassword(@Param('id') id: string, @Body() UpdateUserDto: UpdateUserDto){
+    return this.authService.updatePassword(id, UpdateUserDto)
+  }
+
+  @Auth(ROLES.ADMIN)
+  @Delete(':id')
+  async remove(@Param('id')id: string){
+    return this.authService.deleteUser(id)
   }
 }

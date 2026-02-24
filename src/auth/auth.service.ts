@@ -8,6 +8,7 @@ import { Employee } from 'src/employees/entities/employee.entity';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { LoginUserDto } from './dto/login-user.dto';
+import { use } from 'passport';
 
 @Injectable()
 export class AuthService {
@@ -48,17 +49,33 @@ export class AuthService {
   return token;
   }
 
-  async updateUser(id: string, updateUserDto: UpdateUserDto){
-    if(updateUserDto.userPassword){
-      updateUserDto.userPassword = bcrypt.hashSync(updateUserDto.userPassword, 5);
-    }
-    const newUserData = await this.userRepository.preload({
-      userId: id,
-      ...updateUserDto
+  async updatePassword(id: string, updateUserDto: UpdateUserDto){
+    const userToUpdate = await this.userRepository.findOne({
+      where:{employee:{employeeId:id}}
     })
-    if(!newUserData)throw new NotFoundException("No es posible actualizar el usuario")
-    return newUserData;
+    if(!userToUpdate){
+      throw new NotFoundException("No es posible actualizar el usuario")
+    }
+    if(updateUserDto.userPassword){
+      userToUpdate.userPassword = bcrypt.hashSync(updateUserDto.userPassword, 5);
+    }
+    const updateUser = await this.userRepository.save(userToUpdate)
+    return updateUser
   }
+
+  async deleteUser(id: string){
+    const user = await this.userRepository.findOne({
+      where:{employee:{employeeId: id}}
+    })
+
+    if(!user){
+      throw new NotFoundException('El usuario no existe')
+    }
+
+    await this.userRepository.remove(user)
+    return {mesage: 'Usuario Administrador Eliminado'}
+  }
+  
   }
  
 
