@@ -11,7 +11,7 @@ export async function createDeviceIncident(prevState:any, formData:FormData){
         reportNumber: formData.get("reportNumber")?.toString().trim(),
         incidentDescription: formData.get("incidentDescription")?.toString().trim(),
         incidentNote: formData.get("incidentNote")?.toString().trim() || null,
-        status:  "PENDIENTE" || null,
+        status:  "PENDIENTE",
         device: deviceId || null,
         department: departmentId || null
 

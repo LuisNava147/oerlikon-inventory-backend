@@ -16,10 +16,10 @@ export async function createAccesories(prevState:any,formData:FormData) {
         deviceModel: formData.get("deviceModel"),
         deviceBrand: formData.get("deviceBrand"),
         deviceSerialTag: formData.get("deviceSerialTag"),
-        deviceStatus: "Stock" || null,
+        deviceStatus: "Stock",
         deviceNote: formData.get("deviceNote") || null,
 
-        location: locationId ? locationId.toString() : null || null,
+        location: locationId ? locationId.toString() : null,
         employee: employeeId ? employeeId : null,
         department: departmentId || null
 

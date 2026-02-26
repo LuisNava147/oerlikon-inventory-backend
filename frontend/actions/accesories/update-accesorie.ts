@@ -22,7 +22,7 @@ export async function updateAccesories(accesorieId: string, prevState:any, formD
         deviceSerialTag: formData.get("deviceSerialTag"),
         deviceStatus: formData.get("deviceStatus"),
 
-        location: locationId ? locationId.toString() : null || null,
+        location: locationId ? locationId.toString() : null,
         employee: employeeId ? employeeId : null,
         department: departmentId ? departmentId : null
         }
@@ -30,16 +30,16 @@ export async function updateAccesories(accesorieId: string, prevState:any, formD
         if (accesorieData.deviceStatus === "BAJA") {
             accesorieData.deviceStatus = "BAJA";
             accesorieData.employee = null; // Aseguramos que no tenga empleado
-            console.log(">> Aplicando lógica de BAJA");
+            //console.log(">> Aplicando lógica de BAJA");
         } 
         // CASO B: Si NO es baja, aplicamos la lógica automática (Stock vs Asignado)
         else {
             if (!employeeId) {
                 accesorieData.deviceStatus = "Stock";
-                console.log(">> Sin empleado -> Forzando Stock");
+                //console.log(">> Sin empleado -> Forzando Stock");
             } else {
                 accesorieData.deviceStatus = "Asignado";
-                console.log(">> Con empleado -> Forzando Asignado");
+                //console.log(">> Con empleado -> Forzando Asignado");
             }
         }
 

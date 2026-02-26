@@ -30,16 +30,16 @@ export default async function updateMobile(deviceId:string, prevState:any, formD
         if (mobileData.deviceStatus === "BAJA") {
             mobileData.deviceStatus = "BAJA";
             mobileData.employee = null; // Aseguramos que no tenga empleado
-            console.log(">> Aplicando lógica de BAJA");
+            //console.log(">> Aplicando lógica de BAJA");
         } 
         // CASO B: Si NO es baja, aplicamos la lógica automática (Stock vs Asignado)
         else {
             if (!employeeId) {
                 mobileData.deviceStatus = "Stock";
-                console.log(">> Sin empleado -> Forzando Stock");
+                //console.log(">> Sin empleado -> Forzando Stock");
             } else {
                 mobileData.deviceStatus = "Asignado";
-                console.log(">> Con empleado -> Forzando Asignado");
+                //console.log(">> Con empleado -> Forzando Asignado");
             }
         }
         //console.log(mobileData)

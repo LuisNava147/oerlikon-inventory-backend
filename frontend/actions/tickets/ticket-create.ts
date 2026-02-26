@@ -7,7 +7,7 @@ export async function createTicketIncident(prevState:any, formData:FormData){
     const incidentData = {
         ticketName: formData.get("ticketName")?.toString().trim(),
         ticketLink: formData.get("ticketLink")?.toString().trim(),
-        status: "PENDIENTE" || null,
+        status: "PENDIENTE",
         ticketDescription: formData.get("ticketDescription")?.toString().trim()
     }
     //console.log(incidentData)

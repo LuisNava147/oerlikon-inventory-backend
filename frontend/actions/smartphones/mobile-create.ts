@@ -19,7 +19,7 @@ export async function createMobile(prevState:any, formData: FormData){
             deviceSerialTag: formData.get("deviceSerialTag"),
             devicePassword: formData.get("devicePassword") || null,
             devicePin: formData.get("devicePin") || null,
-            deviceStatus: "Stock" || null,
+            deviceStatus: "Stock",
             deviceAccount: formData.get("deviceAccount") || null,
 
             location: locationId ? locationId.toString() : null,

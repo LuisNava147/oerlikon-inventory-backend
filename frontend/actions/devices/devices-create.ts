@@ -18,7 +18,7 @@ export async function createDevice(prevState:any,formData:FormData) {
         deviceModel: formData.get("deviceModel"),
         deviceBrand: formData.get("deviceBrand"),
         deviceSerialTag: formData.get("deviceSerialTag"),
-        deviceStatus: "Stock" || null,
+        deviceStatus: "Stock",
         deviceNote: formData.get("deviceNote") || null,
 
         location: locationId ? locationId.toString() : null,
