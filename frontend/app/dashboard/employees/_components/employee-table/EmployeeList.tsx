@@ -22,9 +22,8 @@ import ViewAssetsModal from "./ViewAssetsModal";
     devices:Device[]
     locations: Location[]
     departments: Deparment[]
-    onClose:()=>void
   }
-  export default function EmployeeList({employees, devices, locations, departments, onClose}: Props){
+  export default function EmployeeList({employees, devices, locations, departments}: Props){
     const [page, setPage] = useState(1);
     const rowsPerPage = 10;
     const pages = Math.ceil(employees.length / rowsPerPage);
@@ -100,7 +99,7 @@ import ViewAssetsModal from "./ViewAssetsModal";
                 )
             case "actions":
                 return(
-                    <EmployeeActions employees={employee} departments={departments} locations={locations} onClose={onClose} />
+                    <EmployeeActions employees={employee} departments={departments} locations={locations} />
                 )
         }   
     }

@@ -1,9 +1,6 @@
-import { Button, Tooltip } from "@heroui/react";
-import { Edit, Eye, Pencil, Trash, Trash2 } from "lucide-react";
-import Link from "next/link";
+import { Tooltip } from "@heroui/react";
 import { Deparment, Device, Employee, Location } from "@/entities";
 import UpdateAccesories from "./UpdateAccesories";
-import DeleteAccesorieButton from "./DeleteAccesoriesButton";
 import AddDeviceNote from "../../devices/_components/device-table/AddDeviceNote";
 import DeleteDeviceButton from "@/app/dashboard/devices/_components/device-table/DeleteDeviceButton";
 
@@ -12,10 +9,9 @@ interface Props {
     employees: Employee[],
     departments: Deparment[],
     devices: Device
-    onClose: () => void
 }
 
-export default function AccesorieActions({devices, locations, employees, departments, onClose}:Props){
+export default function AccesorieActions({devices, locations, employees, departments}:Props){
     return(
         <div className="flex items-center justify-center gap-2">
              <Tooltip content="Historial/Nota">

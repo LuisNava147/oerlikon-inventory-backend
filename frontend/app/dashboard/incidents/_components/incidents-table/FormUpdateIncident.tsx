@@ -1,14 +1,10 @@
 'use client';
-import { createDeviceIncident } from "@/actions/devices-incidents/incident-create";
+
 import updateDeviceIncident from "@/actions/devices-incidents/incident-update";
-import { createDevice } from "@/actions/devices/devices-create";
-import createEmployee from "@/actions/employees/employee-create";
-import { createPrinter } from "@/actions/printers/printer-create";
-import { createMobile } from "@/actions/smartphones/mobile-create";
-import { Deparment, Device, Employee, Incident, Location } from "@/entities";
-import { Autocomplete, AutocompleteItem, Button, ButtonGroup, Divider, Input, ModalFooter, Select, SelectItem, Spinner, Textarea } from "@heroui/react";
-import { Activity, CircleQuestionMark, FileText, MapPin, Monitor, Save, Search } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Incident } from "@/entities";
+import { Button,  ModalFooter, Select, SelectItem, Spinner, Textarea } from "@heroui/react";
+import { CircleQuestionMark, FileText, Save } from "lucide-react";
+import { useEffect } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 
 const initialState = {

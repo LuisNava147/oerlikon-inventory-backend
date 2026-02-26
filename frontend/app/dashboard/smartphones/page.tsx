@@ -10,7 +10,7 @@ import { BriefcaseBusiness } from "lucide-react";
 import { LinkToLow } from "../devices/_components/device-table/LinkToLow";
 
 
-export default async function SmartphonesPage({searchParams, onClose}:{searchParams:{[key:string]: string | string[] | undefined}, onClose:()=>void}){
+export default async function SmartphonesPage({searchParams}:{searchParams:{[key:string]: string | string[] | undefined}}){
     const ALLOWED_TYPES=[
         "phone","celular","ipad","tablet"
     ]
@@ -153,7 +153,7 @@ export default async function SmartphonesPage({searchParams, onClose}:{searchPar
                 </div>
                 <SearchMobile />
                 <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-2">
-                    <MobileList devices={mobile} employees={employees} locations={locations} departments={departments} onClose={onClose} />
+                    <MobileList devices={mobile} employees={employees} locations={locations} departments={departments} />
                 </div>
             </div>
         )

@@ -9,7 +9,7 @@ import AccesoriesList from "./_components/AccesoriesList";
 import { BriefcaseBusiness } from "lucide-react";
 import { LinkToLow } from "../devices/_components/device-table/LinkToLow";
 
-export default async function AccesoriesPage({searchParams, onClose}:{searchParams: {[key:string]: string | string[] | undefined}, onClose: ()=>void}){
+export default async function AccesoriesPage({searchParams}:{searchParams: {[key:string]: string | string[] | undefined}}){
     const ALLOWED_TYPES = [
         "mouse", "mouses", 
         "keyboard", "teclado", 
@@ -144,7 +144,7 @@ export default async function AccesoriesPage({searchParams, onClose}:{searchPara
             </div>
             <SearchAccesories />
             <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-2">
-            <AccesoriesList devices={devices} locations={locations} employees={employees} departments={departments} onClose={onClose}/>
+            <AccesoriesList devices={devices} locations={locations} employees={employees} departments={departments}/>
             </div>
         </div>
         

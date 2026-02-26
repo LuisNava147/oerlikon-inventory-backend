@@ -1,10 +1,9 @@
 'use client';
 
 import { createTicketIncident } from "@/actions/tickets/ticket-create";
-import { Deparment, Device, Employee, Location } from "@/entities";
-import { Autocomplete, AutocompleteItem, Button, ButtonGroup, Divider, Input, ModalFooter, Select, SelectItem, Textarea, form } from "@heroui/react";
-import { FileText, MapPin, Monitor, Save, Search } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Button, Input, ModalFooter, Textarea } from "@heroui/react";
+import { FileText, Save } from "lucide-react";
+import { useEffect } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 
 const initialState = {

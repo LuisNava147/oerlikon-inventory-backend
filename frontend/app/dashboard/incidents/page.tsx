@@ -2,15 +2,12 @@
 import { API_URL } from "@/constants";
 import { Incident } from "@/entities";
 import { authHeaders } from "@/app/helpers/authHeaders";
-import { Button } from "@heroui/react";
-import { AlertCircle, Calendar, CheckCircle, Clock, Laptop, LayoutGrid, Plus, Search } from "lucide-react";
-import Link from "next/link";
 import SearchDeviceIncident from "./_components/incidents-table/SearchDevicesIncidents";
 import DeviceIncidentList from "./_components/incidents-table/DeviceIncidentList";
 import CreateDeviceIncident from "./_components/incidents-table/CreateDeviceIncident";
 
 
-export default async function IncidentPage({searchParams, onClose}:{searchParams: {[key:string]: string | string[] | undefined}, onClose:()=>void}){
+export default async function IncidentPage({searchParams}:{searchParams: {[key:string]: string | string[] | undefined}}){
     
 
     
@@ -95,7 +92,7 @@ export default async function IncidentPage({searchParams, onClose}:{searchParams
                      <SearchDeviceIncident />
              
                 <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-2">
-                    <DeviceIncidentList incidents={incidents} departments={departments} devices={devices} onClose={onClose}/>
+                    <DeviceIncidentList incidents={incidents} departments={departments} devices={devices}/>
                 </div>
             
         </div>

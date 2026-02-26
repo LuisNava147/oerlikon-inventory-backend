@@ -5,7 +5,7 @@ import { ManyToOne } from "typeorm";
 import { JoinColumn } from "typeorm";
 import { OneToOne } from "typeorm";
 import { OneToMany } from "typeorm";
-import * as bcrypt from 'bcrypt';
+
 
 @Entity()
 export class User {

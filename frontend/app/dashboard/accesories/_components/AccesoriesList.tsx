@@ -18,13 +18,12 @@ const columns = [
   ];
 
   interface Props {
-    locations: Location[],
-    employees: Employee[],
-    departments: Deparment[],
+    locations: Location[]
+    employees: Employee[]
+    departments: Deparment[]
     devices: Device[]
-    onClose: () => void
 }
-  export default function AccesoriesList({ devices, employees, locations, departments, onClose}: Props) {
+  export default function AccesoriesList({ devices, employees, locations, departments}: Props) {
     const [page, setPage] = useState(1);
     const rowsPerPage = 10;
     const pages = Math.ceil(devices.length / rowsPerPage);
@@ -111,7 +110,7 @@ const columns = [
                 );
             case "actions":
                 return(
-                    <AccesorieActions employees={employees} departments={departments} locations={locations} devices={device} onClose={onClose}/>
+                    <AccesorieActions employees={employees} departments={departments} locations={locations} devices={device}/>
                 )
         }
     }

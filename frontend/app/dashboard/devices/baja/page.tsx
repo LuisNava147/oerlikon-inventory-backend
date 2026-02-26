@@ -5,8 +5,6 @@ import { Button } from "@heroui/react";
 import { ArrowLeft, ArchiveX } from "lucide-react";
 import Link from "next/link";
 import LowDeviceList from "./_components/LowDeviceList";
-import { response } from "express";
-import { types } from "util";
 import SearchLowDevices from "./_components/SearchLowDevice";
 import DownloadBajasButton from "./_components/DownloadBajasButton";
 

@@ -1,4 +1,4 @@
-import { Laptop, Monitor, Mouse, Keyboard, HardDrive, Smartphone, HelpCircle, Printer, LaptopMinimal, Headset, SquarePower, CircleQuestionMark, QrCode, MonitorSpeaker } from "lucide-react";
+import { Monitor, Mouse, Keyboard, HardDrive, Smartphone, HelpCircle, Headset, SquarePower, CircleQuestionMark, QrCode, MonitorSpeaker } from "lucide-react";
 
 export default function AccesoriesIcon({type}:{type:string}){
     if(!type)return <HelpCircle size={20} className="text-slate-400" />

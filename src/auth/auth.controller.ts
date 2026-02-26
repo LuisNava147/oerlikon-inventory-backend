@@ -3,7 +3,6 @@ import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
-import type { Response } from 'express';
 import { Res } from '@nestjs/common';
 import { Cookies } from './decorators/cookie.decorator';
 import { TOKEN_NAME } from './constants/jwt.constants';
@@ -22,7 +21,7 @@ export class AuthController {
   }
 
   @Post('login')
-  async login(@Body()loginUserDto: LoginUserDto, @Res({passthrough: true}) response: Response, @Cookies() cookies: any){
+  async login(@Body()loginUserDto: LoginUserDto, @Res({passthrough: true}) response: any, @Cookies() cookies: any){
     const token = await this.authService.loginUser(loginUserDto)
     let expireDate = new Date()
     expireDate.setHours(expireDate.getHours()+8)

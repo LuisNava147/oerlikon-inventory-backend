@@ -9,9 +9,9 @@ interface Props {
     locations:Location[]
     employees: Employee
     departments: Deparment[]
-    onClose:()=>void
 }
-export default function EmployeeActions({locations, employees, departments, onClose}:Props){
+
+export default function EmployeeActions({locations, employees, departments}:Props){
     return(
         <div className="flex items-center justify-center gap-2">
         <Tooltip content= "Admin">

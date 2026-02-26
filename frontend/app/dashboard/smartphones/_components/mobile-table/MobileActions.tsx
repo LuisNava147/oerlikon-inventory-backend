@@ -10,11 +10,10 @@ interface Props {
     devices:Device
     locations:Location[]
     employees: Employee[]
-    onClose: ()=>void
     departments: Deparment[]
 }
 
-export default function MobileActions({devices, locations, employees, departments, onClose}:Props){
+export default function MobileActions({devices, locations, employees, departments}:Props){
     return(
         <div className="flex items-center justify-center gap-2">
             <Tooltip content="Historial/Nota">

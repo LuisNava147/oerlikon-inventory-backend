@@ -8,11 +8,10 @@ import AddDeviceNote from "@/app/dashboard/devices/_components/device-table/AddD
 interface Props {
     devices:Device
     locations:Location[]
-    onClose: ()=>void
     departments: Deparment[]
 }
 
-export default function PrinterActions({devices, locations, departments, onClose}:Props){
+export default function PrinterActions({devices, locations, departments}:Props){
     return(
         <div className="flex items-center justify-center gap-2">
             <Tooltip content="Historial/Nota">

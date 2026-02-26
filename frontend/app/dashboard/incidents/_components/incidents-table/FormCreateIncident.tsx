@@ -1,9 +1,5 @@
 'use client';
 import { createDeviceIncident } from "@/actions/devices-incidents/incident-create";
-import { createDevice } from "@/actions/devices/devices-create";
-import createEmployee from "@/actions/employees/employee-create";
-import { createPrinter } from "@/actions/printers/printer-create";
-import { createMobile } from "@/actions/smartphones/mobile-create";
 import { Deparment, Device, Employee, Location } from "@/entities";
 import { Autocomplete, AutocompleteItem, Button, ButtonGroup, Divider, Input, ModalFooter, Select, SelectItem, Textarea } from "@heroui/react";
 import { FileText, MapPin, Monitor, Save, Search } from "lucide-react";

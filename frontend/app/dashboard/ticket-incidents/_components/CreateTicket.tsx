@@ -1,9 +1,7 @@
 "use client"
 
 import { Button, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@heroui/react";
-import { CircleAlert, Monitor, MonitorUp, Plus, PrinterCheck, TicketCheck } from "lucide-react";
-import { Children, ReactNode } from "react";
-import { Deparment, Device, Employee, Location } from "@/entities";
+import {  Plus, PrinterCheck, TicketCheck } from "lucide-react";
 import FormCreateTicket from "./FormCreateTicket";
 
 export default function CreateTicketIncident(){

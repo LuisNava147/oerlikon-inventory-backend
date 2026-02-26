@@ -4,7 +4,7 @@ import { authHeaders } from "@/app/helpers/authHeaders";
 import CreateAssignment from "./_components/CreateAssignment";
 import AssignmentList from "./_components/AssignmentList";
 
-export default async function AssignmentPage({searchParams, onClose}:{searchParams:{[key:string]: string | string[] | undefined}, onClose:()=>void}){
+export default async function AssignmentPage({searchParams}:{searchParams:{[key:string]: string | string[] | undefined}}){
 
     let assignments: Assignment[] = []
     const response = await fetch(`${API_URL}/assignments`,{
@@ -62,7 +62,7 @@ export default async function AssignmentPage({searchParams, onClose}:{searchPara
             </div>
             
             <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-2">
-                <AssignmentList employees={employees} devices={devices} assignments={assignments} onClose={onClose}/>
+                <AssignmentList assignments={assignments}/>
             </div>
         </div>
         

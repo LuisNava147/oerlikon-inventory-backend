@@ -18,8 +18,8 @@ const columns = [
     {name: "ACCIONES", uid: "actions", align: "center" as const}
 ]
 
-export default function DeviceIncidentList({incidents, departments, devices, onClose}:
-    {incidents: Incident[], departments: Deparment[], devices: Device[], onClose:()=>void}){
+export default function DeviceIncidentList({incidents, departments, devices}:
+    {incidents: Incident[], departments: Deparment[], devices: Device[]}){
 
     const [page, setPage] = useState(1);
     const rowsPerPage = 10;

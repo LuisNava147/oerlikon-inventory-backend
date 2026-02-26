@@ -14,7 +14,7 @@ import Link from "next/link";
 import { LinkToLow } from "./_components/device-table/LinkToLow";
 
 
-export default async function DevicePage({searchParams, onClose}:{searchParams: {[key:string]: string | string[] | undefined}, onClose: ()=>void}) {
+export default async function DevicePage({searchParams}:{searchParams: {[key:string]: string | string[] | undefined}}) {
     const ALLOWED_TYPES = [
         // Computadoras
         "laptop", "laptops",
@@ -158,7 +158,7 @@ export default async function DevicePage({searchParams, onClose}:{searchParams: 
             </div>
             <SearchDevices />
             <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-2">
-            <DeviceList devices={devices} employees={employees} locations={locations} departments={departments} onClose={onClose} />
+            <DeviceList devices={devices} employees={employees} locations={locations} departments={departments} />
             </div>
         </div>
         

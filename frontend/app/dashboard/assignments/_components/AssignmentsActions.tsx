@@ -11,10 +11,9 @@ const ResponsiveFilter = dynamic(
 
 interface Props {
     assignments: Assignment,
-    allAssignments: Assignment[],
 }
 
-export default function AssignmentActions({assignments, allAssignments}:Props){
+export default function AssignmentActions({assignments}:Props){
     return(
         <div className="flex items-center justify-center gap-2">
             <Tooltip content="Descargar">

@@ -18,7 +18,7 @@ const columns = [
   { name: "ACCIONES", uid: "actions", align: "center" as const},
 ];
 
-export default function PrinterList({ devices, departments, locations, onClose}: { devices: Device[], departments: Deparment[], locations:Location[], onClose:()=>void }) {
+export default function PrinterList({ devices, departments, locations}: { devices: Device[], departments: Deparment[], locations:Location[]}) {
     const [page, setPage] = useState(1);
     const rowsPerPage = 10;
     const pages = Math.ceil(devices.length / rowsPerPage);
@@ -128,7 +128,7 @@ export default function PrinterList({ devices, departments, locations, onClose}:
 
             case "actions":
                 return (
-                    <PrinterActions locations={locations} departments={departments} devices={device} onClose={onClose} />
+                    <PrinterActions locations={locations} departments={departments} devices={device} />
                 )
             
         }

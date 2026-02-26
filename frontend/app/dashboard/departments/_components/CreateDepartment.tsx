@@ -47,7 +47,7 @@ export default function CreateDepartment({locations}:{locations: Location[]}){
                 classNames={{trigger: "bg-slate-50 border-slate-200 group-data-[focus=true]:border-red-500",
                 label: "text-slate-600 font-medium"}}>
                         {locations.map((loc)=>(
-                            <SelectItem key={loc.locationId} value={loc.locationId}>{loc.locationName}</SelectItem>
+                            <SelectItem key={loc.locationId} textValue={loc.locationName}>{loc.locationName}</SelectItem>
                         ))}
                 </Select>
                 </div>

@@ -2,7 +2,6 @@
 
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@heroui/react";
 import { HardDriveUpload, Monitor, MonitorUp, Plus, TabletSmartphone } from "lucide-react";
-import { Children, ReactNode } from "react";
 import { Deparment, Employee, Location } from "@/entities";
 import FormCreateAccesories from "./FormCreateAccesories";
 

@@ -1,7 +1,5 @@
 "use client"
 
-import deleteDeviceIncident from "@/actions/devices-incidents/incident-delete";
-import deleteDeviceIncidentButton from "@/actions/devices-incidents/incident-delete";
 import deleteTicketIncident from "@/actions/tickets/ticket-delete";
 import { Device, Employee, Incident, TicketIncident } from "@/entities";
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Tooltip, useDisclosure } from "@heroui/react";

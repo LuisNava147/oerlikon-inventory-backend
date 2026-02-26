@@ -1,15 +1,12 @@
 
 import { API_URL } from "@/constants";
-import { Incident, TicketIncident } from "@/entities";
+import { TicketIncident } from "@/entities";
 import { authHeaders } from "@/app/helpers/authHeaders";
-import { Button } from "@heroui/react";
-import { AlertCircle, Calendar, CheckCircle, Clock, Laptop, LayoutGrid, Plus, Search } from "lucide-react";
-import Link from "next/link";
 import SearchTickets from "./_components/SearchTickets";
 import TicketList from "./_components/TicketList";
 import CreateTicketIncident from "./_components/CreateTicket";
 
-export default async function TicketPage({searchParams, onClose}:{searchParams: {[key:string]: string | string[] | undefined}, onClose:()=>void}){
+export default async function TicketPage({searchParams}:{searchParams: {[key:string]: string | string[] | undefined}}){
 
     let tickets: TicketIncident[] = []
     const query = typeof searchParams?.q === 'string' ? searchParams.q : ""
@@ -47,7 +44,7 @@ export default async function TicketPage({searchParams, onClose}:{searchParams: 
                 <SearchTickets />
              
                 <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-2">
-                    <TicketList tickets={tickets} onClose={onClose}/>
+                    <TicketList tickets={tickets}/>
                 </div>
             
         </div>

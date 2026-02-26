@@ -58,7 +58,7 @@ export default function FormCreateEmployee({locations, departments, onClose}:Pro
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 font-bold">
                     <Select name="location" label="Ubicación" placeholder="Selecciona una Ubicación" variant="bordered" items={locations} color="primary" classNames={{trigger:"bg-slate-50"}}>
                         {locations.map((loc)=>(
-                            <SelectItem key={loc.locationId} value={loc.locationId}>{loc.locationName}</SelectItem>
+                            <SelectItem key={loc.locationId} textValue={loc.locationName}>{loc.locationName}</SelectItem>
                         ))}
                     </Select>
         

@@ -9,7 +9,7 @@ import { Button } from "@heroui/react";
 import { BriefcaseBusiness, Building } from "lucide-react";
 import { LinkToLow } from "../devices/_components/device-table/LinkToLow";
 
-export default async function DevicePage({searchParams, onClose}:{searchParams: {[key:string]: string | string[] | undefined}, onClose: ()=>void}){
+export default async function DevicePage({searchParams}:{searchParams: {[key:string]: string | string[] | undefined}}){
     const ALLOWED_TYPES = [
         "printer", "impresora",
     ];
@@ -144,7 +144,7 @@ export default async function DevicePage({searchParams, onClose}:{searchParams: 
             </div>
             <SearchPrinters />
             <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-2">
-            <PrinterList devices={devices} departments={departments} locations={locations} onClose={onClose} />
+            <PrinterList devices={devices} departments={departments} locations={locations}/>
             </div>
         </div>
         

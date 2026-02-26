@@ -95,7 +95,7 @@ export const AccessRequestDocument = ({ data }: Props) => {
         
         {/* LOGO SIMULADO */}
         <View style={styles.logoContainer}>
-            <Text style={styles.logoRed}>oerlikon <Text style={styles.logoGray}>balzers</Text></Text>
+            <Text style={styles.logoRed}>oerlikon <Text style={styles.logoGray}></Text></Text>
         </View>
 
         {/* TÍTULO PRINCIPAL */}

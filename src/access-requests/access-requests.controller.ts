@@ -30,23 +30,6 @@ export class AccessRequestsController {
     return this.accessRequestsService.findOne(id);
   }
 
-  @Auth(ROLES.ADMIN)
-  @Get(':id/pdf')
-  async downloadPdf(@Param('id',ParseUUIDPipe) id: string,
-  @Res() res : Response){
-    const pdfBuffer = await this.accessRequestsService.generatePdf(id);
-
-    res.set({
-      'Content-Type':'application/pdf',
-      'Content-Lenght':pdfBuffer.buffer.length.toString(),
-
-      'Cache-Control':'no-cache, no-store, must-revalidate',
-      'Pragma':'no-cache',
-      'Expires':0,
-    });
-    res.attachment(pdfBuffer.fileName);
-    res.send(pdfBuffer.buffer);
-  }
 
   @Auth(ROLES.ADMIN)
   @Patch(':id')

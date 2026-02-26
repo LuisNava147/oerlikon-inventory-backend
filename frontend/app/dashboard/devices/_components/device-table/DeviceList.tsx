@@ -22,10 +22,9 @@ interface Props {
     employees: Employee[]
     locations: Location[]
     departments: Deparment[]
-    onClose: () => void
 }
 
-export default function DeviceList({ devices, employees, locations, departments, onClose}: Props) {
+export default function DeviceList({ devices, employees, locations, departments}: Props) {
     const [page, setPage] = useState(1);
     const rowsPerPage = 10;
     const pages = Math.ceil(devices.length / rowsPerPage);
@@ -121,7 +120,7 @@ export default function DeviceList({ devices, employees, locations, departments,
 
             case "actions":
                 return (
-                <DeviceActions devices={device} employees={employees} locations={locations} departments={departments} onClose={onClose} />
+                <DeviceActions devices={device} employees={employees} locations={locations} departments={departments} />
                 )
             
         }

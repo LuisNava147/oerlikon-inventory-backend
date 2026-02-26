@@ -26,7 +26,7 @@ const CATEGORY_CONFIG = {
     }
 }
 
-export default async function DepartmentPage({searchParams, onClose}:{searchParams: {[key:string]: string | string[] | undefined}, onClose: ()=>void}){
+export default async function DepartmentPage({searchParams}:{searchParams: {[key:string]: string | string[] | undefined}}){
     const query = typeof searchParams?.q === 'string' ? searchParams.q : ""
 
     const rawCategory = typeof searchParams?.category === 'string' ? searchParams.category : 'computing';

@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 services:
   db:
@@ -12,3 +12,35 @@ services:
     container_name: oerlikon_inventory_db
     volumes:
       - ./postgres:/var/lib/postgresql/data
+
+  # 2. BACKEND (NestJS)
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      # Si tu backend usa el 3000 internamente, lo exponemos en el 3001 para que no choque
+      - '3001:3000' 
+    environment:
+      # IMPORTANTE: Aquí la DB no es localhost, es 'db' (el nombre del contenedor de arriba)
+      - DATABASE_URL=postgresql://postgres:${pass}@db:5432/${name}
+      # Pon aquí cualquier otra variable secreta que use tu backend (ej. JWT_SECRET)
+    depends_on:
+      - db
+    container_name: oerlikon_inventory_backend
+
+  # 3. FRONTEND (Next.js)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - '3000:3000'
+    environment:
+      #Pon la IP real del servidor de RH
+      - NEXT_PUBLIC_API_URL=http://10.243.82.90:3001
+    depends_on:
+      - backend
+    container_name: oerlikon_inventory_frontend

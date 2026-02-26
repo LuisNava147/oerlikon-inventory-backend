@@ -48,7 +48,7 @@ export default function FormCreateDevice({locations, employees, departments, onC
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-bold">
                 <Select name="deviceType" label="Tipo de Dispositivo" placeholder="Selecciona uno" variant="bordered" isRequired items={DEVICE_TYPE} color="primary" classNames={{trigger:"bg-slate-50"}}>
                     {DEVICE_TYPE.map((t)=>(
-                        <SelectItem key={t.key} value={t.key}>{t.label}</SelectItem>
+                        <SelectItem key={t.key}>{t.label}</SelectItem>
                     ))}
                 </Select>
             <Input isRequired label="Marca del Dispositivo" placeholder="Ej. DELL" variant="bordered" name="deviceBrand" color="primary" classNames={{inputWrapper: "bg-slate-50"}}/>
@@ -68,7 +68,7 @@ export default function FormCreateDevice({locations, employees, departments, onC
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 font-bold">
                     <Select name="location" label="Ubicación" placeholder="Selecciona una Ubicación" variant="bordered" items={locations} color="primary" classNames={{trigger:"bg-slate-50"}}>
                         {locations.map((loc)=>(
-                            <SelectItem key={loc.locationId} value={loc.locationId}>{loc.locationName}</SelectItem>
+                            <SelectItem key={loc.locationId} textValue={loc.locationName}>{loc.locationName}</SelectItem>
                         ))}
                     </Select>
                     <input type="hidden" name="employee" value={employeeId} />

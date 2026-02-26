@@ -17,7 +17,7 @@ const columns = [
     {name: "ACCIONES", uid: "actions", align: "center" as const}
 ]
 
-export default function TicketList({tickets, onClose}:{tickets:TicketIncident[], onClose:()=>void}){
+export default function TicketList({tickets}:{tickets:TicketIncident[]}){
     const [page, setPage] = useState(1);
     const rowsPerPage = 10;
     const pages = Math.ceil(tickets.length / rowsPerPage);

@@ -23,10 +23,9 @@ interface Props {
     employees: Employee[]
     locations: Location[]
     departments: Deparment[]
-    onClose: () => void
 }
 
-export default function MobileList({ devices, employees, locations, departments, onClose}:Props) {
+export default function MobileList({ devices, employees, locations, departments}:Props) {
     const [page, setPage] = useState(1);
     const rowsPerPage = 10;
     const pages = Math.ceil(devices.length / rowsPerPage);
@@ -147,7 +146,7 @@ export default function MobileList({ devices, employees, locations, departments,
 
             case "actions":
                 return (
-                <MobileActions employees={employees} locations={locations} devices={device} departments={departments} onClose={onClose} />
+                <MobileActions employees={employees} locations={locations} devices={device} departments={departments} />
                 )
             
         }

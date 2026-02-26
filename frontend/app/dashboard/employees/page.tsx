@@ -8,7 +8,7 @@ import Link from "next/link";
 import { Button } from "@heroui/react";
 import { BriefcaseBusiness } from "lucide-react";
 
-export default async function EmployeePage({searchParams, onClose}:{searchParams:{[key:string]: string | string[] | undefined}, onClose:()=>void}){
+export default async function EmployeePage({searchParams}:{searchParams:{[key:string]: string | string[] | undefined}}){
     
     let employees: Employee[] = []
     const query = typeof searchParams?.q === 'string' ? searchParams.q : ""
@@ -108,7 +108,7 @@ export default async function EmployeePage({searchParams, onClose}:{searchParams
                 </div>
                 <SearchEmployee />
                 <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-2">
-                <EmployeeList devices={devices} employees={employees} departments={departments} locations={locations} onClose={onClose}/>
+                <EmployeeList devices={devices} employees={employees} departments={departments} locations={locations}/>
                 </div>
             </div>
         ) 

@@ -129,7 +129,7 @@ export default function FormCreateAssignment({ employees, devices, onClose }: Pr
               variant="bordered"
               defaultItems={filteredDevices} 
               key={selectedEmployeeId} 
-              selectedKey={currentDeviceKey}
+              selectedKey={String(currentDeviceKey)}
               onSelectionChange={setCurrentDeviceKey}
               isDisabled={!selectedEmployeeId} // Bloqueamos si no hay empleado
               startContent={<Monitor className="text-gray-400" size={18} />}

@@ -17,12 +17,9 @@ const columns = [
 ]
 
 interface Props{
-    assignments: Assignment[],
-    devices: Device[],
-    employees: Employee[],
-    onClose: () => void,
+    assignments: Assignment[]
 }
-export default function AssignmentList({assignments, devices, employees, onClose}:Props){
+export default function AssignmentList({assignments}:Props){
     const [page, setPage] = useState(1);
     const rowsPerPage = 10;
     const pages = Math.ceil(assignments.length / rowsPerPage);
@@ -88,7 +85,7 @@ export default function AssignmentList({assignments, devices, employees, onClose
                 )
             case "actions":
                     return(
-                        <AssignmentActions assignments={assignment} allAssignments={assignments} />
+                        <AssignmentActions assignments={assignment} />
                     )
         }
     },[assignments])
